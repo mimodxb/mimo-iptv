@@ -16,7 +16,7 @@ The playlist URL remains unchanged so the existing TiviMate playlist can be refr
 
 ### Playlist
 
-`mimo-iptv` is deployed as **version 6**. It starts from the current Dearbulut health-source playlist, removes obvious webpage-only URLs and exact duplicate stream URLs, and applies the Azerbaijan repair overrides.
+`mimo-iptv` is deployed as **version 6** and ACTIVE. It starts from the current Dearbulut health-source playlist, removes obvious webpage-only URLs and exact duplicate stream URLs, and applies the Azerbaijan repair overrides.
 
 The playlist header references only the single merged EPG endpoint above.
 
@@ -38,19 +38,27 @@ The upstream Azerbaijan baseline remains available for channels reported online 
 
 ## Single merged EPG
 
-The previous Dearbulut `epg/guide.xml.gz` URL is not used because that file was absent from the inspected deployment.
+The broken Dearbulut `epg/guide.xml.gz` deployment is not used.
 
-`mimo-epg-merged` is currently deployed as **version 8**. It uses the currently published EPG.PW Lite global XMLTV source and maps global EPG channel display names to the `tvg-id` values in the current Dearbulut playlist. It then merges custom Azerbaijan EPG.PW data rewritten to the playlist IDs `AzTV.az`, `IctimaiTV.az`, `XezerTV.az`, and `IdmanTV.az` when programme data is available.
+`mimo-epg-merged` is deployed as Supabase **version 10**, implementation **3.1**, and ACTIVE. It provides one XMLTV endpoint for TiviMate and combines behind that URL:
 
-The iptv-org community guide was not retained as a production dependency because the current iptv-org GUIDES status reports the listed community guide workers, including StrangeDrVN, as unavailable. EPG.PW remains the published global source used by this implementation.
+- EPG.PW Lite global XMLTV for broad international programme data;
+- the currently present StrangeDrVN public XMLTV guide as additional iptv-org-style `tvg-id` coverage;
+- custom Azerbaijan EPG.PW data rewritten to `AzTV.az`, `IctimaiTV.az`, `XezerTV.az`, and `IdmanTV.az` when programme data is available.
 
-Responses are configured as XMLTV and cacheable for twelve hours. EPG coverage is not claimed for every playlist channel; automatic coverage depends on a usable name match or the explicit Azerbaijan mappings.
+The international XMLTV documents are streamed through the Edge Function rather than being loaded completely into memory. Their individual XML declarations and `<tv>` wrappers are stripped and the function emits one valid outer XMLTV document. Responses are cacheable for twelve hours.
+
+The function supports `?check=1` for compact upstream/structural diagnostics.
+
+The current iptv-org `GUIDES.md` marks its community worker entries red, including its configured StrangeDrVN worker path. The StrangeDrVN public branch itself currently contains `guide.xml` and `guide.xml.gz`, so it is used only as supplemental coverage; EPG.PW Lite remains the primary global EPG dependency.
+
+EPG coverage is not claimed for every playlist channel. Automatic guide assignment still depends on compatible XMLTV/channel identifiers or player-side name matching.
 
 ## Validation boundary
 
-A successful deployment is not represented as proof of a successful live invocation. The Supabase deployment record confirms the current functions are ACTIVE, but this environment could not directly invoke the public project hostname after the latest deployment because external DNS access to that project hostname was unavailable. Production runtime response must therefore be distinguished from deployment-state verification.
+Supabase reports both production Edge Functions ACTIVE and the deployed source has been inspected. The current assistant environment could not directly fetch the public Supabase project hostname after deployment because its external fetch path returned a cache/network restriction. Deployment-state verification is therefore not misrepresented as an independently observed end-to-end HTTP response.
 
-Likewise, a successful HTTP response, valid M3U/XMLTV structure, upstream health check, or successful deployment is not proof that every live stream plays on every device or network.
+Likewise, HTTP success, valid M3U/XMLTV structure, an upstream health check, or successful deployment is not proof that every live stream plays on every device or network.
 
 ## Architecture
 
