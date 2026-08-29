@@ -40,7 +40,7 @@ The upstream Azerbaijan baseline remains available for channels reported online 
 
 The previous Dearbulut `epg/guide.xml.gz` URL is not used because that file was absent from the inspected deployment.
 
-`mimo-epg-merged` is deployed as **version 3**. It exposes one XMLTV URL for TiviMate and combines:
+`mimo-epg-merged` is deployed as **version 4**. It exposes one XMLTV URL for TiviMate and combines:
 
 - EPG.PW Lite global XMLTV as broad international guide data;
 - the current StrangeDrVN/iptv-org-compatible XMLTV guide to improve matching for iptv-org-style `tvg-id` values;
