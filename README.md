@@ -40,7 +40,7 @@ The upstream Azerbaijan baseline remains available for channels reported online 
 
 The broken Dearbulut `epg/guide.xml.gz` deployment is not used.
 
-`mimo-epg-merged` is deployed as Supabase **version 18**, implementation **4.1**, and ACTIVE. It provides one XMLTV endpoint for TiviMate and combines behind that URL:
+`mimo-epg-merged` is deployed as Supabase **version 21**, implementation **4.2**, and ACTIVE. It provides one XMLTV endpoint for TiviMate and combines behind that URL:
 
 - EPG.PW Lite global XMLTV for broad international programme data;
 - the current StrangeDrVN public `guide.xml` as additional iptv-org-style `tvg-id` coverage;
@@ -50,7 +50,7 @@ The large international XMLTV documents are streamed through the Edge Function r
 
 The function supports `?check=1` for compact upstream/structural diagnostics.
 
-The current StrangeDrVN `public` branch contains `channels.xml`, `guide.xml`, `guide.xml.gz`, and `guide.json`; its guide is supplemental to EPG.PW Lite rather than the sole international dependency.
+The current StrangeDrVN `public` branch contains `channels.xml`, `guide.xml`, `guide.xml.gz`, and `guide.json`; the correct XML path is `https://raw.githubusercontent.com/StrangeDrVN/epg/public/guide.xml`. Its guide is supplemental to EPG.PW Lite rather than the sole international dependency.
 
 EPG coverage is not claimed for every playlist channel. Automatic guide assignment still depends on compatible XMLTV/channel identifiers or player-side name matching.
 
