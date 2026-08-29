@@ -18,7 +18,7 @@ The playlist URL remains unchanged so the existing TiviMate playlist can be refr
 
 `mimo-iptv` is deployed as **version 6**. It starts from the current Dearbulut health-source playlist, removes obvious webpage-only URLs and exact duplicate stream URLs, and applies the Azerbaijan repair overrides.
 
-The playlist header now references only the single merged EPG endpoint above.
+The playlist header references only the single merged EPG endpoint above.
 
 ### Azerbaijan repairs
 
@@ -40,19 +40,17 @@ The upstream Azerbaijan baseline remains available for channels reported online 
 
 The previous Dearbulut `epg/guide.xml.gz` URL is not used because that file was absent from the inspected deployment.
 
-`mimo-epg-merged` is deployed as **version 4**. It exposes one XMLTV URL for TiviMate and combines:
+`mimo-epg-merged` is currently deployed as **version 8**. It uses the currently published EPG.PW Lite global XMLTV source and maps global EPG channel display names to the `tvg-id` values in the current Dearbulut playlist. It then merges custom Azerbaijan EPG.PW data rewritten to the playlist IDs `AzTV.az`, `IctimaiTV.az`, `XezerTV.az`, and `IdmanTV.az` when programme data is available.
 
-- EPG.PW Lite global XMLTV as broad international guide data;
-- the current StrangeDrVN/iptv-org-compatible XMLTV guide to improve matching for iptv-org-style `tvg-id` values;
-- custom Azerbaijan EPG.PW channel data rewritten to the playlist IDs `AzTV.az`, `IctimaiTV.az`, `XezerTV.az`, and `IdmanTV.az` when programme data is available.
+The iptv-org community guide was not retained as a production dependency because the current iptv-org GUIDES status reports the listed community guide workers, including StrangeDrVN, as unavailable. EPG.PW remains the published global source used by this implementation.
 
-The function streams the large global XMLTV sources into one `<tv>` document instead of loading the complete guides into memory at once. Responses are cacheable for twelve hours.
-
-EPG coverage is not claimed for every playlist channel. Automatic guide assignment still depends on the playlist `tvg-id` matching an XMLTV channel ID. The merged endpoint is intended to maximize coverage while preserving the single-URL requirement.
+Responses are configured as XMLTV and cacheable for twelve hours. EPG coverage is not claimed for every playlist channel; automatic coverage depends on a usable name match or the explicit Azerbaijan mappings.
 
 ## Validation boundary
 
-A successful HTTP response, valid M3U/XMLTV structure, upstream health check, or successful deployment is not represented as proof that every live stream plays on every device or network. Stream playback and EPG matching are separate checks.
+A successful deployment is not represented as proof of a successful live invocation. The Supabase deployment record confirms the current functions are ACTIVE, but this environment could not directly invoke the public project hostname after the latest deployment because external DNS access to that project hostname was unavailable. Production runtime response must therefore be distinguished from deployment-state verification.
+
+Likewise, a successful HTTP response, valid M3U/XMLTV structure, upstream health check, or successful deployment is not proof that every live stream plays on every device or network.
 
 ## Architecture
 
