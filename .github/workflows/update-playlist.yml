@@ -1,0 +1,45 @@
+name: Build IPTV playlist
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * *"
+  push:
+    paths:
+      - "build_playlist.py"
+      - ".github/workflows/update-playlist.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: playlist-build
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build and validate playlist
+        run: python build_playlist.py
+
+      - name: Commit validated output
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add playlist.m3u build-report.json
+          if git diff --cached --quiet; then
+            echo "No playlist changes."
+          else
+            git commit -m "Refresh validated IPTV playlist"
+            git push
+          fi
