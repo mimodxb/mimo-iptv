@@ -1,47 +1,60 @@
 # Mimo IPTV
 
-Production playlist URL:
+## Live playlist
 
 https://nkuhaupwlxadvihnnned.supabase.co/functions/v1/mimo-iptv
 
-Use that URL directly as an M3U playlist in TiviMate or another IPTV player.
+The URL is unchanged because the existing TiviMate playlist can be refreshed in place. The function behind it was replaced with **v5 on 2026-08-29**.
 
-## Current verified build
+## 2026-08-29 repair
 
-Verified on 2026-08-29 by directly invoking the production endpoint.
+The previous build was not acceptable as an end-to-end verification. This revision removes the specific broken Azerbaijan candidates instead of keeping them merely to satisfy a channel-name checklist.
 
-- HTTP status: 200
-- M3U header: valid `#EXTM3U`
-- Content type: `application/x-mpegURL; charset=utf-8`
-- Total channels: 4,178
-- Entries from the latest health-passing source set: 4,166
-- Azerbaijan entries: 25
-- Required Azerbaijan channels missing: 0
-- Obvious webpage-only / YouTube-style URLs: 0
-- SHA-256: `39d79d06b3037433d65a9d2a905de08a86fcd739b5b1c0e7235ee4ede471e9c3`
-- Main health-checked source: `https://dearbulut.github.io/iptv/playlists/online.m3u`
+### Azerbaijan changes
 
-The endpoint URL itself did not change during this refresh. The playlist generated behind that URL was updated and re-verified.
+- **Real TV:** old failing primary removed; `https://str.yodacdn.net/real/playlist.m3u8` is now the primary because it was confirmed working in TiviMate.
+- **ATV Azerbaijan:** retained from the TiviMate-confirmed working stream.
+- **İctimai TV:** retained from the TiviMate-confirmed working stream.
+- **Space TV:** old failing source replaced with a separately HLS-probed direct stream.
+- **İdman TV:** old failing source replaced with a separately HLS-probed direct stream.
+- **ARB 24:** replaced with a separately HLS-probed direct stream.
+- **CBC / CBC Sport:** direct/probed streams used.
+- **ARB:** omitted for now; the known candidate failed and no sufficiently reliable replacement was established.
+- **MTV Azerbaijan:** omitted for now; webpage/wrapper candidates were not accepted as a reliable TiviMate stream.
+
+The healthy Azerbaijan baseline also retains Az TV, EL TV, Kanal 35, Kanal S, Kapaz TV, KN Music TV, Mədəniyyət TV, Naxçıvan TV, Vilayət TV and Xəzər TV where the health source reports them online.
+
+### General playlist validation
+
+The production function now starts from the complete current health-passing playlist rather than claiming that manually injected URLs are health-verified. It rejects known webpage-only hosts and exact duplicate stream URLs.
+
+A local reconstruction against the latest deployed source artifact used during this repair produced:
+
+- **8,353 unique stream URLs**
+- **8,344 health-source entries**
+- **22 Azerbaijan entries**
+- **0 exact duplicate URLs**
+- **0 known YouTube/VK/Facebook/Twitch webpage URLs**
+
+The live total can change as the upstream health source refreshes.
+
+## EPG repair
+
+The earlier `dearbulut.github.io/iptv/epg/guide.xml.gz` URL is no longer used; the deployed Pages artifact did not contain that EPG file.
+
+The playlist now embeds these guide sources:
+
+1. Azerbaijan guide generated for matching playlist IDs:
+   `https://nkuhaupwlxadvihnnned.supabase.co/functions/v1/mimo-epg-az`
+2. Global XMLTV guide:
+   `https://epg.pw/xmltv/epg.xml.gz`
+3. Additional iptv-org-ID-compatible guide:
+   `https://raw.githubusercontent.com/StrangeDrVN/epg/public/guide.xml.gz`
+
+The Azerbaijan guide maps current programme data for Az TV, İctimai TV and Xəzər TV where available, plus İdman TV when its source contains programme data. EPG coverage is not claimed for every playlist channel.
 
 ## Current architecture
 
-- The production playlist is generated and served by the Supabase Edge Function above.
-- This GitHub repository currently stores the project documentation and verification record; it does not yet host the production `playlist.m3u` file itself.
-- TiviMate therefore uses the Supabase URL shown above.
-
-## Build rules
-
-- Uses the latest health-passing IPTV source set as the main baseline.
-- Adds and prioritizes Azerbaijan channels separately.
-- Removes exact duplicate stream URLs.
-- Rejects known webpage-only URLs such as YouTube, Twitch, Facebook, VK, OK and similar page URLs.
-- Preserves M3U metadata and group information where available.
-- Keeps the production URL stable when the generated playlist is refreshed.
-
-## Azerbaijan priority set
-
-The current verified output contains 25 Azerbaijan entries. The required priority set includes:
-
-AzTV, ATV Azerbaijan, ARB, ARB 24, Baku TV, CBC Sport, İctimai TV, İdman TV, Mədəniyyət TV, MTV Azerbaijan, Real TV, Space TV and Xəzər TV.
-
-Additional Azerbaijan channels and backup stream variants are retained where useful.
+- The live playlist currently remains on the existing Supabase endpoint so the already-added TiviMate playlist can be repaired without changing its URL.
+- This GitHub repository is the documentation and verification record for the current revision.
+- The earlier GitHub-only migration is **not** being represented as completed; GitHub Actions runner provisioning previously failed before any job steps executed.
