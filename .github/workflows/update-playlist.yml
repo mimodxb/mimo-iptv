@@ -43,3 +43,5 @@ jobs:
             git commit -m "Refresh validated IPTV playlist"
             git push
           fi
+
+# Initial build trigger
