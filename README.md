@@ -1,6 +1,6 @@
 # Mimo IPTV
 
-## Final TiviMate endpoints
+## TiviMate endpoints
 
 Playlist URL:
 
@@ -10,58 +10,92 @@ Single EPG URL:
 
 https://nkuhaupwlxadvihnnned.supabase.co/functions/v1/mimo-epg-merged
 
-The playlist URL remains unchanged so the existing TiviMate playlist can be refreshed in place.
+The playlist URL remains unchanged, so the existing TiviMate playlist can be refreshed in place.
 
-## Production state — 2026-08-29
+## Production state — 2026-09-11
 
 ### Playlist
 
-`mimo-iptv` is deployed as **version 6** and ACTIVE. It starts from the current Dearbulut health-source playlist, removes obvious webpage-only URLs and exact duplicate stream URLs, and applies the Azerbaijan repair overrides.
+`mimo-iptv` is deployed as **version 7** and Supabase reports it **ACTIVE**.
 
-The playlist header references only the single merged EPG endpoint above.
+The function starts from the Dearbulut health-source playlist for broad international coverage, removes webpage-only URLs and duplicate stream URLs, then applies Azerbaijan-specific repairs. Russian, Turkish, European and other international channels therefore remain supplied by the large upstream health-filtered playlist rather than a small hand-maintained list.
 
-### Azerbaijan repairs
+Azerbaijan entries are also deduplicated by channel identity (`tvg-id`) where available, not only by exact URL/name.
 
-- Real TV: `https://str.yodacdn.net/real/playlist.m3u8` — promoted to primary because it was confirmed working in TiviMate.
-- ATV Azerbaijan: `https://lives.atv.az:5443/ATV_TV_STREAM/streams/atvcanli.m3u8` — retained from TiviMate-confirmed playback.
-- İctimai TV: `https://live.itv.az/itv.m3u8` — retained from TiviMate-confirmed playback.
-- Space TV: `http://213.239.195.222/azerbaijan/space_stream_sd_2023/playlist.m3u8` — independent HLS probe evidence; not represented as user-confirmed playback.
-- İdman TV: `http://213.239.195.222/azerbaijan/idman_stream_sd_2023/playlist.m3u8` — independent HLS probe evidence; not represented as user-confirmed playback.
-- ARB 24: `http://85.132.81.184:8080/arb24/live1/index.m3u8` — independent HLS probe evidence; not represented as user-confirmed playback.
-- CBC: `https://stream.cbctv.az:5443/LiveApp/streams/cbctv.m3u8`.
-- CBC Sport: `http://213.239.195.222/azerbaijan/cbc_sport_stream_hd_2023/playlist.m3u8`.
-- Baku TV: `https://rtmp.baku.tv/hls/bakutv.m3u8`.
-- ARB primary: omitted until a reliable direct stream is established.
-- MTV Azerbaijan: omitted until a reliable direct TiviMate-compatible stream is established.
+### Priority Azerbaijan validation
 
-The upstream Azerbaijan baseline remains available for channels reported online by the health source.
+Xəzər TV and Space TV are treated as priority channels.
+
+On each playlist build, version 7 performs a direct HLS manifest probe and chooses the first candidate that actually responds as HLS.
+
+#### Xəzər TV — `XezerTV.az`
+
+Candidates, in order:
+
+1. `https://www.xezerxeber.az/stream/index.m3u8`
+2. `https://xezerxeber.az/stream/main_stream.m3u8`
+
+The first candidate is also reported HTTP 200 by a current public IPTV directory updated 2026-09-07.
+
+#### Space TV — `SpaceTV.az`
+
+Candidates, in order:
+
+1. `http://213.239.195.222/azerbaijan/space_stream_sd_2023/playlist.m3u8`
+2. `https://streams.livetv.az/azerbaijan/space_stream/playlist.m3u8`
+
+The first candidate has recent independent HLS probe evidence showing an HLS stream with H.264 video and AAC audio. Space remains more intermittent than Xəzər, so version 7 does not blindly assume one permanent URL.
+
+If neither priority candidate passes the live probe, version 7 does not falsely mark it as verified; the diagnostic endpoint reports the priority channel as degraded and the upstream health-source entry may remain available if present.
+
+### Other Azerbaijan repairs
+
+- ATV Azerbaijan: `https://lives.atv.az:5443/ATV_TV_STREAM/streams/atvcanli.m3u8`
+- İctimai TV: `https://live.itv.az/itv.m3u8`
+- Real TV: `https://str.yodacdn.net/real/playlist.m3u8`
+- AzTV: `https://str.yodacdn.net/aztv/index.m3u8`
+- Mədəniyyət TV: `https://str.yodacdn.net/medeniyyettele/index.m3u8`
+- İdman TV: `http://213.239.195.222/azerbaijan/idman_stream_sd_2023/playlist.m3u8`
+- ARB 24: `http://85.132.81.184:8080/arb24/live1/index.m3u8`
+- CBC: `https://stream.cbctv.az:5443/LiveApp/streams/cbctv.m3u8`
+- CBC Sport: `http://213.239.195.222/azerbaijan/cbc_sport_stream_hd_2023/playlist.m3u8`
+- Baku TV: `https://rtmp.baku.tv/hls/bakutv.m3u8`
+
+The upstream Azerbaijan baseline remains available for additional channels reported healthy by the global source.
+
+### Diagnostics
+
+Use:
+
+`https://nkuhaupwlxadvihnnned.supabase.co/functions/v1/mimo-iptv?check=1`
+
+The response reports:
+
+- playlist version and channel count;
+- Azerbaijan channel count;
+- selected Xəzər and Space URLs;
+- per-candidate HLS probe results;
+- Azerbaijan entries and validation labels;
+- playlist SHA-256.
+
+`PASS` means the general playlist checks pass and both priority channels passed their live HLS probes. `DEGRADED` means the playlist can still be produced but at least one priority channel did not pass its live probe at that moment.
 
 ## Single merged EPG
 
-The broken Dearbulut `epg/guide.xml.gz` deployment is not used.
+`mimo-epg-merged` remains the single XMLTV endpoint for TiviMate. It combines broad international programme data with additional public XMLTV coverage and Azerbaijan-specific ID rewriting where programme data is available.
 
-`mimo-epg-merged` is deployed as Supabase **version 21**, implementation **4.2**, and ACTIVE. It provides one XMLTV endpoint for TiviMate and combines behind that URL:
-
-- EPG.PW Lite global XMLTV for broad international programme data;
-- the current StrangeDrVN public `guide.xml` as additional iptv-org-style `tvg-id` coverage;
-- custom Azerbaijan EPG.PW data rewritten to `AzTV.az`, `IctimaiTV.az`, `XezerTV.az`, and `IdmanTV.az` when programme data is available.
-
-The large international XMLTV documents are streamed through the Edge Function rather than being loaded completely into memory. Their individual XML declarations and `<tv>` wrappers are stripped and the function emits one outer XMLTV document. Responses are cacheable for twelve hours.
-
-The function supports `?check=1` for compact upstream/structural diagnostics.
-
-The current StrangeDrVN `public` branch contains `channels.xml`, `guide.xml`, `guide.xml.gz`, and `guide.json`; the correct XML path is `https://raw.githubusercontent.com/StrangeDrVN/epg/public/guide.xml`. Its guide is supplemental to EPG.PW Lite rather than the sole international dependency.
-
-EPG coverage is not claimed for every playlist channel. Automatic guide assignment still depends on compatible XMLTV/channel identifiers or player-side name matching.
+EPG coverage is not claimed for every playlist channel; assignment still depends on compatible XMLTV/channel identifiers or player-side matching.
 
 ## Validation boundary
 
-Supabase reports both production Edge Functions ACTIVE and the deployed source has been inspected. The current assistant environment cannot directly fetch the public Supabase project hostname after deployment because DNS/external fetch restrictions block that route. Deployment-state verification is therefore not represented as an independently observed end-to-end HTTP response.
+Supabase reports production `mimo-iptv` version 7 ACTIVE and the deployed source has been inspected after deployment.
 
-Likewise, HTTP success, valid M3U/XMLTV structure, an upstream health check, or successful deployment is not proof that every live stream plays on every device or network.
+The assistant execution environment used for this deployment cannot directly resolve the public Supabase hostname, so an end-to-end request to the production `?check=1` endpoint was not independently fetched from that environment. Xəzər and Space have separate current public stream evidence, and version 7 now performs its own live HLS checks at playlist-generation time.
+
+Final device playback still depends on the stream host, network/geographic access, Android/player handling, and whether the broadcaster changes its live URL.
 
 ## Architecture
 
 - Supabase Edge Functions are the production delivery layer.
-- GitHub is the documentation and verification record for the deployed configuration.
-- The earlier GitHub-only migration is not represented as completed because the attempted GitHub Actions runner did not execute its job steps.
+- GitHub is the documentation and verification record.
+- The existing TiviMate playlist URL remains unchanged.
