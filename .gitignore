@@ -1,0 +1,17 @@
+.gradle/
+build/
+**/build/
+local.properties
+*.jks
+*.keystore
+.idea/
+*.apk
+*.aab
+*.ap_
+validation/
+design/backend-check-*.json
+design/live-catalog-check.txt
+opencodereport.txt
+EPG_INVESTIGATION_REPORT.md
+.DS_Store
+Thumbs.db

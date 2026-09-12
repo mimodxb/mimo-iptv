@@ -1,0 +1,7 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item><shape><solid android:color="#091516"/><size android:width="320dp" android:height="180dp"/></shape></item>
+    <item android:width="76dp" android:height="76dp" android:left="20dp" android:gravity="left|center_vertical">
+        <bitmap android:src="@drawable/mimo_emblem" android:gravity="fill"/>
+    </item>
+    <item android:drawable="@drawable/banner_wordmark" android:width="194dp" android:height="70dp" android:right="18dp" android:gravity="right|center_vertical"/>
+</layer-list>
