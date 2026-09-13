@@ -14,6 +14,7 @@ import java.util.*;
 public class FavoritesFragment extends MobileBaseFragment implements MobileMainActivity.Searchable {
 
     private RecyclerView recyclerView;
+    private TextView emptyView;
     private FavoritesAdapter adapter;
 
     @Override
@@ -24,6 +25,7 @@ public class FavoritesFragment extends MobileBaseFragment implements MobileMainA
     @Override
     public void onViewReady(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recyclerView = findView(view, R.id.favorites_recycler);
+        emptyView = findView(view, R.id.favorites_empty);
         int spanCount = getResources().getBoolean(R.bool.is_tablet) ? 3 : 2;
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), spanCount));
         adapter = new FavoritesAdapter();
@@ -43,11 +45,23 @@ public class FavoritesFragment extends MobileBaseFragment implements MobileMainA
             }
         }
         adapter.setChannels(favoriteChannels);
+        updateEmptyState();
+    }
+
+    private void updateEmptyState() {
+        if (adapter.getItemCount() == 0) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void onSearch(String query) {
         adapter.filter(query);
+        updateEmptyState();
     }
 
     static class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
