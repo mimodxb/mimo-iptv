@@ -55,6 +55,7 @@ public final class PlaybackActivity extends Activity {
         setContentView(root);play.requestFocus();
     }
     @Override protected void onStart(){super.onStart();if(key!=null){active=true;begin();}}
+    @Override protected void onResume(){super.onResume();immersive(this);if(play!=null)play.requestFocus();}
     @Override protected void onStop(){active=false;gen++;cancelTimers();release();super.onStop();}
     @Override protected void onDestroy(){io.shutdownNow();super.onDestroy();}
 
@@ -117,7 +118,7 @@ public final class PlaybackActivity extends Activity {
         openStream(s);
     }
     private void openStream(Channel.Stream s){
-        release();recovering=false;setState(ST_OPENING);setChrome(true);play.setText(tr("play_pause"));
+        release();recovering=false;setState(ST_OPENING);setChrome(true);
         DefaultHttpDataSource.Factory http=new DefaultHttpDataSource.Factory().setUserAgent("MIMO-TV/0.1 AndroidTV")
             .setConnectTimeoutMs(10000).setReadTimeoutMs(12000).setAllowCrossProtocolRedirects(true).setDefaultRequestProperties(s.headers);
         player=new ExoPlayer.Builder(this).setMediaSourceFactory(new DefaultMediaSourceFactory(this).setDataSourceFactory(http)).build();
@@ -127,7 +128,7 @@ public final class PlaybackActivity extends Activity {
             @Override public void onPlaybackStateChanged(int st){
                 if(!active||gen!=tok||recovering)return;
                 if(bufTimeout!=null)h.removeCallbacks(bufTimeout);
-                if(st==Player.STATE_READY){setState(ST_PLAYING);showInfo(true);scheduleHide();}
+                if(st==Player.STATE_READY){if(player!=null&&player.isPlaying()){setState(ST_PLAYING);showInfo(true);scheduleHide();}}
                 else if(st==Player.STATE_BUFFERING){setState(ST_BUFFERING);armTimeout(tok);}
                 else if(st==Player.STATE_ENDED){status.setText(tr("play_ended"));recover();}
             }
@@ -160,8 +161,17 @@ public final class PlaybackActivity extends Activity {
     }
     private void togglePlayback(){
         if(player==null){begin();return;}
-        if(player.isPlaying())player.pause();else player.play();
-        setChrome(true);scheduleHide();
+        if(player.isPlaying()){
+            player.pause();
+            play.setText(tr("play_resume"));
+            setState(ST_PAUSED);status.setText(tr("play_paused"));
+            setChrome(true);h.removeCallbacks(hideChrome);
+        }else{
+            player.play();
+            play.setText(tr("play_pause"));
+            setState(ST_PLAYING);status.setText(tr("play_live")+"  ·  "+name);
+            showInfo(true);scheduleHide();
+        }
     }
     private void scheduleHide(){h.removeCallbacks(hideChrome);if(player!=null&&player.isPlaying())h.postDelayed(hideChrome,CHROME_DELAY);}
 
@@ -226,8 +236,8 @@ public final class PlaybackActivity extends Activity {
         boolean remote=k==KeyEvent.KEYCODE_DPAD_CENTER||k==KeyEvent.KEYCODE_DPAD_UP||k==KeyEvent.KEYCODE_DPAD_DOWN||k==KeyEvent.KEYCODE_DPAD_LEFT||k==KeyEvent.KEYCODE_DPAD_RIGHT||k==KeyEvent.KEYCODE_ENTER;
         if(ev.getAction()==KeyEvent.ACTION_DOWN){
             if(k==KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE){togglePlayback();return true;}
-            if(k==KeyEvent.KEYCODE_MEDIA_PLAY){if(player!=null)player.play();return true;}
-            if(k==KeyEvent.KEYCODE_MEDIA_PAUSE){if(player!=null)player.pause();setChrome(true);return true;}
+            if(k==KeyEvent.KEYCODE_MEDIA_PLAY){if(player!=null){player.play();play.setText(tr("play_pause"));setState(ST_PLAYING);status.setText(tr("play_live")+"  ·  "+name);showInfo(true);scheduleHide();}return true;}
+            if(k==KeyEvent.KEYCODE_MEDIA_PAUSE){if(player!=null){player.pause();play.setText(tr("play_resume"));setState(ST_PAUSED);status.setText(tr("play_paused"));setChrome(true);h.removeCallbacks(hideChrome);}return true;}
             if(k==KeyEvent.KEYCODE_CHANNEL_UP){nextChan();return true;}
             if(k==KeyEvent.KEYCODE_CHANNEL_DOWN){prevChan();return true;}
             if(k==KeyEvent.KEYCODE_MENU){lastChan();return true;}
