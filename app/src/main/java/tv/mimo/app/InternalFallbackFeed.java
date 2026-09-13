@@ -78,9 +78,10 @@ public final class InternalFallbackFeed {
 
         for (Channel fb : fallbacks) {
             Channel target = existingMap.get(fb.key);
-            if (target == null) {
-                // No matching primary channel — skip to avoid creating duplicate cards
-                continue;
+            if (target == null) continue;
+            // Inherit logo from fallback if primary has none
+            if ((target.logo == null || target.logo.isEmpty()) && fb.logo != null && !fb.logo.isEmpty()) {
+                target.logo = fb.logo;
             }
             for (Channel.Stream s : fb.streams) {
                 if (target.streams.stream().noneMatch(x -> x.identity().equals(s.identity()))) {
