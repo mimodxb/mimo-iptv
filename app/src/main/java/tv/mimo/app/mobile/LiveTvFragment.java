@@ -193,7 +193,7 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
             holder.name.setText(channel.name);
             // Programme info could be added from EPG data later
             if (channel.streams != null && !channel.streams.isEmpty()) {
-                holder.programme.setText("Available");
+                holder.programme.setText(holder.itemView.getContext().getString(R.string.channel_available));
                 holder.programme.setVisibility(View.VISIBLE);
             } else {
                 holder.programme.setVisibility(View.GONE);

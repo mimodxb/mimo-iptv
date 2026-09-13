@@ -1,7 +1,5 @@
 package tv.mimo.app.mobile;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
@@ -40,16 +38,6 @@ public class SettingsFragment extends MobileBaseFragment {
                         .replace(R.id.fragment_container, aboutFragment)
                         .addToBackStack(null)
                         .commit();
-                    return true;
-                });
-            }
-
-            Preference diagnosticsPref = findPreference("pref_diagnostics");
-            if (diagnosticsPref != null) {
-                diagnosticsPref.setOnPreferenceClickListener(preference -> {
-                    Intent intent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://nkuhaupwlxadvihnnned.supabase.co/functions/v1/mimo-iptv?check=1"));
-                    startActivity(intent);
                     return true;
                 });
             }

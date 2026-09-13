@@ -12,6 +12,7 @@ import java.util.*;
 public class GuideFragment extends MobileBaseFragment implements MobileMainActivity.Searchable {
 
     private RecyclerView recyclerView;
+    private TextView emptyView;
     private GuideAdapter adapter;
 
     @Override
@@ -22,6 +23,7 @@ public class GuideFragment extends MobileBaseFragment implements MobileMainActiv
     @Override
     public void onViewReady(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recyclerView = findView(view, R.id.guide_recycler);
+        emptyView = findView(view, R.id.guide_empty);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         adapter = new GuideAdapter();
         recyclerView.setAdapter(adapter);
@@ -33,11 +35,23 @@ public class GuideFragment extends MobileBaseFragment implements MobileMainActiv
         // TODO: Load from EPG data via Repository
         // Placeholder for now
         adapter.setProgrammes(new ArrayList<>());
+        updateEmptyState();
+    }
+
+    private void updateEmptyState() {
+        if (adapter.getItemCount() == 0) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void onSearch(String query) {
         adapter.filter(query);
+        updateEmptyState();
     }
 
     static class GuideAdapter extends RecyclerView.Adapter<GuideAdapter.ViewHolder> {
@@ -90,7 +104,7 @@ public class GuideFragment extends MobileBaseFragment implements MobileMainActiv
 
         @Override
         public int getItemCount() {
-            return filtered.isEmpty() ? 1 : filtered.size(); // Show empty state
+            return filtered.size();
         }
 
         static class ViewHolder extends RecyclerView.ViewHolder {
@@ -98,7 +112,6 @@ public class GuideFragment extends MobileBaseFragment implements MobileMainActiv
             final TextView title;
             final TextView time;
             final TextView description;
-            final TextView empty;
 
             ViewHolder(View itemView) {
                 super(itemView);
@@ -106,7 +119,6 @@ public class GuideFragment extends MobileBaseFragment implements MobileMainActiv
                 title = itemView.findViewById(R.id.programme_title);
                 time = itemView.findViewById(R.id.programme_time);
                 description = itemView.findViewById(R.id.programme_description);
-                empty = itemView.findViewById(R.id.guide_empty);
             }
         }
     }

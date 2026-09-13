@@ -57,6 +57,7 @@
     <string name="error_unknown">Unknown error</string>
     <string name="retry">Retry</string>
     <string name="loading">Loading…</string>
+    <string name="channel_available">Available</string>
 
     <!-- Language -->
     <string-array name="language_entries">

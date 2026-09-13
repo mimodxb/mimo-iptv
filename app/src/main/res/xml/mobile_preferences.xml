@@ -32,12 +32,4 @@
             android:icon="@drawable/ic_settings" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_diagnostics">
-        <Preference
-            android:key="pref_diagnostics"
-            android:title="@string/settings_diagnostics"
-            android:summary="Backend status, playlist health, logs"
-            android:icon="@drawable/ic_guide" />
-    </PreferenceCategory>
-
 </PreferenceScreen>
