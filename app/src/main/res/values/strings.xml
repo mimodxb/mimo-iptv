@@ -44,7 +44,7 @@
     <string name="about_title">About MIMO TV</string>
     <string name="about_version">Version 0.1.0</string>
     <string name="about_creator">by Movsum Mirzazada</string>
-    <string name="about_description">Native Android TV and mobile app for Mimo's Collective IPTV service.</string>
+    <string name="about_description">"Native Android TV and mobile app for Mimo's Collective IPTV service."</string>
     <string name="about_backend">Powered by Mimo IPTV backend</string>
 
     <!-- Search -->

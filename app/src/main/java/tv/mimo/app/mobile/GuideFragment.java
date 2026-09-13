@@ -6,6 +6,8 @@ import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.*;
+import tv.mimo.app.R;
+import java.util.*;
 
 public class GuideFragment extends MobileBaseFragment implements MobileMainActivity.Searchable {
 
@@ -18,9 +20,7 @@ public class GuideFragment extends MobileBaseFragment implements MobileMainActiv
     }
 
     @Override
-    protected void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+    public void onViewReady(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recyclerView = findView(view, R.id.guide_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         adapter = new GuideAdapter();
@@ -32,7 +32,7 @@ public class GuideFragment extends MobileBaseFragment implements MobileMainActiv
     private void loadGuide() {
         // TODO: Load from EPG data via Repository
         // Placeholder for now
-        adapter.setProgrammes(new java.util.ArrayList<>());
+        adapter.setProgrammes(new ArrayList<>());
     }
 
     @Override
@@ -106,7 +106,7 @@ public class GuideFragment extends MobileBaseFragment implements MobileMainActiv
                 title = itemView.findViewById(R.id.programme_title);
                 time = itemView.findViewById(R.id.programme_time);
                 description = itemView.findViewById(R.id.programme_description);
-                empty = itemView.findViewById(R.id.programme_empty);
+                empty = itemView.findViewById(R.id.guide_empty);
             }
         }
     }

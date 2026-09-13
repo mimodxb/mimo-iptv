@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public abstract class MobileBaseFragment extends Fragment {
 
     protected abstract int getLayoutResId();
-    protected abstract void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState);
+    protected abstract void onViewReady(@NonNull View view, @Nullable Bundle savedInstanceState);
 
     @Nullable
     @Override
@@ -21,7 +21,7 @@ public abstract class MobileBaseFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        onViewCreated(view, savedInstanceState);
+        onViewReady(view, savedInstanceState);
     }
 
     protected <T extends View> T findView(View root, int id) {

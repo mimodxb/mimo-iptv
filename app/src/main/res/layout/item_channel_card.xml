@@ -60,7 +60,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_favorite"
-                    android:colorFilter="@color/mobile_gold"
+                    app:tint="@color/mobile_gold"
                     android:visibility="invisible"
                     android:contentDescription="@string/nav_favorites" />
             </LinearLayout>

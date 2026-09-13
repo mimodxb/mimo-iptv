@@ -25,6 +25,10 @@ dependencies {
     implementation 'androidx.media3:media3-exoplayer-dash:1.6.1'
     implementation 'androidx.media3:media3-ui:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.fragment:fragment:1.6.2'
+    implementation 'androidx.viewpager2:viewpager2:1.1.0'
+    implementation 'androidx.preference:preference:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.robolectric:robolectric:4.14.1'
 }

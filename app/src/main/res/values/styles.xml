@@ -7,26 +7,41 @@
     <color name="mobile_green">#B8D977</color>
     <color name="mobile_gold">#D9AE51</color>
 
-    <style name="MobileAppTheme" parent="android:style/Theme.Material.NoActionBar">
+    <!-- TV theme (referenced in AndroidManifest.xml - DO NOT REMOVE) -->
+    <style name="AppTheme" parent="android:style/Theme.Material.NoActionBar">
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowActionModeOverlay">true</item>
         <item name="android:windowBackground">@color/mobile_bg</item>
         <item name="android:colorAccent">@color/mobile_green</item>
-        <item name="android:colorPrimary">@color/mobile_green</item>
-        <item name="android:colorPrimaryDark">@color/mobile_teal</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="MobileToolbar" parent="android:style/Widget.Material.ActionBar">
-        <item name="android:background">@color/mobile_panel</item>
-        <item name="android:titleTextColor">@color/mobile_ink</item>
-        <item name="android:subtitleTextColor">@color/mobile_muted</item>
+    <!-- Mobile theme -->
+    <style name="MobileAppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowBackground">@color/mobile_bg</item>
+        <item name="colorPrimary">@color/mobile_green</item>
+        <item name="colorPrimaryDark">@color/mobile_teal</item>
+        <item name="colorAccent">@color/mobile_green</item>
+        <item name="colorOnPrimary">@color/mobile_ink</item>
+        <item name="colorOnSurface">@color/mobile_ink</item>
+        <item name="android:colorBackground">@color/mobile_bg</item>
     </style>
 
-    <style name="MobileBottomNav" parent="android:style/Widget.Material.BottomNavigationView">
+    <style name="MobileToolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
         <item name="android:background">@color/mobile_panel</item>
-        <item name="android:itemIconTint">@color/mobile_bottom_nav_colors</item>
-        <item name="android:itemTextColor">@color/mobile_bottom_nav_colors</item>
-        <item name="android:labelVisibilityMode">labeled</item>
+        <item name="titleTextColor">@color/mobile_ink</item>
+        <item name="subtitleTextColor">@color/mobile_muted</item>
+    </style>
+
+    <style name="MobileBottomNav" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@color/mobile_panel</item>
+        <item name="itemIconTint">@color/mobile_bottom_nav_colors</item>
+        <item name="itemTextColor">@color/mobile_bottom_nav_colors</item>
+        <item name="labelVisibilityMode">labeled</item>
     </style>
 </resources>

@@ -5,10 +5,18 @@ import android.view.*;
 import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.*;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import androidx.viewpager2.widget.ViewPager2;
+import tv.mimo.app.Channel;
+import tv.mimo.app.Repository;
+import tv.mimo.app.Source;
+import tv.mimo.app.R;
 import java.util.*;
 
 public class LiveTvFragment extends MobileBaseFragment implements MobileMainActivity.Searchable {
@@ -16,6 +24,7 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
     private LiveTvPagerAdapter pagerAdapter;
+    private Repository repository;
 
     private static final String[] CATEGORIES = {
         "Azerbaijan", "Russia", "Turkey", "Europe", "World"
@@ -35,13 +44,13 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
     }
 
     @Override
-    protected void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewReady(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        repository = new Repository(requireContext());
 
         tabLayout = findView(view, R.id.category_tabs);
         viewPager = findView(view, R.id.live_tv_pager);
 
-        pagerAdapter = new LiveTvPagerAdapter();
+        pagerAdapter = new LiveTvPagerAdapter(getChildFragmentManager(), getLifecycle());
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(CATEGORIES.length);
 
@@ -52,26 +61,25 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
 
     @Override
     public void onSearch(String query) {
-        // Filter current category's channels
-        Fragment fragment = pagerAdapter.getItem(viewPager.getCurrentItem());
+        Fragment fragment = pagerAdapter.getRegisteredFragment(viewPager.getCurrentItem());
         if (fragment instanceof ChannelGridFragment) {
             ((ChannelGridFragment) fragment).filter(query);
         }
     }
 
-    static class LiveTvPagerAdapter extends androidx.fragment.app.FragmentStateAdapter {
-        LiveTvPagerAdapter() {
-            super(requireActivity().getSupportFragmentManager(), androidx.lifecycle.Lifecycle.getDefault());
-        }
+    static class LiveTvPagerAdapter extends FragmentStateAdapter {
+        private final Map<Integer, Fragment> fragmentMap = new HashMap<>();
 
-        LiveTvPagerAdapter(androidx.fragment.app.FragmentManager fm, androidx.lifecycle.Lifecycle lifecycle) {
+        LiveTvPagerAdapter(FragmentManager fm, Lifecycle lifecycle) {
             super(fm, lifecycle);
         }
 
         @NonNull
         @Override
         public Fragment createFragment(int position) {
-            return ChannelGridFragment.newInstance(CATEGORIES[position]);
+            Fragment fragment = ChannelGridFragment.newInstance(CATEGORIES[position]);
+            fragmentMap.put(position, fragment);
+            return fragment;
         }
 
         @Override
@@ -79,8 +87,8 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
             return CATEGORIES.length;
         }
 
-        Fragment getItem(int position) {
-            return (Fragment) instantiateItem(viewPager, position);
+        Fragment getRegisteredFragment(int position) {
+            return fragmentMap.get(position);
         }
     }
 
@@ -112,7 +120,8 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.fragment_channel_grid, container, false);
             recyclerView = view.findViewById(R.id.channel_grid);
-            recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2));
+            int spanCount = getResources().getBoolean(R.bool.is_tablet) ? 3 : 2;
+            recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), spanCount));
             adapter = new ChannelGridAdapter();
             recyclerView.setAdapter(adapter);
             loadChannels();
@@ -120,18 +129,17 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
         }
 
         private void loadChannels() {
-            // TODO: Load from Repository - placeholder for now
-            channels = createMockChannels();
-            adapter.setChannels(channels);
-        }
-
-        private List<Channel> createMockChannels() {
-            List<Channel> list = new ArrayList<>();
-            // Mock data - in real implementation, fetch from Repository
-            for (int i = 0; i < 12; i++) {
-                list.add(new Channel("Channel " + (i + 1), category, ""));
+            // Load channels from Repository for this category
+            Repository repo = new Repository(requireContext());
+            Repository.Catalog catalog = repo.load(false); // use cached data initially
+            List<Channel> categoryChannels = new ArrayList<>();
+            for (Channel c : catalog.channels) {
+                if (category.equals(c.category())) {
+                    categoryChannels.add(c);
+                }
             }
-            return list;
+            channels = categoryChannels;
+            adapter.setChannels(channels);
         }
 
         @Override
@@ -143,18 +151,6 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
             if (adapter != null) {
                 adapter.filter(query);
             }
-        }
-    }
-
-    static class Channel {
-        final String name;
-        final String category;
-        final String programme;
-
-        Channel(String name, String category, String programme) {
-            this.name = name;
-            this.category = category;
-            this.programme = programme;
         }
     }
 
@@ -195,8 +191,9 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             Channel channel = filtered.get(position);
             holder.name.setText(channel.name);
-            if (channel.programme != null && !channel.programme.isEmpty()) {
-                holder.programme.setText(channel.programme);
+            // Programme info could be added from EPG data later
+            if (channel.streams != null && !channel.streams.isEmpty()) {
+                holder.programme.setText("Available");
                 holder.programme.setVisibility(View.VISIBLE);
             } else {
                 holder.programme.setVisibility(View.GONE);

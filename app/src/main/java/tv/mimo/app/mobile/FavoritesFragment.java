@@ -6,6 +6,10 @@ import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.*;
+import tv.mimo.app.Channel;
+import tv.mimo.app.Repository;
+import tv.mimo.app.R;
+import java.util.*;
 
 public class FavoritesFragment extends MobileBaseFragment implements MobileMainActivity.Searchable {
 
@@ -18,22 +22,27 @@ public class FavoritesFragment extends MobileBaseFragment implements MobileMainA
     }
 
     @Override
-    protected void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+    public void onViewReady(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recyclerView = findView(view, R.id.favorites_recycler);
-        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2));
+        int spanCount = getResources().getBoolean(R.bool.is_tablet) ? 3 : 2;
+        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), spanCount));
         adapter = new FavoritesAdapter();
         recyclerView.setAdapter(adapter);
 
-        // Load favorites from Repository - placeholder for now
         loadFavorites();
     }
 
     private void loadFavorites() {
-        // TODO: Load from Repository.favorites()
-        // For now, show empty state
-        adapter.setChannels(new java.util.ArrayList<>());
+        Repository repo = new Repository(requireContext());
+        Set<String> favoriteKeys = repo.favorites();
+        Repository.Catalog catalog = repo.load(false);
+        List<Channel> favoriteChannels = new ArrayList<>();
+        for (Channel c : catalog.channels) {
+            if (favoriteKeys.contains(c.key)) {
+                favoriteChannels.add(c);
+            }
+        }
+        adapter.setChannels(favoriteChannels);
     }
 
     @Override
@@ -78,8 +87,9 @@ public class FavoritesFragment extends MobileBaseFragment implements MobileMainA
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             Channel channel = filtered.get(position);
             holder.name.setText(channel.name);
-            if (channel.programme != null && !channel.programme.isEmpty()) {
-                holder.programme.setText(channel.programme);
+            // Programme info could be added from EPG data later
+            if (channel.streams != null && !channel.streams.isEmpty()) {
+                holder.programme.setText("Available");
                 holder.programme.setVisibility(View.VISIBLE);
             } else {
                 holder.programme.setVisibility(View.GONE);
@@ -106,18 +116,6 @@ public class FavoritesFragment extends MobileBaseFragment implements MobileMainA
                 // Favorites always show favorite icon
                 favorite.setVisibility(View.VISIBLE);
             }
-        }
-    }
-
-    static class Channel {
-        final String name;
-        final String category;
-        final String programme;
-
-        Channel(String name, String category, String programme) {
-            this.name = name;
-            this.category = category;
-            this.programme = programme;
         }
     }
 }

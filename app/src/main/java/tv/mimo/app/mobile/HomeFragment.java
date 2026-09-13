@@ -6,6 +6,7 @@ import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.*;
+import tv.mimo.app.R;
 import java.util.*;
 
 public class HomeFragment extends MobileBaseFragment implements MobileMainActivity.Searchable {
@@ -19,9 +20,7 @@ public class HomeFragment extends MobileBaseFragment implements MobileMainActivi
     }
 
     @Override
-    protected void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+    public void onViewReady(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recyclerView = findView(view, R.id.home_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         adapter = new HomeAdapter();

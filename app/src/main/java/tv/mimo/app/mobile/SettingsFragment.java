@@ -7,9 +7,9 @@ import android.view.*;
 import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.preference.*;
+import tv.mimo.app.R;
 
 public class SettingsFragment extends MobileBaseFragment {
 
@@ -19,9 +19,7 @@ public class SettingsFragment extends MobileBaseFragment {
     }
 
     @Override
-    protected void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+    public void onViewReady(@NonNull View view, @Nullable Bundle savedInstanceState) {
         getChildFragmentManager()
             .beginTransaction()
             .replace(R.id.settings_container, new SettingsPreferenceFragment())
@@ -33,28 +31,35 @@ public class SettingsFragment extends MobileBaseFragment {
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.mobile_preferences, rootKey);
 
-            findPreference("pref_about")?.setOnPreferenceClickListener(preference -> {
-                Fragment aboutFragment = new AboutFragment();
-                requireActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, aboutFragment)
-                    .addToBackStack(null)
-                    .commit();
-                return true;
-            });
+            Preference aboutPref = findPreference("pref_about");
+            if (aboutPref != null) {
+                aboutPref.setOnPreferenceClickListener(preference -> {
+                    Fragment aboutFragment = new AboutFragment();
+                    requireActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, aboutFragment)
+                        .addToBackStack(null)
+                        .commit();
+                    return true;
+                });
+            }
 
-            findPreference("pref_diagnostics")?.setOnPreferenceClickListener(preference -> {
-                // Open diagnostics URL
-                Intent intent = new Intent(Intent.ACTION_VIEW, 
-                    Uri.parse("https://nkuhaupwlxadvihnnned.supabase.co/functions/v1/mimo-iptv?check=1"));
-                startActivity(intent);
-                return true;
-            });
+            Preference diagnosticsPref = findPreference("pref_diagnostics");
+            if (diagnosticsPref != null) {
+                diagnosticsPref.setOnPreferenceClickListener(preference -> {
+                    Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://nkuhaupwlxadvihnnned.supabase.co/functions/v1/mimo-iptv?check=1"));
+                    startActivity(intent);
+                    return true;
+                });
+            }
 
-            findPreference("pref_manage_sources")?.setOnPreferenceClickListener(preference -> {
-                // TODO: Navigate to source management - placeholder for now
-                return true;
-            });
+            Preference sourcesPref = findPreference("pref_manage_sources");
+            if (sourcesPref != null) {
+                sourcesPref.setOnPreferenceClickListener(preference -> {
+                    return true;
+                });
+            }
         }
     }
 }
