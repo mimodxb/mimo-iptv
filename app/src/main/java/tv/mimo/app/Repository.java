@@ -113,6 +113,18 @@ public final class Repository {
             if(all.stream().noneMatch(c->c.key.equals("spacetv.az"))) all.add(new Channel("SpaceTV.az","Space TV","AZ","Azerbaijan","","mimo"));
         }
         List<Channel> merged=M3uParser.merge(all);
+        try {
+            InternalFallbackFeed fallback = new InternalFallbackFeed(cache.getParentFile().getParentFile());
+            List<Channel> fbChannels = fallback.load(network);
+            if (!fbChannels.isEmpty()) {
+                List<Channel> fbMerged = M3uParser.merge(fbChannels);
+                int before = merged.size();
+                InternalFallbackFeed.mergeInto(merged, fbMerged);
+                Log.w("MIMO_DIAG","  fallback merge: "+fbMerged.size()+" fb channels, streams added to existing channels");
+            }
+        } catch (Exception e) {
+            Log.w("MIMO_DIAG","  fallback: integration failed (non-fatal): "+e.getMessage());
+        }
         Log.w("MIMO_DIAG","load() network="+network+" done merged="+merged.size()+" notices="+notices);
         return new Catalog(merged,notices,epgs);
     }

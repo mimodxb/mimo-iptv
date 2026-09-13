@@ -3,7 +3,7 @@ import java.util.*;
 
 /** One backend refresh per session; every URL/header combination is tried at most once. */
 public final class RecoveryPlan {
-    public static final int MAX_ATTEMPTS = 4;
+    public static final int MAX_ATTEMPTS = 6;
     private final Set<String> attempted = new HashSet<>();
     private boolean refreshed;
     public Channel.Stream next(List<Channel.Stream> streams) {
