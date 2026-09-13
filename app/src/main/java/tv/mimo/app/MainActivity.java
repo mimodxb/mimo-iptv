@@ -26,6 +26,7 @@ public final class MainActivity extends Activity {
     private TextView status,titleCount;
     private RecyclerView grid;
     private ChannelsAdapter adapter;
+    private LinearLayout favEmptyView;
     private String page="Home",category="Azerbaijan",query="",lastChannel="";
     private boolean loading,guideLoading,reloadQueued;
     private final Map<String,TextView> nav=new LinkedHashMap<>();
@@ -83,6 +84,7 @@ public final class MainActivity extends Activity {
             TextView home=text(this,tr("home_hero_title"),21,INK);home.setTypeface(null,Typeface.BOLD);add(copy,home,49);
             add(copy,text(this,tr("home_hero_sub"),12,MUTED),21);hero.addView(copy,new LinearLayout.LayoutParams(0,-1,1));
             ImageView mark=new ImageView(this);mark.setImageResource(R.drawable.mimo_emblem);mark.setContentDescription("MIMO TV botanical monogram");mark.setScaleType(ImageView.ScaleType.FIT_CENTER);hero.addView(mark,new LinearLayout.LayoutParams(d(88),d(88)));add(body,hero,108);gap(body,10);
+            addRecentlyWatchedRow();
         }
         if(page.equals("Search")){
             EditText search=new EditText(this);search.setSingleLine(true);search.setTextColor(INK);search.setTextSize(18);search.setHintTextColor(MUTED);search.setHint(tr("search_hint"));search.setContentDescription(tr("nav_search"));search.setText(query);search.setImeOptions(EditorInfo.IME_ACTION_SEARCH);add(body,search,52);
@@ -105,7 +107,13 @@ public final class MainActivity extends Activity {
         grid=new RecyclerView(this);grid.setId(View.generateViewId());grid.setClipToPadding(false);grid.setPadding(d(3),d(4),d(3),d(6));
         grid.setLayoutManager(new GridLayoutManager(this,page.equals("Guide")?2:4));grid.setItemAnimator(null);grid.setPreserveFocusAfterLayout(true);
         adapter=new ChannelsAdapter();grid.setAdapter(adapter);body.addView(grid,new LinearLayout.LayoutParams(-1,0,1));
-        TextView hint=text(this,tr("hint_dpad"),10,MUTED);add(body,hint,21);updateGrid();
+        favEmptyView=column(this);favEmptyView.setGravity(Gravity.CENTER);favEmptyView.setPadding(d(24),d(32),d(24),d(32));
+        TextView favIcon=text(this,"♡",48,MUTED);favIcon.setGravity(Gravity.CENTER);favEmptyView.addView(favIcon,new LinearLayout.LayoutParams(-1,-2));
+        TextView favMsg=text(this,tr("fav_empty"),14,MUTED);favMsg.setGravity(Gravity.CENTER);favEmptyView.addView(favMsg,new LinearLayout.LayoutParams(-1,-2));
+        body.addView(favEmptyView,new LinearLayout.LayoutParams(-1,-1));
+        if(!page.equals("Favorites"))favEmptyView.setVisibility(View.GONE);
+        TextView hint=text(this,tr("hint_dpad"),10,MUTED);add(body,hint,18);
+        TextView navHint=text(this,tr("hint_navigate"),9,TEAL);add(body,navHint,16);updateGrid();
     }
 
     private void reload(){
@@ -129,6 +137,9 @@ public final class MainActivity extends Activity {
             filtered.add(c);
         }
         adapter.items=filtered;adapter.notifyDataSetChanged();
+        boolean showFavEmpty=page.equals("Favorites")&&filtered.isEmpty();
+        if(favEmptyView!=null)favEmptyView.setVisibility(showFavEmpty?View.VISIBLE:View.GONE);
+        if(grid!=null)grid.setVisibility(showFavEmpty?View.GONE:View.VISIBLE);
         titleCount.setText(filtered.isEmpty()?(page.equals("Favorites")?tr("fav_empty"):tr("no_channels")):
             (page.equals("Home")||page.equals("Guide")?category+"  ·  ":"")+filtered.size()+" "+tr("channels"));
         if(status!=null)status.setText(loading?tr("refreshing"):catalog.notices.isEmpty()?
@@ -140,6 +151,34 @@ public final class MainActivity extends Activity {
         for(int i=0;i<adapter.items.size();i++)if(adapter.items.get(i).key.equals(lastChannel)){
             int position=i;grid.scrollToPosition(position);grid.post(()->{RecyclerView.ViewHolder holder=grid.findViewHolderForAdapterPosition(position);if(holder!=null)holder.itemView.requestFocus();});break;
         }
+    }
+
+    /* ── Recently Watched row (Home page) ── */
+    private void addRecentlyWatchedRow(){
+        List<String> recent=repository.recentlyWatched();
+        List<Channel> recentChannels=new ArrayList<>();
+        for(String key:recent){for(Channel c:catalog.channels)if(c.key.equals(key)){recentChannels.add(c);break;}}
+        if(recentChannels.isEmpty()){
+            TextView empty=text(this,tr("recent_empty"),11,MUTED);empty.setPadding(d(4),d(6),d(4),d(6));add(body,empty,28);gap(body,6);return;
+        }
+        TextView sectionLabel=text(this,tr("recent_headline"),12,GOLD);sectionLabel.setLetterSpacing(.08f);add(body,sectionLabel,22);gap(body,4);
+        LinearLayout row=row(this);row.setPadding(d(2),0,d(2),0);
+        for(Channel c:recentChannels){
+            LinearLayout card=column(this);card.setPadding(d(10),d(8),d(10),d(8));focus(card,PANEL);
+            LinearLayout.LayoutParams cardLp=new LinearLayout.LayoutParams(d(140),d(72));cardLp.setMarginEnd(d(6));card.setLayoutParams(cardLp);
+            LinearLayout top=row(this);
+            ImageView logo=new ImageView(this);logo.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(d(28),d(28));lp.setMarginEnd(d(6));top.addView(logo,lp);
+            if(!c.logo.isEmpty())ChannelLogoLoader.load(logo,c.logo,d(28),d(28));else logo.setImageBitmap(ChannelLogoLoader.placeholder(d(28),d(28)));
+            LinearLayout texts=column(this);
+            TextView name=text(this,c.name,12,INK);name.setTypeface(null,Typeface.BOLD);name.setMaxLines(1);name.setEllipsize(android.text.TextUtils.TruncateAt.END);texts.addView(name,new LinearLayout.LayoutParams(-1,-2));
+            TextView cat=text(this,c.category()+"  ·  "+c.country.toUpperCase(Locale.ROOT),9,MUTED);texts.addView(cat,new LinearLayout.LayoutParams(-1,-2));
+            top.addView(texts,new LinearLayout.LayoutParams(0,-1,1));add(card,top,-1);
+            TextView watchBtn=text(this,tr("recent_watch"),10,GREEN);watchBtn.setGravity(Gravity.CENTER);add(card,watchBtn,20);
+            card.setOnClickListener(v->watch(c));
+            row.addView(card);
+        }
+        add(body,row,82);gap(body,6);
     }
 
     private void watch(Channel c){
@@ -318,4 +357,19 @@ public final class MainActivity extends Activity {
         });
     }
     @Override public void onBackPressed(){if(!page.equals("Home")){navigate("Home");}else if(!nav.get("Home").hasFocus())nav.get("Home").requestFocus();else super.onBackPressed();}
+
+    /* ── Fast D-pad navigation: Page Up/Down, Top/Bottom ── */
+    private static final int PAGE_SIZE=12;
+    @Override public boolean dispatchKeyEvent(KeyEvent ev){
+        if(ev.getAction()!=KeyEvent.ACTION_DOWN)return super.dispatchKeyEvent(ev);
+        int k=ev.getKeyCode();
+        if(grid!=null&&adapter!=null&&!adapter.items.isEmpty()){
+            LinearLayoutManager lm=(LinearLayoutManager)grid.getLayoutManager();
+            if(k==KeyEvent.KEYCODE_CHANNEL_UP){int pos=Math.max(0,lm.findFirstVisibleItemPosition()-PAGE_SIZE);grid.smoothScrollToPosition(pos);return true;}
+            if(k==KeyEvent.KEYCODE_CHANNEL_DOWN){int pos=Math.min(adapter.items.size()-1,lm.findLastVisibleItemPosition()+PAGE_SIZE);grid.smoothScrollToPosition(pos);return true;}
+            if(k==KeyEvent.KEYCODE_MEDIA_PLAY){grid.smoothScrollToPosition(0);return true;}
+            if(k==KeyEvent.KEYCODE_MEDIA_STOP){grid.smoothScrollToPosition(adapter.items.size()-1);return true;}
+        }
+        return super.dispatchKeyEvent(ev);
+    }
 }
