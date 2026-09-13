@@ -4,7 +4,8 @@ import java.util.*;
 
 /** Stable identity is independent of signed or refreshed stream URLs. */
 public final class Channel {
-    public final String key, tvgId, name, country, group, logo;
+    public final String key, tvgId, name, country, group;
+    public String logo;
     public final String cat;
     public final List<Stream> streams = new ArrayList<>();
     private static final java.util.regex.Pattern COMBINING = java.util.regex.Pattern.compile("\\p{M}");

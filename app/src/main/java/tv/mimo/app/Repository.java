@@ -55,6 +55,39 @@ public final class Repository {
         prefs.edit().putStringSet("favorites",favorites).apply();
         return added;
     }
+
+    /* ── Recently Watched (bounded, deduplicated, most-recent-first) ── */
+    private static final int RECENT_LIMIT = 20;
+    public List<String> recentlyWatched() {
+        String json = prefs.getString("recent", "[]");
+        try {
+            JSONArray arr = new JSONArray(json);
+            List<String> list = new ArrayList<>();
+            for (int i = 0; i < arr.length(); i++) list.add(arr.getString(i));
+            return list;
+        } catch (Exception e) { return new ArrayList<>(); }
+    }
+    public void addRecentlyWatched(String key) {
+        if (key == null || key.isEmpty()) return;
+        List<String> list = recentlyWatched();
+        list.remove(key);
+        list.add(0, key);
+        if (list.size() > RECENT_LIMIT) list = new ArrayList<>(list.subList(0, RECENT_LIMIT));
+        prefs.edit().putString("recent", new JSONArray(list).toString()).apply();
+    }
+
+    /* ── Last / Previous Channel ── */
+    public String lastChannel() { return prefs.getString("last_channel", ""); }
+    public String previousChannel() { return prefs.getString("prev_channel", ""); }
+    public void setLastChannel(String key) {
+        String prev = lastChannel();
+        if (!prev.isEmpty() && !prev.equals(key)) prefs.edit().putString("prev_channel", prev).apply();
+        prefs.edit().putString("last_channel", key).apply();
+    }
+
+    /* ── Language preference ── */
+    public String language() { return prefs.getString("language", "en"); }
+    public void setLanguage(String lang) { prefs.edit().putString("language", lang).apply(); }
     private File cacheFile(Source s) {
         String key = UUID.nameUUIDFromBytes((s.id+":"+s.url).getBytes(StandardCharsets.UTF_8)).toString();
         return new File(cache,key+".m3u");
