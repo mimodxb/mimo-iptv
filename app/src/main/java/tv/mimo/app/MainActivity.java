@@ -26,7 +26,7 @@ public final class MainActivity extends Activity {
     private TextView status,titleCount;
     private RecyclerView grid;
     private ChannelsAdapter adapter;
-    private LinearLayout favEmptyView;
+    private LinearLayout favEmptyView,recentContainer;
     private String page="Home",category="Azerbaijan",query="",lastChannel="";
     private boolean loading,guideLoading,reloadQueued;
     private final Map<String,TextView> nav=new LinkedHashMap<>();
@@ -84,7 +84,8 @@ public final class MainActivity extends Activity {
             TextView home=text(this,tr("home_hero_title"),21,INK);home.setTypeface(null,Typeface.BOLD);add(copy,home,49);
             add(copy,text(this,tr("home_hero_sub"),12,MUTED),21);hero.addView(copy,new LinearLayout.LayoutParams(0,-1,1));
             ImageView mark=new ImageView(this);mark.setImageResource(R.drawable.mimo_emblem);mark.setContentDescription("MIMO TV botanical monogram");mark.setScaleType(ImageView.ScaleType.FIT_CENTER);hero.addView(mark,new LinearLayout.LayoutParams(d(88),d(88)));add(body,hero,108);gap(body,10);
-            addRecentlyWatchedRow();
+            recentContainer=new LinearLayout(this);recentContainer.setOrientation(LinearLayout.VERTICAL);
+            body.addView(recentContainer,new LinearLayout.LayoutParams(-1,-2));addRecentlyWatchedRow();gap(body,6);
         }
         if(page.equals("Search")){
             EditText search=new EditText(this);search.setSingleLine(true);search.setTextColor(INK);search.setTextSize(18);search.setHintTextColor(MUTED);search.setHint(tr("search_hint"));search.setContentDescription(tr("nav_search"));search.setText(query);search.setImeOptions(EditorInfo.IME_ACTION_SEARCH);add(body,search,52);
@@ -144,6 +145,7 @@ public final class MainActivity extends Activity {
             (page.equals("Home")||page.equals("Guide")?category+"  ·  ":"")+filtered.size()+" "+tr("channels"));
         if(status!=null)status.setText(loading?tr("refreshing"):catalog.notices.isEmpty()?
             tr("together")+"  ·  "+catalog.channels.stream().filter(c->!c.streams.isEmpty()).count()+" "+tr("available"):String.join("  ",catalog.notices));
+        if(page.equals("Home"))addRecentlyWatchedRow();
     }
 
     private void restoreChannelFocus(){
@@ -155,13 +157,17 @@ public final class MainActivity extends Activity {
 
     /* ── Recently Watched row (Home page) ── */
     private void addRecentlyWatchedRow(){
+        if(recentContainer==null)return;
+        recentContainer.removeAllViews();
         List<String> recent=repository.recentlyWatched();
         List<Channel> recentChannels=new ArrayList<>();
         for(String key:recent){for(Channel c:catalog.channels)if(c.key.equals(key)){recentChannels.add(c);break;}}
         if(recentChannels.isEmpty()){
-            TextView empty=text(this,tr("recent_empty"),11,MUTED);empty.setPadding(d(4),d(6),d(4),d(6));add(body,empty,28);gap(body,6);return;
+            TextView empty=text(this,tr("recent_empty"),11,MUTED);empty.setPadding(d(4),d(6),d(4),d(6));
+            recentContainer.addView(empty,new LinearLayout.LayoutParams(-1,d(28)));return;
         }
-        TextView sectionLabel=text(this,tr("recent_headline"),12,GOLD);sectionLabel.setLetterSpacing(.08f);add(body,sectionLabel,22);gap(body,4);
+        TextView sectionLabel=text(this,tr("recent_headline"),12,GOLD);sectionLabel.setLetterSpacing(.08f);
+        add(recentContainer,sectionLabel,22);gap(recentContainer,4);
         LinearLayout row=row(this);row.setPadding(d(2),0,d(2),0);
         for(Channel c:recentChannels){
             LinearLayout card=column(this);card.setPadding(d(10),d(8),d(10),d(8));focus(card,PANEL);
@@ -178,7 +184,7 @@ public final class MainActivity extends Activity {
             card.setOnClickListener(v->watch(c));
             row.addView(card);
         }
-        add(body,row,82);gap(body,6);
+        add(recentContainer,row,82);
     }
 
     private void watch(Channel c){
@@ -360,15 +366,26 @@ public final class MainActivity extends Activity {
 
     /* ── Fast D-pad navigation: Page Up/Down, Top/Bottom ── */
     private static final int PAGE_SIZE=12;
+    private void scrollToFocus(int targetPos){
+        if(grid==null||adapter==null)return;
+        LinearLayoutManager lm=(LinearLayoutManager)grid.getLayoutManager();
+        grid.scrollToPosition(targetPos);
+        grid.post(()->{
+            int first=lm.findFirstVisibleItemPosition();int last=lm.findLastVisibleItemPosition();
+            int focusPos=Math.max(first,Math.min(targetPos,last));
+            RecyclerView.ViewHolder h=grid.findViewHolderForAdapterPosition(focusPos);
+            if(h!=null)h.itemView.requestFocus();
+        });
+    }
     @Override public boolean dispatchKeyEvent(KeyEvent ev){
         if(ev.getAction()!=KeyEvent.ACTION_DOWN)return super.dispatchKeyEvent(ev);
         int k=ev.getKeyCode();
         if(grid!=null&&adapter!=null&&!adapter.items.isEmpty()){
             LinearLayoutManager lm=(LinearLayoutManager)grid.getLayoutManager();
-            if(k==KeyEvent.KEYCODE_CHANNEL_UP){int pos=Math.max(0,lm.findFirstVisibleItemPosition()-PAGE_SIZE);grid.smoothScrollToPosition(pos);return true;}
-            if(k==KeyEvent.KEYCODE_CHANNEL_DOWN){int pos=Math.min(adapter.items.size()-1,lm.findLastVisibleItemPosition()+PAGE_SIZE);grid.smoothScrollToPosition(pos);return true;}
-            if(k==KeyEvent.KEYCODE_MEDIA_PLAY){grid.smoothScrollToPosition(0);return true;}
-            if(k==KeyEvent.KEYCODE_MEDIA_STOP){grid.smoothScrollToPosition(adapter.items.size()-1);return true;}
+            if(k==KeyEvent.KEYCODE_CHANNEL_UP){scrollToFocus(Math.max(0,lm.findFirstVisibleItemPosition()-PAGE_SIZE));return true;}
+            if(k==KeyEvent.KEYCODE_CHANNEL_DOWN){scrollToFocus(Math.min(adapter.items.size()-1,lm.findLastVisibleItemPosition()+PAGE_SIZE));return true;}
+            if(k==KeyEvent.KEYCODE_MEDIA_PLAY){scrollToFocus(0);return true;}
+            if(k==KeyEvent.KEYCODE_MEDIA_STOP){scrollToFocus(adapter.items.size()-1);return true;}
         }
         return super.dispatchKeyEvent(ev);
     }
