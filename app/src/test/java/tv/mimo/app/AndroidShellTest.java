@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.*;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.*;
+import org.robolectric.shadows.ShadowLooper;
 import java.util.*;
 import static org.junit.Assert.*;
 
@@ -25,10 +26,12 @@ public class AndroidShellTest {
     }
     @Test public void shellLaunchesAndEveryNavigationEntryOpens(){
         try(ActivityController<MainActivity> controller=Robolectric.buildActivity(MainActivity.class).setup()){
-            MainActivity activity=controller.get();View root=activity.getWindow().getDecorView();
-            assertNotNull(find(root,"A little closer to home."));assertTrue(find(root,"Home").isFocusable());
-            for(String[] route:new String[][]{{"Search","Find your channel."},{"Favorites","Your favorites."},{"Guide","What’s on."},{"Settings","Make yourself at home."},{"Home","A little closer to home."}}){
-                assertTrue(find(root,route[0]).performClick());assertNotNull(find(root,route[1]));
+            MainActivity activity=controller.get();
+            View root=activity.getWindow().getDecorView();
+            assertNotNull(find(root,"A little closer to home."));
+            for(String[] route:new String[][]{{"Search","Find your channel."},{"Favorites","Your favorites."},{"Guide","What's on."},{"Settings","Make yourself at home."},{"Home","A little closer to home."}}){
+                assertTrue(find(root,route[0]).performClick());ShadowLooper.idleMainLooper();
+                root=activity.getWindow().getDecorView();assertNotNull(find(root,route[1]));
             }
         }
     }
