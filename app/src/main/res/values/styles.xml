@@ -1,11 +1,32 @@
 <resources>
-    <style name="AppTheme" parent="android:style/Theme.Material.NoActionBar">
-        <item name="android:fontFamily">sans</item>
+    <color name="mobile_bg">#091516</color>
+    <color name="mobile_panel">#122627</color>
+    <color name="mobile_teal">#133939</color>
+    <color name="mobile_ink">#EDF1E7</color>
+    <color name="mobile_muted">#A6BBB1</color>
+    <color name="mobile_green">#B8D977</color>
+    <color name="mobile_gold">#D9AE51</color>
+
+    <style name="MobileAppTheme" parent="android:style/Theme.Material.NoActionBar">
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowActionModeOverlay">true</item>
-        <item name="android:windowBackground">#091516</item>
-        <item name="android:colorAccent">#B8D977</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/mobile_bg</item>
+        <item name="android:colorAccent">@color/mobile_green</item>
+        <item name="android:colorPrimary">@color/mobile_green</item>
+        <item name="android:colorPrimaryDark">@color/mobile_teal</item>
+    </style>
+
+    <style name="MobileToolbar" parent="android:style/Widget.Material.ActionBar">
+        <item name="android:background">@color/mobile_panel</item>
+        <item name="android:titleTextColor">@color/mobile_ink</item>
+        <item name="android:subtitleTextColor">@color/mobile_muted</item>
+    </style>
+
+    <style name="MobileBottomNav" parent="android:style/Widget.Material.BottomNavigationView">
+        <item name="android:background">@color/mobile_panel</item>
+        <item name="android:itemIconTint">@color/mobile_bottom_nav_colors</item>
+        <item name="android:itemTextColor">@color/mobile_bottom_nav_colors</item>
+        <item name="android:labelVisibilityMode">labeled</item>
     </style>
 </resources>

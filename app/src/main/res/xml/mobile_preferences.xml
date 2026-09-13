@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/settings_language">
+        <ListPreference
+            android:key="pref_language"
+            android:title="@string/settings_language"
+            android:summary="Select app language"
+            android:entries="@array/language_entries"
+            android:entryValues="@array/language_values"
+            android:defaultValue="system" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_playlists">
+        <Preference
+            android:key="pref_manage_sources"
+            android:title="@string/settings_playlists"
+            android:summary="Add, edit, enable/disable playlist sources"
+            android:icon="@drawable/ic_live_tv" />
+        <SwitchPreferenceCompat
+            android:key="pref_auto_refresh"
+            android:title="Auto-refresh playlists"
+            android:summary="Automatically refresh on app start"
+            android:defaultValue="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_about">
+        <Preference
+            android:key="pref_about"
+            android:title="@string/settings_about"
+            android:summary="Version, credits, and legal"
+            android:icon="@drawable/ic_settings" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_diagnostics">
+        <Preference
+            android:key="pref_diagnostics"
+            android:title="@string/settings_diagnostics"
+            android:summary="Backend status, playlist health, logs"
+            android:icon="@drawable/ic_guide" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
