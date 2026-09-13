@@ -69,6 +69,17 @@ public final class Strings {
         M.put("play_pause",      new String[]{"Pause", "Dayandır"});
         M.put("play_fav_add",    new String[]{"♡  Favorite", "♡  Sevimli"});
         M.put("play_fav_done",   new String[]{"♥  Saved", "♥  Saxlanıldı"});
+        M.put("play_resume",     new String[]{"Play", "Davam et"});
+        M.put("play_prev",       new String[]{"‹  Prev", "‹  Əvvəlki"});
+        M.put("play_next",       new String[]{"Next  ›", "Növbəti  ›"});
+        M.put("play_last",       new String[]{"Last  ⇄", "Sonuncu  ⇄"});
+
+        // About
+        M.put("about_title",     new String[]{"MIMO TV", "MIMO TV"});
+        M.put("about_creator",   new String[]{"by Movsum Mirzazada", "Movsum Mirzazada tərəfindən"});
+        M.put("about_collective",new String[]{"Mimo's Collective", "Mimo Kolektivi"});
+        M.put("about_desc",      new String[]{"A little closer to home.", "Evə bir az daha yaxın."});
+        M.put("about_version",   new String[]{"Version 0.1.0", "Versiya 0.1.0"});
 
         // Common
         M.put("channels",       new String[]{"channels", "kanallar"});

@@ -144,7 +144,10 @@ public final class MainActivity extends Activity {
 
     private void watch(Channel c){
         lastChannel=c.key;repository.setLastChannel(c.key);repository.addRecentlyWatched(c.key);
-        Intent intent=new Intent(this,PlaybackActivity.class);intent.putExtra("key",c.key);intent.putExtra("name",c.name);startActivity(intent);
+        Intent intent=new Intent(this,PlaybackActivity.class);intent.putExtra("key",c.key);intent.putExtra("name",c.name);
+        ArrayList<String> keys=new ArrayList<>();for(Channel ch:adapter.items)keys.add(ch.key);
+        intent.putStringArrayListExtra("chan_keys",keys);intent.putExtra("idx",adapter.items.indexOf(c));
+        startActivity(intent);
     }
     private void favorite(Channel c){boolean added=repository.toggleFavorite(c.key);Toast.makeText(this,added?tr("added_fav"):tr("removed_fav"),Toast.LENGTH_SHORT).show();updateGrid();restoreChannelFocus();}
 
@@ -228,16 +231,39 @@ public final class MainActivity extends Activity {
             repository.setLanguage(newLang);render();reload();
         }),46);gap(content,8);
 
-        // Developer diagnostics — hidden gate: tap "About" area 5 times within 3 seconds
+        // About screen — normal click shows About dialog
         gap(content,16);
-        TextView aboutBtn=text(this,tr("settings_about"),11,MUTED);aboutBtn.setPadding(d(12),d(8),d(12),d(8));
-        aboutBtn.setOnClickListener(v->{
+        TextView aboutBtn=button(this,tr("settings_about"),this::showAbout);aboutBtn.setTextSize(11);
+        content.addView(aboutBtn,new LinearLayout.LayoutParams(-1,d(36)));
+
+        // Version text — 5-tap hidden gate for developer diagnostics
+        gap(content,6);
+        TextView versionBtn=text(this,tr("about_version"),10,MUTED);versionBtn.setPadding(d(12),d(4),d(12),d(4));
+        versionBtn.setOnClickListener(v->{
             long now=System.currentTimeMillis();
             if(now-devTapTime>3000)devTapCount=0;
             devTapCount++;devTapTime=now;
             if(devTapCount>=5){devTapCount=0;showDiagnostics();}
         });
-        content.addView(aboutBtn,new LinearLayout.LayoutParams(-1,d(36)));
+        content.addView(versionBtn,new LinearLayout.LayoutParams(-1,d(28)));
+    }
+
+    private void showAbout(){
+        LinearLayout layout=column(this);layout.setPadding(d(32),d(24),d(32),d(24));
+        ImageView icon=new ImageView(this);icon.setImageResource(R.drawable.mimo_emblem);icon.setContentDescription("MIMO TV");
+        LinearLayout.LayoutParams iconLp=new LinearLayout.LayoutParams(d(72),d(72));iconLp.gravity=Gravity.CENTER_HORIZONTAL;iconLp.bottomMargin=d(16);
+        layout.addView(icon,iconLp);
+        TextView title=text(this,tr("about_title"),24,INK);title.setTypeface(null,Typeface.BOLD);title.setGravity(Gravity.CENTER);
+        layout.addView(title,new LinearLayout.LayoutParams(-1,-2));
+        TextView collective=text(this,tr("about_collective"),16,GOLD);collective.setGravity(Gravity.CENTER);collective.setLetterSpacing(.08f);
+        layout.addView(collective,new LinearLayout.LayoutParams(-1,-2));
+        layout.addView(new View(this),new LinearLayout.LayoutParams(-1,d(12)));
+        TextView desc=text(this,tr("about_desc"),14,MUTED);desc.setGravity(Gravity.CENTER);
+        layout.addView(desc,new LinearLayout.LayoutParams(-1,-2));
+        layout.addView(new View(this),new LinearLayout.LayoutParams(-1,d(8)));
+        TextView creator=text(this,tr("about_creator"),13,MUTED);creator.setGravity(Gravity.CENTER);
+        layout.addView(creator,new LinearLayout.LayoutParams(-1,-2));
+        new AlertDialog.Builder(this).setView(layout).setPositiveButton(tr("close"),null).show();
     }
 
     private void showDiagnostics(){
