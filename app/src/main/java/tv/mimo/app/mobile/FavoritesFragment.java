@@ -7,8 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.*;
 import tv.mimo.app.Channel;
-import tv.mimo.app.Repository;
+import tv.mimo.app.ChannelLogoLoader;
 import tv.mimo.app.R;
+import tv.mimo.app.Repository;
 import java.util.*;
 
 public class FavoritesFragment extends MobileBaseFragment implements MobileMainActivity.Searchable {
@@ -16,6 +17,7 @@ public class FavoritesFragment extends MobileBaseFragment implements MobileMainA
     private RecyclerView recyclerView;
     private TextView emptyView;
     private FavoritesAdapter adapter;
+    private Repository repository;
 
     @Override
     protected int getLayoutResId() {
@@ -28,16 +30,17 @@ public class FavoritesFragment extends MobileBaseFragment implements MobileMainA
         emptyView = findView(view, R.id.favorites_empty);
         int spanCount = getResources().getBoolean(R.bool.is_tablet) ? 3 : 2;
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), spanCount));
+        repository = new Repository(requireContext());
         adapter = new FavoritesAdapter();
+        adapter.setRepository(repository);
         recyclerView.setAdapter(adapter);
 
         loadFavorites();
     }
 
     private void loadFavorites() {
-        Repository repo = new Repository(requireContext());
-        Set<String> favoriteKeys = repo.favorites();
-        Repository.Catalog catalog = repo.load(false);
+        Set<String> favoriteKeys = repository.favorites();
+        Repository.Catalog catalog = repository.load(false);
         List<Channel> favoriteChannels = new ArrayList<>();
         for (Channel c : catalog.channels) {
             if (favoriteKeys.contains(c.key)) {
@@ -46,6 +49,8 @@ public class FavoritesFragment extends MobileBaseFragment implements MobileMainA
         }
         adapter.setChannels(favoriteChannels);
         updateEmptyState();
+        // Update favorite icons
+        adapter.notifyDataSetChanged();
     }
 
     private void updateEmptyState() {
@@ -64,9 +69,18 @@ public class FavoritesFragment extends MobileBaseFragment implements MobileMainA
         updateEmptyState();
     }
 
+    public void refreshData() {
+        loadFavorites();
+    }
+
     static class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
         private List<Channel> channels = new ArrayList<>();
         private List<Channel> filtered = new ArrayList<>();
+        private Repository repository;
+
+        void setRepository(Repository repository) {
+            this.repository = repository;
+        }
 
         void setChannels(List<Channel> channels) {
             this.channels = channels;
@@ -101,12 +115,40 @@ public class FavoritesFragment extends MobileBaseFragment implements MobileMainA
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             Channel channel = filtered.get(position);
             holder.name.setText(channel.name);
-            // Programme info could be added from EPG data later
+            
+            // Load channel logo
+            if (channel.logo != null && !channel.logo.isEmpty()) {
+                ChannelLogoLoader.load(holder.logo, channel.logo, 120, 120);
+            } else {
+                holder.logo.setImageBitmap(ChannelLogoLoader.placeholder(120, 120));
+            }
+
+            // Programme info
             if (channel.streams != null && !channel.streams.isEmpty()) {
                 holder.programme.setText(holder.itemView.getContext().getString(R.string.channel_available));
                 holder.programme.setVisibility(View.VISIBLE);
             } else {
                 holder.programme.setVisibility(View.GONE);
+            }
+
+            // Favorite toggle
+            holder.favorite.setOnClickListener(v -> {
+                if (repository != null) {
+                    boolean added = repository.toggleFavorite(channel.key);
+                    holder.favorite.setImageResource(added ? R.drawable.ic_favorite_filled : R.drawable.ic_favorite);
+                    holder.favorite.setColorFilter(added ? 
+                        holder.itemView.getContext().getColor(R.color.mobile_gold) : 
+                        holder.itemView.getContext().getColor(R.color.mobile_muted));
+                }
+            });
+
+            // Update favorite icon state
+            if (repository != null && repository.favorites().contains(channel.key)) {
+                holder.favorite.setImageResource(R.drawable.ic_favorite_filled);
+                holder.favorite.setColorFilter(holder.itemView.getContext().getColor(R.color.mobile_gold));
+            } else {
+                holder.favorite.setImageResource(R.drawable.ic_favorite);
+                holder.favorite.setColorFilter(holder.itemView.getContext().getColor(R.color.mobile_muted));
             }
         }
 
@@ -127,8 +169,6 @@ public class FavoritesFragment extends MobileBaseFragment implements MobileMainA
                 programme = itemView.findViewById(R.id.channel_programme);
                 favorite = itemView.findViewById(R.id.channel_favorite);
                 logo = itemView.findViewById(R.id.channel_logo);
-                // Favorites always show favorite icon
-                favorite.setVisibility(View.VISIBLE);
             }
         }
     }

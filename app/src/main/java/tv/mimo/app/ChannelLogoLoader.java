@@ -27,7 +27,7 @@ public final class ChannelLogoLoader {
     }
 
     /** Placeholder silhouette for missing/failed logos. */
-    static Bitmap placeholder(int w, int h) {
+    public static Bitmap placeholder(int w, int h) {
         Bitmap b = Bitmap.createBitmap(Math.max(w,1), Math.max(h,1), CFG);
         Canvas c = new Canvas(b);
         c.drawColor(TvStyle.PANEL);

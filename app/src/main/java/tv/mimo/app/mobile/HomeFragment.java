@@ -6,13 +6,17 @@ import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.*;
+import tv.mimo.app.Channel;
+import tv.mimo.app.ChannelLogoLoader;
 import tv.mimo.app.R;
+import tv.mimo.app.Repository;
 import java.util.*;
 
 public class HomeFragment extends MobileBaseFragment implements MobileMainActivity.Searchable {
 
     private RecyclerView recyclerView;
     private HomeAdapter adapter;
+    private Repository repository;
 
     @Override
     protected int getLayoutResId() {
@@ -26,21 +30,43 @@ public class HomeFragment extends MobileBaseFragment implements MobileMainActivi
         adapter = new HomeAdapter();
         recyclerView.setAdapter(adapter);
 
-        // Set initial data - in real implementation this would come from Repository
-        adapter.setData(createHomeSections());
+        repository = new Repository(requireContext());
+        loadHomeData();
     }
 
-    private List<HomeSection> createHomeSections() {
+    private void loadHomeData() {
+        Repository.Catalog catalog = repository.load(false);
+        List<String> recentKeys = repository.recentlyWatched();
+        Set<String> favoriteKeys = repository.favorites();
+
         List<HomeSection> sections = new ArrayList<>();
 
         // Branding header
         sections.add(new HomeSection(HomeSection.TYPE_BRANDING, null));
 
-        // Recently Watched placeholder
-        sections.add(new HomeSection(HomeSection.TYPE_RECENTLY_WATCHED, new ArrayList<>()));
+        // Recently Watched
+        List<Channel> recentChannels = new ArrayList<>();
+        for (String key : recentKeys) {
+            for (Channel c : catalog.channels) {
+                if (key.equals(c.key)) {
+                    recentChannels.add(c);
+                    break;
+                }
+            }
+        }
+        sections.add(new HomeSection(HomeSection.TYPE_RECENTLY_WATCHED, recentChannels));
 
-        // Favorites placeholder
-        sections.add(new HomeSection(HomeSection.TYPE_FAVORITES, new ArrayList<>()));
+        // Favorites
+        List<Channel> favoriteChannels = new ArrayList<>();
+        for (String key : favoriteKeys) {
+            for (Channel c : catalog.channels) {
+                if (key.equals(c.key)) {
+                    favoriteChannels.add(c);
+                    break;
+                }
+            }
+        }
+        sections.add(new HomeSection(HomeSection.TYPE_FAVORITES, favoriteChannels));
 
         // Categories
         List<CategoryItem> categories = new ArrayList<>();
@@ -51,13 +77,16 @@ public class HomeFragment extends MobileBaseFragment implements MobileMainActivi
         categories.add(new CategoryItem(R.string.home_category_world, "World"));
         sections.add(new HomeSection(HomeSection.TYPE_CATEGORIES, categories));
 
-        return sections;
+        adapter.setData(sections);
     }
 
     @Override
     public void onSearch(String query) {
         // Navigate to Live TV with search or show search results
-        // For now, just filter categories or delegate to LiveTvFragment
+    }
+
+    public void refreshData() {
+        loadHomeData();
     }
 
     static class HomeSection {
@@ -176,7 +205,7 @@ public class HomeFragment extends MobileBaseFragment implements MobileMainActivi
                     recycler.setVisibility(View.VISIBLE);
                     emptyText.setVisibility(View.GONE);
                     recycler.setLayoutManager(new LinearLayoutManager(itemView.getContext(), LinearLayout.HORIZONTAL, false));
-                    recycler.setAdapter(new ChannelHorizontalAdapter(items));
+                    recycler.setAdapter(new ChannelHorizontalAdapter((List<Channel>) items));
                 }
             }
         }
@@ -197,8 +226,8 @@ public class HomeFragment extends MobileBaseFragment implements MobileMainActivi
     }
 
     static class ChannelHorizontalAdapter extends RecyclerView.Adapter<ChannelHorizontalAdapter.ViewHolder> {
-        private final List<?> items;
-        ChannelHorizontalAdapter(List<?> items) { this.items = items; }
+        private final List<Channel> items;
+        ChannelHorizontalAdapter(List<Channel> items) { this.items = items; }
 
         @NonNull @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -209,14 +238,26 @@ public class HomeFragment extends MobileBaseFragment implements MobileMainActivi
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            // Bind channel data
+            Channel channel = items.get(position);
+            holder.name.setText(channel.name);
+            if (channel.logo != null && !channel.logo.isEmpty()) {
+                ChannelLogoLoader.load(holder.logo, channel.logo, 90, 90);
+            } else {
+                holder.logo.setImageBitmap(ChannelLogoLoader.placeholder(90, 90));
+            }
         }
 
         @Override
         public int getItemCount() { return items.size(); }
 
         static class ViewHolder extends RecyclerView.ViewHolder {
-            ViewHolder(View itemView) { super(itemView); }
+            final TextView name;
+            final ImageView logo;
+            ViewHolder(View itemView) {
+                super(itemView);
+                name = itemView.findViewById(R.id.channel_name);
+                logo = itemView.findViewById(R.id.channel_logo);
+            }
         }
     }
 
@@ -235,7 +276,6 @@ public class HomeFragment extends MobileBaseFragment implements MobileMainActivi
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             CategoryItem item = categories.get(position);
             holder.name.setText(item.nameRes);
-            // Could add category-specific icon/color here
         }
 
         @Override
