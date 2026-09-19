@@ -325,7 +325,6 @@ public final class MobilePlaybackActivity extends Activity {
             statusText.setText(tr("play_live")+"  ·  "+name);
             showInfo(true);
             scheduleHide();
-            recordHistoryIfNeeded();
         }
     }
 
@@ -420,7 +419,7 @@ public final class MobilePlaybackActivity extends Activity {
         if(ev.getAction()==KeyEvent.ACTION_DOWN){
             if(k==KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE){ togglePlayback(); return true; }
             if(k==KeyEvent.KEYCODE_MEDIA_PLAY){
-                if(player!=null){ player.play(); playPauseBtn.setText(tr("play_pause")); setState(ST_PLAYING); statusText.setText(tr("play_live")+"  ·  "+name); showInfo(true); scheduleHide(); recordHistoryIfNeeded(); }
+                if(player!=null){ player.play(); playPauseBtn.setText(tr("play_pause")); setState(ST_PLAYING); statusText.setText(tr("play_live")+"  ·  "+name); showInfo(true); scheduleHide(); }
                 return true;
             }
             if(k==KeyEvent.KEYCODE_MEDIA_PAUSE){
