@@ -1,5 +1,6 @@
 package tv.mimo.app.mobile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -171,6 +172,7 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
         @Override
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
+            adapter.setFragment(this);
             loadChannels(false);
         }
 
@@ -249,10 +251,17 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
     static class ChannelGridAdapter extends RecyclerView.Adapter<ChannelGridAdapter.ViewHolder> {
         private List<Channel> channels = new ArrayList<>();
         private List<Channel> filtered = new ArrayList<>();
+        private ArrayList<String> channelKeys;
+        private Fragment fragment;
 
         void setChannels(List<Channel> channels) {
             this.channels = channels;
             this.filtered = new ArrayList<>(channels);
+            // Build channel keys list for navigation
+            this.channelKeys = new ArrayList<>();
+            for (Channel c : channels) {
+                channelKeys.add(c.key);
+            }
             notifyDataSetChanged();
         }
 
@@ -269,6 +278,10 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
                 }
             }
             notifyDataSetChanged();
+        }
+
+        void setFragment(Fragment fragment) {
+            this.fragment = fragment;
         }
 
         @NonNull
@@ -298,6 +311,27 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
             } else {
                 holder.programme.setVisibility(View.GONE);
             }
+
+            // Click listener to launch playback
+            holder.itemView.setOnClickListener(v -> {
+                if (fragment != null && fragment.getActivity() != null) {
+                    int filteredIndex = holder.getAdapterPosition();
+                    if (filteredIndex >= 0 && filteredIndex < filtered.size()) {
+                        Channel selectedChannel = filtered.get(filteredIndex);
+                        int channelIdx = channelKeys.indexOf(selectedChannel.key);
+                        launchPlayback(selectedChannel, channelIdx);
+                    }
+                }
+            });
+        }
+
+        private void launchPlayback(Channel channel, int channelIdx) {
+            Intent intent = new Intent(fragment.getActivity(), MobilePlaybackActivity.class);
+            intent.putExtra("key", channel.key);
+            intent.putExtra("name", channel.name);
+            intent.putStringArrayListExtra("chan_keys", channelKeys);
+            intent.putExtra("idx", channelIdx);
+            fragment.startActivity(intent);
         }
 
         @Override

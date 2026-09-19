@@ -21,6 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".mobile.MobilePlaybackActivity" android:exported="false"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:theme="@style/MobileAppTheme" />
         <activity android:name=".PlaybackActivity" android:exported="false"
             android:screenOrientation="landscape" />
     </application>
