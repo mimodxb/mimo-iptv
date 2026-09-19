@@ -42,6 +42,9 @@ public final class MobilePlaybackActivity extends Activity {
     private final Runnable hideChrome=()->setChrome(false);
     private final Runnable hideInfo=()->showInfo(false);
 
+    // History guard: only record channel once after genuine playback starts
+    private String recordedKey = null;
+
     @Override public void onCreate(Bundle b){
         super.onCreate(b);
         repo=new Repository(this);
@@ -77,7 +80,6 @@ public final class MobilePlaybackActivity extends Activity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        // Handle orientation changes without recreating activity
         if (video != null && player != null) {
             video.getLayoutParams().width = -1;
             video.getLayoutParams().height = -1;
@@ -163,6 +165,7 @@ public final class MobilePlaybackActivity extends Activity {
 
     private void begin(){
         if(!active) return;
+        recordedKey = null; // Reset history guard for new channel
         int tok=++gen;
         cancelTimers();
         release();
@@ -224,6 +227,7 @@ public final class MobilePlaybackActivity extends Activity {
                         setState(ST_PLAYING);
                         showInfo(true);
                         scheduleHide();
+                        recordHistoryIfNeeded();
                     }
                 } else if(st==Player.STATE_BUFFERING){
                     setState(ST_BUFFERING);
@@ -241,6 +245,7 @@ public final class MobilePlaybackActivity extends Activity {
                     setState(ST_PLAYING);
                     showInfo(true);
                     scheduleHide();
+                    recordHistoryIfNeeded();
                 } else {
                     setState(ST_PAUSED);
                     statusText.setText(tr("play_paused"));
@@ -256,6 +261,14 @@ public final class MobilePlaybackActivity extends Activity {
         player.prepare();
         player.play();
         armTimeout(tok);
+    }
+
+    private void recordHistoryIfNeeded(){
+        if (recordedKey == null && key != null) {
+            repo.setLastChannel(key);
+            repo.addRecentlyWatched(key);
+            recordedKey = key;
+        }
     }
 
     private void armTimeout(int tok){
@@ -312,6 +325,7 @@ public final class MobilePlaybackActivity extends Activity {
             statusText.setText(tr("play_live")+"  ·  "+name);
             showInfo(true);
             scheduleHide();
+            recordHistoryIfNeeded();
         }
     }
 
@@ -383,8 +397,7 @@ public final class MobilePlaybackActivity extends Activity {
         if(catalog!=null) for(Channel c: catalog.channels) if(c.key.equals(newKey)){ name=c.name; break; }
         ((TextView)topBar.getChildAt(0)).setText(name);
         favBtn.setText(repo.favorites().contains(key) ? tr("play_fav_done") : tr("play_fav_add"));
-        repo.setLastChannel(key);
-        repo.addRecentlyWatched(key);
+        // Do NOT record history here - wait for genuine playback
         begin();
         h.postDelayed(()->switching=false, SWITCH_DEBOUNCE);
     }
@@ -393,7 +406,6 @@ public final class MobilePlaybackActivity extends Activity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        // Tap anywhere to show/hide controls
         if(event.getAction() == MotionEvent.ACTION_DOWN){
             if(chrome){ setChrome(false); }
             else { setChrome(true); showInfo(true); scheduleHide(); }
@@ -408,7 +420,7 @@ public final class MobilePlaybackActivity extends Activity {
         if(ev.getAction()==KeyEvent.ACTION_DOWN){
             if(k==KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE){ togglePlayback(); return true; }
             if(k==KeyEvent.KEYCODE_MEDIA_PLAY){
-                if(player!=null){ player.play(); playPauseBtn.setText(tr("play_pause")); setState(ST_PLAYING); statusText.setText(tr("play_live")+"  ·  "+name); showInfo(true); scheduleHide(); }
+                if(player!=null){ player.play(); playPauseBtn.setText(tr("play_pause")); setState(ST_PLAYING); statusText.setText(tr("play_live")+"  ·  "+name); showInfo(true); scheduleHide(); recordHistoryIfNeeded(); }
                 return true;
             }
             if(k==KeyEvent.KEYCODE_MEDIA_PAUSE){
