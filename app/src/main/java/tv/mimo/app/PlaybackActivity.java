@@ -2,6 +2,7 @@ package tv.mimo.app;
 
 import android.app.Activity;
 import android.os.*;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import androidx.media3.common.*;
@@ -17,6 +18,7 @@ import static tv.mimo.app.TvStyle.*;
 public final class PlaybackActivity extends Activity {
     static final int ST_CLOSED=0,ST_OPENING=1,ST_BUFFERING=2,ST_PLAYING=3,ST_PAUSED=4,ST_RECOVERING=5,ST_UNAVAILABLE=6;
     private static final long INFO_DELAY=4000,CHROME_DELAY=6000,BUF_TIMEOUT=25000,SWITCH_DEBOUNCE=500;
+    private static final long STALL_CHECK_INTERVAL_MS = 5000; // Check for stalls every 5 seconds
     private final ExecutorService io=Executors.newSingleThreadExecutor();
     private final Handler h=new Handler(Looper.getMainLooper());
     private Repository repo;
@@ -40,6 +42,7 @@ public final class PlaybackActivity extends Activity {
     private Runnable bufTimeout;
     private final Runnable hideChrome=()->setChrome(false);
     private final Runnable hideInfo=()->showInfo(false);
+    private Runnable stallCheckRunnable;
 
     @Override public void onCreate(Bundle b){
         super.onCreate(b);immersive(this);repo=new Repository(this);
@@ -98,7 +101,7 @@ public final class PlaybackActivity extends Activity {
     }
 
     private void release(){if(player!=null){video.setPlayer(null);player.release();player=null;}}
-    private void cancelTimers(){h.removeCallbacks(hideChrome);h.removeCallbacks(hideInfo);if(bufTimeout!=null)h.removeCallbacks(bufTimeout);}
+    private void cancelTimers(){h.removeCallbacks(hideChrome);h.removeCallbacks(hideInfo);if(bufTimeout!=null)h.removeCallbacks(bufTimeout); if (stallCheckRunnable != null) h.removeCallbacks(stallCheckRunnable);}
 
     private void begin(){
         if(!active)return;int tok=++gen;cancelTimers();release();recovery=new RecoveryPlan();cands.clear();recovering=true;
@@ -128,14 +131,14 @@ public final class PlaybackActivity extends Activity {
             @Override public void onPlaybackStateChanged(int st){
                 if(!active||gen!=tok||recovering)return;
                 if(bufTimeout!=null)h.removeCallbacks(bufTimeout);
-                if(st==Player.STATE_READY){if(player!=null&&player.isPlaying()){setState(ST_PLAYING);showInfo(true);scheduleHide();}}
+                if(st==Player.STATE_READY){if(player!=null&&player.isPlaying()){setState(ST_PLAYING);showInfo(true);scheduleHide(); recovery.onPlaybackStarted(); startStallDetection();}}
                 else if(st==Player.STATE_BUFFERING){setState(ST_BUFFERING);armTimeout(tok);}
                 else if(st==Player.STATE_ENDED){status.setText(tr("play_ended"));recover();}
             }
             @Override public void onIsPlayingChanged(boolean playing){
                 if(!active)return;video.setKeepScreenOn(playing);
                 play.setText(playing?tr("play_pause"):tr("play_resume"));
-                if(playing){setState(ST_PLAYING);showInfo(true);scheduleHide();}
+                if(playing){setState(ST_PLAYING);showInfo(true);scheduleHide(); recovery.onPlaybackStarted(); startStallDetection();}
                 else{setState(ST_PAUSED);status.setText(tr("play_paused"));setChrome(true);h.removeCallbacks(hideChrome);}
             }
             @Override public void onPlayerError(PlaybackException error){if(active&&gen==tok)recover();}
@@ -146,6 +149,23 @@ public final class PlaybackActivity extends Activity {
         if(bufTimeout!=null)h.removeCallbacks(bufTimeout);
         bufTimeout=()->{if(active&&gen==tok&&player!=null&&player.getPlaybackState()==Player.STATE_BUFFERING&&player.getPlayWhenReady())recover();};
         h.postDelayed(bufTimeout,BUF_TIMEOUT);
+    }
+    
+private void startStallDetection() {
+        if (stallCheckRunnable != null) h.removeCallbacks(stallCheckRunnable);
+        stallCheckRunnable = () -> {
+            if (!active || player == null || recovering) return;
+            long currentPos = player.getCurrentPosition();
+            if (recovery.checkForStall(currentPos)) {
+                // Stall detected - trigger recovery/fallback
+                Log.w("MIMO_DIAG", "PlaybackActivity: Stall detected for priority channel, triggering fallback");
+                recover();
+            } else {
+                // Schedule next check
+                h.postDelayed(stallCheckRunnable, 5000);
+            }
+        };
+        h.postDelayed(stallCheckRunnable, 10000); // Start checking after 10 seconds of playback
     }
     private void recover(){
         if(!active||recovering)return;recovering=true;cancelTimers();release();setChrome(true);
@@ -193,7 +213,7 @@ public final class PlaybackActivity extends Activity {
         infoName.setText(ch.name);
         String cat=ch.category();String co=ch.country;
         infoCat.setText(co!=null&&!co.isEmpty()?cat+"  ·  "+co.toUpperCase(Locale.ROOT):cat);
-        if(ch.logo!=null&&!ch.logo.isEmpty())ChannelLogoLoader.load(infoLogo,ch.logo,dp(this,36),dp(this,36));
+        if(ch.logo!=null&&!ch.logo.isEmpty())ChannelLogoLoader.load(infoLogo,ch.logo,36,36,this);
         else infoLogo.setImageBitmap(ChannelLogoLoader.placeholder(dp(this,36),dp(this,36)));
         infoOverlay.setVisibility(View.VISIBLE);
         h.removeCallbacks(hideInfo);h.postDelayed(hideInfo,INFO_DELAY);

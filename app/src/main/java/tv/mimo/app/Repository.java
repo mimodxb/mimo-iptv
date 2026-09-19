@@ -161,13 +161,22 @@ public final class Repository {
         Log.w("MIMO_DIAG","load() network="+network+" done merged="+merged.size()+" notices="+notices);
         return new Catalog(merged,notices,epgs);
     }
-    /** Refresh only the authoritative backend when recovering a priority channel. No embedded backup URLs. */
+    /** Refresh only the authoritative backend when recovering a priority channel. No embedded backup URLs.
+     * Returns ALL merged streams for the priority channel so that Android RecoveryPlan can iterate through
+     * multiple distinct candidates, not just the first parsed entry. */
     public List<Channel.Stream> refreshPriority(String key) throws IOException {
         Source backend=null;
         for(Source s:sources()) if(s.enabled && s.url.equals(PLAYLIST)) {backend=s;break;}
         if(backend==null) return Collections.emptyList();
-        for(Channel c:M3uParser.parse(fetch(backend.url,16*1024*1024),backend.id,backend.url))
-            if(c.key.equals(key)) return c.streams;
+        String text = fetch(backend.url, 16*1024*1024);
+        List<Channel> parsed = M3uParser.parse(text, backend.id, backend.url);
+        // Merge all parsed channels first, then find the target to get all its merged streams
+        List<Channel> merged = M3uParser.merge(parsed);
+        for (Channel c : merged) {
+            if (c.key.equals(key)) {
+                return new ArrayList<>(c.streams); // Return copy to avoid external mutation
+            }
+        }
         return Collections.emptyList();
     }
     public static String fetch(String url,int limit) throws IOException {

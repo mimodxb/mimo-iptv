@@ -3,6 +3,7 @@ package tv.mimo.app.mobile;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.*;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import androidx.media3.common.*;
@@ -41,6 +42,7 @@ public final class MobilePlaybackActivity extends Activity {
     private Runnable bufTimeout;
     private final Runnable hideChrome=()->setChrome(false);
     private final Runnable hideInfo=()->showInfo(false);
+    private Runnable stallCheckRunnable;
 
     // History guard: only record channel once after genuine playback starts
     private String recordedKey = null;
@@ -161,6 +163,7 @@ public final class MobilePlaybackActivity extends Activity {
         h.removeCallbacks(hideChrome);
         h.removeCallbacks(hideInfo);
         if(bufTimeout!=null) h.removeCallbacks(bufTimeout);
+        if (stallCheckRunnable != null) h.removeCallbacks(stallCheckRunnable);
     }
 
     private void begin(){
@@ -228,6 +231,7 @@ public final class MobilePlaybackActivity extends Activity {
                         showInfo(true);
                         scheduleHide();
                         recordHistoryIfNeeded();
+                        startStallDetection();
                     }
                 } else if(st==Player.STATE_BUFFERING){
                     setState(ST_BUFFERING);
@@ -246,6 +250,7 @@ public final class MobilePlaybackActivity extends Activity {
                     showInfo(true);
                     scheduleHide();
                     recordHistoryIfNeeded();
+                    startStallDetection();
                 } else {
                     setState(ST_PAUSED);
                     statusText.setText(tr("play_paused"));
@@ -261,6 +266,23 @@ public final class MobilePlaybackActivity extends Activity {
         player.prepare();
         player.play();
         armTimeout(tok);
+    }
+
+    private void startStallDetection() {
+        if (stallCheckRunnable != null) h.removeCallbacks(stallCheckRunnable);
+        stallCheckRunnable = () -> {
+            if (!active || player == null || recovering) return;
+            long currentPos = player.getCurrentPosition();
+            if (recovery.checkForStall(currentPos)) {
+                // Stall detected - trigger recovery/fallback
+                Log.w("MIMO_DIAG", "MobilePlaybackActivity: Stall detected for priority channel, triggering fallback");
+                recover();
+            } else {
+                // Schedule next check
+                h.postDelayed(stallCheckRunnable, 5000);
+            }
+        };
+        h.postDelayed(stallCheckRunnable, 10000); // Start checking after 10 seconds of playback
     }
 
     private void recordHistoryIfNeeded(){
@@ -353,7 +375,7 @@ public final class MobilePlaybackActivity extends Activity {
         String co=ch.country;
         infoCat.setText(co!=null && !co.isEmpty() ? cat+"  ·  "+co.toUpperCase(Locale.ROOT) : cat);
         if(ch.logo!=null && !ch.logo.isEmpty())
-            ChannelLogoLoader.load(infoLogo, ch.logo, MobileStyle.dp(this,36), MobileStyle.dp(this,36));
+            ChannelLogoLoader.load(infoLogo, ch.logo, MobileStyle.dp(this,36), MobileStyle.dp(this,36), this);
         else
             infoLogo.setImageBitmap(ChannelLogoLoader.placeholder(MobileStyle.dp(this,36), MobileStyle.dp(this,36)));
         infoOverlay.setVisibility(View.VISIBLE);
