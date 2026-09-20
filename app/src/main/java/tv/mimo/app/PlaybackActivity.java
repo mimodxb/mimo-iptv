@@ -18,7 +18,7 @@ import static tv.mimo.app.TvStyle.*;
 public final class PlaybackActivity extends Activity {
     static final int ST_CLOSED=0,ST_OPENING=1,ST_BUFFERING=2,ST_PLAYING=3,ST_PAUSED=4,ST_RECOVERING=5,ST_UNAVAILABLE=6;
     private static final long INFO_DELAY=4000,CHROME_DELAY=6000,BUF_TIMEOUT=25000,SWITCH_DEBOUNCE=500;
-    private static final long STALL_CHECK_INTERVAL_MS = 5000; // Check for stalls every 5 seconds
+    private static final long STALL_CHECK_INTERVAL_MS = 5000;
     private final ExecutorService io=Executors.newSingleThreadExecutor();
     private final Handler h=new Handler(Looper.getMainLooper());
     private Repository repo;
@@ -131,41 +131,47 @@ public final class PlaybackActivity extends Activity {
             @Override public void onPlaybackStateChanged(int st){
                 if(!active||gen!=tok||recovering)return;
                 if(bufTimeout!=null)h.removeCallbacks(bufTimeout);
-                if(st==Player.STATE_READY){if(player!=null&&player.isPlaying()){setState(ST_PLAYING);showInfo(true);scheduleHide(); recovery.onPlaybackStarted(); startStallDetection();}}
+                if(st==Player.STATE_READY){if(player!=null&&player.isPlaying()){setState(ST_PLAYING);showInfo(true);scheduleHide(); recovery.onPlaybackStarted(ch.priority()); startStallDetection();}}
                 else if(st==Player.STATE_BUFFERING){setState(ST_BUFFERING);armTimeout(tok);}
                 else if(st==Player.STATE_ENDED){status.setText(tr("play_ended"));recover();}
             }
             @Override public void onIsPlayingChanged(boolean playing){
                 if(!active)return;video.setKeepScreenOn(playing);
                 play.setText(playing?tr("play_pause"):tr("play_resume"));
-                if(playing){setState(ST_PLAYING);showInfo(true);scheduleHide(); recovery.onPlaybackStarted(); startStallDetection();}
-                else{setState(ST_PAUSED);status.setText(tr("play_paused"));setChrome(true);h.removeCallbacks(hideChrome);}
+                if(playing){setState(ST_PLAYING);showInfo(true);scheduleHide(); recovery.onPlaybackResumed(); startStallDetection();}
+                else{setState(ST_PAUSED);status.setText(tr("play_paused"));setChrome(true);h.removeCallbacks(hideChrome); recovery.onPlaybackPaused(); stopStallDetection();}
             }
             @Override public void onPlayerError(PlaybackException error){if(active&&gen==tok)recover();}
-        });
+});
         player.setMediaItem(MediaItem.fromUri(s.url));player.prepare();player.play();armTimeout(tok);
     }
-    private void armTimeout(int tok){
-        if(bufTimeout!=null)h.removeCallbacks(bufTimeout);
-        bufTimeout=()->{if(active&&gen==tok&&player!=null&&player.getPlaybackState()==Player.STATE_BUFFERING&&player.getPlayWhenReady())recover();};
-        h.postDelayed(bufTimeout,BUF_TIMEOUT);
-    }
     
-private void startStallDetection() {
+    private void startStallDetection() {
         if (stallCheckRunnable != null) h.removeCallbacks(stallCheckRunnable);
         stallCheckRunnable = () -> {
             if (!active || player == null || recovering) return;
+            // Only check for priority channels
+            if (ch == null || !ch.priority()) return;
             long currentPos = player.getCurrentPosition();
             if (recovery.checkForStall(currentPos)) {
-                // Stall detected - trigger recovery/fallback
                 Log.w("MIMO_DIAG", "PlaybackActivity: Stall detected for priority channel, triggering fallback");
                 recover();
             } else {
-                // Schedule next check
                 h.postDelayed(stallCheckRunnable, 5000);
             }
         };
         h.postDelayed(stallCheckRunnable, 10000); // Start checking after 10 seconds of playback
+    }
+    
+    private void stopStallDetection() {
+        if (stallCheckRunnable != null) h.removeCallbacks(stallCheckRunnable);
+        recovery.onPlaybackStopped();
+    }
+    
+    private void armTimeout(int tok){
+        if(bufTimeout!=null)h.removeCallbacks(bufTimeout);
+        bufTimeout=()->{if(active&&gen==tok&&player!=null&&player.getPlaybackState()==Player.STATE_BUFFERING&&player.getPlayWhenReady())recover();};
+        h.postDelayed(bufTimeout,BUF_TIMEOUT);
     }
     private void recover(){
         if(!active||recovering)return;recovering=true;cancelTimers();release();setChrome(true);
@@ -244,7 +250,7 @@ private void startStallDetection() {
         if(catalog!=null)for(Channel c:catalog.channels)if(c.key.equals(newKey)){name=c.name;break;}
         ((TextView)top.getChildAt(0)).setText(name);
         favBtn.setText(repo.favorites().contains(key)?tr("play_fav_done"):tr("play_fav_add"));
-        repo.setLastChannel(key);repo.addRecentlyWatched(key);
+        // Do NOT record history here - wait for genuine playback
         begin();
         h.postDelayed(()->switching=false,SWITCH_DEBOUNCE);
     }

@@ -87,6 +87,11 @@ public final class MobilePlaybackActivity extends Activity {
             video.getLayoutParams().height = -1;
             video.requestLayout();
         }
+        // Rebuild controls for orientation change
+        if (controls != null) {
+            root.removeView(controls);
+            buildControls();
+        }
     }
 
     private void buildInfo(){
@@ -126,27 +131,41 @@ public final class MobilePlaybackActivity extends Activity {
     }
 
     private void buildControls(){
-        controls=MobileStyle.row(this);
-        controls.setPadding(MobileStyle.dp(this,12), MobileStyle.dp(this,12), MobileStyle.dp(this,12), MobileStyle.dp(this,12));
+        // Use HorizontalScrollView for portrait usability
+        HorizontalScrollView scrollView = new HorizontalScrollView(this);
+        scrollView.setHorizontalScrollBarEnabled(false);
+        scrollView.setFillViewport(false);
+        
+        controls = MobileStyle.row(this);
+        controls.setPadding(MobileStyle.dp(this,12), MobileStyle.dp(this,8), MobileStyle.dp(this,12), MobileStyle.dp(this,8));
         controls.setBackground(MobileStyle.shape(0xee091516, MobileStyle.dp(this,12), 0));
-        addBtn(tr("play_back"), this::finish);
-        playPauseBtn=addBtn(tr("play_pause"), this::togglePlayback);
-        addBtn(tr("play_prev"), this::prevChan);
-        addBtn(tr("play_next"), this::nextChan);
-        addBtn(tr("play_last"), this::lastChan);
-        favBtn=addBtn(repo.favorites().contains(key) ? tr("play_fav_done") : tr("play_fav_add"),
-            () -> { repo.toggleFavorite(key); favBtn.setText(repo.favorites().contains(key) ? tr("play_fav_done") : tr("play_fav_add")); scheduleHide(); });
-        addBtn(tr("play_retry"), this::begin);
-        FrameLayout.LayoutParams fp=new FrameLayout.LayoutParams(-1, MobileStyle.dp(this,72), Gravity.BOTTOM);
-        fp.setMargins(MobileStyle.dp(this,36), 0, MobileStyle.dp(this,36), MobileStyle.dp(this,28));
-        root.addView(controls, fp);
+        
+        // Use smaller buttons with icons + short text
+        addBtn("\u25C0", this::finish); // Back
+        playPauseBtn = addBtn("\u25B6", this::togglePlayback); // Play
+        addBtn("\u23EE", this::prevChan); // Previous
+        addBtn("\u23ED", this::nextChan); // Next
+        addBtn("\u23ED\uFE0F", this::lastChan); // Last
+        favBtn = addBtn("\u2661", () -> { 
+            repo.toggleFavorite(key); 
+            favBtn.setText(repo.favorites().contains(key) ? "\u2665" : "\u2661"); 
+            scheduleHide(); 
+        });
+        addBtn("\u21BB", this::begin); // Retry
+        
+        scrollView.addView(controls);
+        FrameLayout.LayoutParams fp = new FrameLayout.LayoutParams(-1, MobileStyle.dp(this, 72), Gravity.BOTTOM);
+        fp.setMargins(MobileStyle.dp(this, 12), 0, MobileStyle.dp(this, 12), MobileStyle.dp(this, 12));
+        root.addView(scrollView, fp);
     }
 
     private TextView addBtn(String label, Runnable action){
-        TextView b=MobileStyle.button(this, label, action);
+        TextView b = MobileStyle.button(this, label, action);
         b.setGravity(Gravity.CENTER);
-        LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(0, -1, 1);
-        p.setMarginEnd(MobileStyle.dp(this,8));
+        b.setTextSize(18); // Larger for icon readability
+        b.setMinWidth(MobileStyle.dp(this, 56)); // Minimum touch target
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(0, -1, 1);
+        p.setMarginEnd(MobileStyle.dp(this, 4));
         controls.addView(b, p);
         return b;
     }
@@ -244,7 +263,7 @@ public final class MobilePlaybackActivity extends Activity {
             @Override public void onIsPlayingChanged(boolean playing){
                 if(!active) return;
                 video.setKeepScreenOn(playing);
-                playPauseBtn.setText(playing ? tr("play_pause") : tr("play_resume"));
+                playPauseBtn.setText(playing ? "\u23F8" : "\u25B6");
                 if(playing){
                     setState(ST_PLAYING);
                     showInfo(true);
@@ -256,6 +275,7 @@ public final class MobilePlaybackActivity extends Activity {
                     statusText.setText(tr("play_paused"));
                     setChrome(true);
                     h.removeCallbacks(hideChrome);
+                    stopStallDetection();
                 }
             }
             @Override public void onPlayerError(PlaybackException error){
@@ -272,17 +292,22 @@ public final class MobilePlaybackActivity extends Activity {
         if (stallCheckRunnable != null) h.removeCallbacks(stallCheckRunnable);
         stallCheckRunnable = () -> {
             if (!active || player == null || recovering) return;
+            // Only check for priority channels
+            if (ch == null || !ch.priority()) return;
             long currentPos = player.getCurrentPosition();
             if (recovery.checkForStall(currentPos)) {
-                // Stall detected - trigger recovery/fallback
                 Log.w("MIMO_DIAG", "MobilePlaybackActivity: Stall detected for priority channel, triggering fallback");
                 recover();
             } else {
-                // Schedule next check
                 h.postDelayed(stallCheckRunnable, 5000);
             }
         };
         h.postDelayed(stallCheckRunnable, 10000); // Start checking after 10 seconds of playback
+    }
+    
+    private void stopStallDetection() {
+        if (stallCheckRunnable != null) h.removeCallbacks(stallCheckRunnable);
+        recovery.onPlaybackStopped();
     }
 
     private void recordHistoryIfNeeded(){
@@ -335,14 +360,15 @@ public final class MobilePlaybackActivity extends Activity {
         if(player==null){ begin(); return; }
         if(player.isPlaying()){
             player.pause();
-            playPauseBtn.setText(tr("play_resume"));
+            playPauseBtn.setText("\u23F8");
             setState(ST_PAUSED);
             statusText.setText(tr("play_paused"));
             setChrome(true);
             h.removeCallbacks(hideChrome);
+            stopStallDetection();
         } else {
             player.play();
-            playPauseBtn.setText(tr("play_pause"));
+            playPauseBtn.setText("\u23F8");
             setState(ST_PLAYING);
             statusText.setText(tr("play_live")+"  ·  "+name);
             showInfo(true);
@@ -375,7 +401,7 @@ public final class MobilePlaybackActivity extends Activity {
         String co=ch.country;
         infoCat.setText(co!=null && !co.isEmpty() ? cat+"  ·  "+co.toUpperCase(Locale.ROOT) : cat);
         if(ch.logo!=null && !ch.logo.isEmpty())
-            ChannelLogoLoader.load(infoLogo, ch.logo, MobileStyle.dp(this,36), MobileStyle.dp(this,36), this);
+            ChannelLogoLoader.load(infoLogo, ch.logo, 36, 36, this);
         else
             infoLogo.setImageBitmap(ChannelLogoLoader.placeholder(MobileStyle.dp(this,36), MobileStyle.dp(this,36)));
         infoOverlay.setVisibility(View.VISIBLE);
@@ -417,7 +443,7 @@ public final class MobilePlaybackActivity extends Activity {
         name=newKey;
         if(catalog!=null) for(Channel c: catalog.channels) if(c.key.equals(newKey)){ name=c.name; break; }
         ((TextView)topBar.getChildAt(0)).setText(name);
-        favBtn.setText(repo.favorites().contains(key) ? tr("play_fav_done") : tr("play_fav_add"));
+        favBtn.setText(repo.favorites().contains(key) ? "\u2665" : "\u2661");
         // Do NOT record history here - wait for genuine playback
         begin();
         h.postDelayed(()->switching=false, SWITCH_DEBOUNCE);
@@ -441,11 +467,11 @@ public final class MobilePlaybackActivity extends Activity {
         if(ev.getAction()==KeyEvent.ACTION_DOWN){
             if(k==KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE){ togglePlayback(); return true; }
             if(k==KeyEvent.KEYCODE_MEDIA_PLAY){
-                if(player!=null){ player.play(); playPauseBtn.setText(tr("play_pause")); setState(ST_PLAYING); statusText.setText(tr("play_live")+"  ·  "+name); showInfo(true); scheduleHide(); }
+                if(player!=null){ player.play(); playPauseBtn.setText("\u23F8"); setState(ST_PLAYING); statusText.setText(tr("play_live")+"  ·  "+name); showInfo(true); scheduleHide(); }
                 return true;
             }
             if(k==KeyEvent.KEYCODE_MEDIA_PAUSE){
-                if(player!=null){ player.pause(); playPauseBtn.setText(tr("play_resume")); setState(ST_PAUSED); statusText.setText(tr("play_paused")); setChrome(true); h.removeCallbacks(hideChrome); }
+                if(player!=null){ player.pause(); playPauseBtn.setText("\u25B6"); setState(ST_PAUSED); statusText.setText(tr("play_paused")); setChrome(true); h.removeCallbacks(hideChrome); }
                 return true;
             }
             if(k==KeyEvent.KEYCODE_BACK && chrome){

@@ -253,6 +253,7 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
         private List<Channel> filtered = new ArrayList<>();
         private ArrayList<String> channelKeys;
         private Fragment fragment;
+        private static final int LOGO_SIZE_DP = 120;
 
         void setChannels(List<Channel> channels) {
             this.channels = channels;
@@ -299,9 +300,9 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
             
             // Load channel logo
             if (channel.logo != null && !channel.logo.isEmpty()) {
-                ChannelLogoLoader.load(holder.logo, channel.logo, 120, 120);
+                ChannelLogoLoader.load(holder.logo, channel.logo, LOGO_SIZE_DP, LOGO_SIZE_DP, holder.itemView.getContext());
             } else {
-                holder.logo.setImageBitmap(ChannelLogoLoader.placeholder(120, 120));
+                holder.logo.setImageBitmap(ChannelLogoLoader.placeholder(holder.itemView.getContext(), LOGO_SIZE_DP, LOGO_SIZE_DP));
             }
 
             // Programme info could be added from EPG data later

@@ -118,9 +118,9 @@ public class FavoritesFragment extends MobileBaseFragment implements MobileMainA
             
             // Load channel logo
             if (channel.logo != null && !channel.logo.isEmpty()) {
-                ChannelLogoLoader.load(holder.logo, channel.logo, 120, 120);
+                ChannelLogoLoader.load(holder.logo, channel.logo, 120, 120, holder.itemView.getContext());
             } else {
-                holder.logo.setImageBitmap(ChannelLogoLoader.placeholder(120, 120));
+                holder.logo.setImageBitmap(ChannelLogoLoader.placeholder(holder.itemView.getContext(), 120, 120));
             }
 
             // Programme info

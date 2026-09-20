@@ -227,6 +227,7 @@ public class HomeFragment extends MobileBaseFragment implements MobileMainActivi
 
     static class ChannelHorizontalAdapter extends RecyclerView.Adapter<ChannelHorizontalAdapter.ViewHolder> {
         private final List<Channel> items;
+        private static final int LOGO_SIZE_DP = 90;
         ChannelHorizontalAdapter(List<Channel> items) { this.items = items; }
 
         @NonNull @Override
@@ -241,9 +242,9 @@ public class HomeFragment extends MobileBaseFragment implements MobileMainActivi
             Channel channel = items.get(position);
             holder.name.setText(channel.name);
             if (channel.logo != null && !channel.logo.isEmpty()) {
-                ChannelLogoLoader.load(holder.logo, channel.logo, 90, 90);
+                ChannelLogoLoader.load(holder.logo, channel.logo, LOGO_SIZE_DP, LOGO_SIZE_DP, holder.itemView.getContext());
             } else {
-                holder.logo.setImageBitmap(ChannelLogoLoader.placeholder(90, 90));
+                holder.logo.setImageBitmap(ChannelLogoLoader.placeholder(holder.itemView.getContext(), LOGO_SIZE_DP, LOGO_SIZE_DP));
             }
         }
 

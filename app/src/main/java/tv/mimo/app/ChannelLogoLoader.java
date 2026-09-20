@@ -37,6 +37,11 @@ public final class ChannelLogoLoader {
         return b;
     }
 
+    /** Placeholder silhouette for missing/failed logos (dp overload). */
+    public static Bitmap placeholder(Context context, int widthDp, int heightDp) {
+        return placeholder(dp(context, widthDp), dp(context, heightDp));
+    }
+
     /** Load URL into ImageView asynchronously. Falls back to placeholder.
      *  Uses tag-based reuse protection: a delayed response is only applied if
      *  the ImageView's tag still matches the requested URL.
