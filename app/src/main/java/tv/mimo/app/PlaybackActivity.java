@@ -121,10 +121,11 @@ public final class PlaybackActivity extends Activity {
         openStream(s);
     }
     private void openStream(Channel.Stream s){
+        recovery.onStreamChanged(ch!=null&&ch.priority());
         release();recovering=false;setState(ST_OPENING);setChrome(true);
         DefaultHttpDataSource.Factory http=new DefaultHttpDataSource.Factory().setUserAgent("MIMO-TV/0.1 AndroidTV")
             .setConnectTimeoutMs(10000).setReadTimeoutMs(12000).setAllowCrossProtocolRedirects(true).setDefaultRequestProperties(s.headers);
-        player=new ExoPlayer.Builder(this).setMediaSourceFactory(new DefaultMediaSourceFactory(this).setDataSourceFactory(http)).build();
+        player=new ExoPlayer.Builder(this).setLoadControl(new androidx.media3.exoplayer.DefaultLoadControl.Builder().setBufferDurationsMs(15000,45000,1500,5000).build()).setMediaSourceFactory(new DefaultMediaSourceFactory(this).setDataSourceFactory(http)).build();
         player.setAudioAttributes(new AudioAttributes.Builder().setUsage(C.USAGE_MEDIA).setContentType(C.AUDIO_CONTENT_TYPE_MOVIE).build(),true);
         player.setHandleAudioBecomingNoisy(true);video.setPlayer(player);int tok=gen;
         player.addListener(new Player.Listener(){
@@ -132,14 +133,15 @@ public final class PlaybackActivity extends Activity {
                 if(!active||gen!=tok||recovering)return;
                 if(bufTimeout!=null)h.removeCallbacks(bufTimeout);
                 if(st==Player.STATE_READY){if(player!=null&&player.isPlaying()){setState(ST_PLAYING);showInfo(true);scheduleHide(); recovery.onPlaybackStarted(ch.priority()); startStallDetection();}}
-                else if(st==Player.STATE_BUFFERING){setState(ST_BUFFERING);armTimeout(tok);}
+                else if(st==Player.STATE_BUFFERING){if(ch!=null&&ch.priority()&&recovery.recordBuffering(android.os.SystemClock.elapsedRealtime())){recover();return;}
+                    setState(ST_BUFFERING);armTimeout(tok);}
                 else if(st==Player.STATE_ENDED){status.setText(tr("play_ended"));recover();}
             }
             @Override public void onIsPlayingChanged(boolean playing){
                 if(!active)return;video.setKeepScreenOn(playing);
                 play.setText(playing?tr("play_pause"):tr("play_resume"));
-                if(playing){setState(ST_PLAYING);showInfo(true);scheduleHide(); recovery.onPlaybackResumed(); startStallDetection();}
-                else{setState(ST_PAUSED);status.setText(tr("play_paused"));setChrome(true);h.removeCallbacks(hideChrome); recovery.onPlaybackPaused(); stopStallDetection();}
+                if(playing){recovery.onPlaybackStarted(ch!=null&&ch.priority());setState(ST_PLAYING);showInfo(true);scheduleHide(); recovery.onPlaybackResumed(); startStallDetection();}
+                else if(player!=null&&!player.getPlayWhenReady()){setState(ST_PAUSED);status.setText(tr("play_paused"));setChrome(true);h.removeCallbacks(hideChrome); recovery.onPlaybackPaused(); stopStallDetection();}
             }
             @Override public void onPlayerError(PlaybackException error){if(active&&gen==tok)recover();}
 });
@@ -171,7 +173,7 @@ public final class PlaybackActivity extends Activity {
     private void armTimeout(int tok){
         if(bufTimeout!=null)h.removeCallbacks(bufTimeout);
         bufTimeout=()->{if(active&&gen==tok&&player!=null&&player.getPlaybackState()==Player.STATE_BUFFERING&&player.getPlayWhenReady())recover();};
-        h.postDelayed(bufTimeout,BUF_TIMEOUT);
+        h.postDelayed(bufTimeout,ch!=null&&ch.priority()?12000:BUF_TIMEOUT);
     }
     private void recover(){
         if(!active||recovering)return;recovering=true;cancelTimers();release();setChrome(true);

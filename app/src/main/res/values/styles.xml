@@ -19,7 +19,7 @@
     </style>
 
     <!-- Mobile theme -->
-    <style name="MobileAppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="MobileAppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowActionModeOverlay">true</item>
@@ -27,8 +27,14 @@
         <item name="colorPrimary">@color/mobile_green</item>
         <item name="colorPrimaryDark">@color/mobile_teal</item>
         <item name="colorAccent">@color/mobile_green</item>
-        <item name="colorOnPrimary">@color/mobile_ink</item>
+        <item name="colorOnPrimary">@color/mobile_bg</item>
         <item name="colorOnSurface">@color/mobile_ink</item>
+        <item name="colorSurface">@color/mobile_panel</item>
+        <item name="colorOnBackground">@color/mobile_ink</item>
+        <item name="android:textColorPrimary">@color/mobile_ink</item>
+        <item name="android:textColorSecondary">@color/mobile_muted</item>
+        <item name="android:textColorHint">@color/mobile_muted</item>
+        <item name="android:colorControlNormal">@color/mobile_muted</item>
         <item name="android:colorBackground">@color/mobile_bg</item>
     </style>
 

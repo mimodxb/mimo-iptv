@@ -6,8 +6,8 @@ android {
         applicationId 'tv.mimo.app'
         minSdk 23
         targetSdk 35
-        versionCode 100
-        versionName '1.0.0-rc1'
+        versionCode 101
+        versionName '1.0.0-rc2'
     }
     compileOptions {
         coreLibraryDesugaringEnabled true
