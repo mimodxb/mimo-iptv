@@ -33,7 +33,8 @@ public final class M3uParser {
                 Map<String,String> a = attributes(line);
                 int comma = metadataComma(line);
                 String name = comma < 0 ? a.getOrDefault("tvg-name", "Channel") : line.substring(comma + 1).trim();
-                pending = new Channel(a.getOrDefault("tvg-id", ""), name, a.getOrDefault("tvg-country", ""),
+                String tvgId = a.getOrDefault("tvg-id", "").replaceFirst("(?i)@(SD|HD|FHD|UHD)$", "");
+                pending = new Channel(tvgId, name, a.getOrDefault("tvg-country", ""),
                     a.getOrDefault("group-title", ""), a.getOrDefault("tvg-logo", ""), sourceId);
                 headers = new LinkedHashMap<>();
             } else if (line.startsWith("#EXTVLCOPT:http-user-agent=")) headers.put("User-Agent", line.substring(line.indexOf('=') + 1));

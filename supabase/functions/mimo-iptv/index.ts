@@ -90,10 +90,11 @@ const STATIC_REPAIRS:Entry[] = [
   manual("Real TV","RealTV.az","https://str.yodacdn.net/real/playlist.m3u8","user-confirmed-working"),
   manual("İdman TV","IdmanTV.az","https://live.itv.az/idman.m3u8","tcl-media3-verified"),
   manual("ARB 24","ARB24.az","http://erlyvideo.izone.az:80/arb24/mono.m3u8","tcl-media3-verified"),
-  manual("CBC","CBC.az","https://stream.cbctv.az:5443/LiveApp/streams/cbctv.m3u8","independent-hls-probe-only"),
-  manual("CBC Sport","CBCSport.az","http://213.239.195.222/azerbaijan/cbc_sport_stream_hd_2023/playlist.m3u8","independent-hls-probe-only"),
+  {...manual("CBC","CBC.az","https://stream.castr.com/6994359f4093355bcd876a4c/live_dfbe52f00be311f1952faf8c24dd1b5c/index.m3u8","official-player-media-probed"),
+    opts:["#EXTVLCOPT:http-referrer=https://player.castr.com/","#EXTVLCOPT:http-user-agent=Mozilla/5.0"]},
+  manual("CBC Sport","CBCSport.az","https://cbcsports-live.lg.mncdn.com/cbcsports_live/cbcsports/playlist.m3u8","official-player-media-probed"),
   manual("Baku TV","BakuTV.az","https://rtmp.baku.tv/hls/bakutv.m3u8","current-public-direct-stream"),
-  manual("AzTV","AzTV.az","https://str.yodacdn.net/aztv/index.m3u8","current-public-direct-stream"),
+  manual("AzTV","AzTV.az","https://str.yodacdn.net/azertv/index.m3u8","current-public-direct-stream"),
   manual("Mədəniyyət TV","MedeniyyetTV.az","https://str.yodacdn.net/medeniyyettele/index.m3u8","current-public-direct-stream")
 ];
 

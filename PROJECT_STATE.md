@@ -26,3 +26,5 @@ Workspace: `work/mimo-current`. Evidence: sibling `work/current-audit`, includin
 Future work should use the checkpoint and only resolve the blockers above. Do not repeat repository initialization, broad Notion discovery, or the catalogue-wide logo scan.
 
 
+
+Latest checkpoint: [rc3 TCL regression repair](docs/tcl-rc3-repair.md). Read this before repeating diagnostics.

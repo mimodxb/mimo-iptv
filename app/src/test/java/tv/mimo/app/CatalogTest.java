@@ -4,6 +4,13 @@ import static org.junit.Assert.*;
 import java.util.*;
 
 public class CatalogTest {
+    @Test public void publicPlaylistQualitySuffixPreservesCountryAndFallbackIdentity()throws Exception{
+        List<Channel> channels=M3uParser.parse("#EXTM3U\n#EXTINF:-1 tvg-id=\"AzTV.az@SD\",Az TV\nhttps://a/live\n#EXTINF:-1 tvg-id=\"AzTV.az\",AzTV\nhttps://b/live", "public", "https://example.org/az.m3u");
+        assertEquals(1,channels.size());
+        assertEquals("Azerbaijan",channels.get(0).category());
+        assertEquals("AzTV.az",channels.get(0).tvgId);
+        assertEquals(2,channels.get(0).streams.size());
+    }
     private List<Channel> parse(String body)throws Exception{return M3uParser.parse("\uFEFF#EXTM3U\r\n"+body,"mimo","https://example.org/list.m3u");}
     @Test public void unicodeNamesAndQuotedCommasSurvive()throws Exception{
         Channel c=parse("#EXTINF:-1 tvg-id=\"XezerTV.az\" group-title=\"News, Azerbaijan\" tvg-country=\"AZ\",Xəzər TV\r\nhttps://host/live.m3u8").get(0);
