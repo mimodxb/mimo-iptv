@@ -223,6 +223,7 @@ public final class MobilePlaybackActivity extends Activity {
     }
 
     private void openStream(Channel.Stream s){
+        recovery.onStreamChanged(ch!=null&&ch.priority());
         release();
         recovering=false;
         setState(ST_OPENING);
@@ -233,7 +234,7 @@ public final class MobilePlaybackActivity extends Activity {
             .setReadTimeoutMs(12000)
             .setAllowCrossProtocolRedirects(true)
             .setDefaultRequestProperties(s.headers);
-        player=new ExoPlayer.Builder(this)
+        player=new ExoPlayer.Builder(this).setLoadControl(new androidx.media3.exoplayer.DefaultLoadControl.Builder().setBufferDurationsMs(15000,45000,1500,5000).build())
             .setMediaSourceFactory(new DefaultMediaSourceFactory(this).setDataSourceFactory(http))
             .build();
         player.setAudioAttributes(new AudioAttributes.Builder()
@@ -256,6 +257,7 @@ public final class MobilePlaybackActivity extends Activity {
                         startStallDetection();
                     }
                 } else if(st==Player.STATE_BUFFERING){
+                    if(ch!=null&&ch.priority()&&recovery.recordBuffering(android.os.SystemClock.elapsedRealtime())){recover();return;}
                     setState(ST_BUFFERING);
                     armTimeout(tok);
                 } else if(st==Player.STATE_ENDED){
@@ -327,7 +329,7 @@ public final class MobilePlaybackActivity extends Activity {
             if(active && gen==tok && player!=null && player.getPlaybackState()==Player.STATE_BUFFERING && player.getPlayWhenReady())
                 recover();
         };
-        h.postDelayed(bufTimeout, BUF_TIMEOUT);
+        h.postDelayed(bufTimeout,ch!=null&&ch.priority()?12000:BUF_TIMEOUT);
     }
 
     private void recover(){

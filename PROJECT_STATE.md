@@ -1,5 +1,9 @@
 # MIMO TV checkpoint — 27 September 2026
 
+## Latest follow-up: rc2 installed on Samsung
+
+Settings contrast corrected and visually verified on SM-S928B. Owner approved replacing the old signature; installation succeeded. Playback recovery now detects repeated short buffering and the mobile stall detector starts correctly. Release build, lint and 65 tests pass. Evening Xəzər stability and TCL testing remain open; Space candidates still fail.
+
 ## Continue here; do not restart the audit
 
 Integrated `feature/mobile-integration` and `feature/tv-library-navigation` into `release/tv-mobile-completion-20260927`.
@@ -20,4 +24,5 @@ Final validation PASS: assembleRelease, assembleDebug, 63 Android tests, lintDeb
 Workspace: `work/mimo-current`. Evidence: sibling `work/current-audit`, including build logs, live backend v9 response, logo HTTP results, repair summary, and exact unresolved entries. Private release key: sibling `work/mimo-signing/mimo-release.jks`; its password is encrypted to the Windows user in `password.dpapi`. Preserve both outside GitHub. Deliverables go in `outputs`.
 
 Future work should use the checkpoint and only resolve the blockers above. Do not repeat repository initialization, broad Notion discovery, or the catalogue-wide logo scan.
+
 

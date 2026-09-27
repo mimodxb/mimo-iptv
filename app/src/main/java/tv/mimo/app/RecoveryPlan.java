@@ -20,9 +20,19 @@ public final class RecoveryPlan {
     private long lastStallCheckTime = 0;
     private boolean currentlyPlaying = false;
     private boolean isPriorityChannel = false;
+    private boolean streamHasPlayed;
+    private final Deque<Long> rebufferTimes=new ArrayDeque<>();
+    /** Three interruptions within five minutes warrant trying the next candidate. */
+    public boolean recordBuffering(long now){
+        if(!isPriorityChannel||!streamHasPlayed)return false;
+        while(!rebufferTimes.isEmpty()&&now-rebufferTimes.peekFirst()>300000)rebufferTimes.removeFirst();
+        rebufferTimes.addLast(now);
+        return rebufferTimes.size()>=3;
+    }
     
     /** Call when playback genuinely starts (STATE_READY + playing) for a priority channel */
     public void onPlaybackStarted(boolean isPriority) {
+        streamHasPlayed=true;
         playbackStartTime = System.currentTimeMillis();
         lastPosition = 0;
         lastStallCheckTime = System.currentTimeMillis();
@@ -56,6 +66,8 @@ public final class RecoveryPlan {
     
     /** Call when switching to a new stream - resets all stall state */
     public void onStreamChanged(boolean isPriority) {
+        streamHasPlayed=false;
+        rebufferTimes.clear();
         playbackStartTime = 0;
         lastPosition = -1;
         lastStallCheckTime = 0;
