@@ -7,6 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.*;
 import tv.mimo.app.R;
+import tv.mimo.app.Repository;
+import tv.mimo.app.Channel;
+import tv.mimo.app.Epg;
 import java.util.*;
 
 public class GuideFragment extends MobileBaseFragment implements MobileMainActivity.Searchable {
@@ -32,10 +35,34 @@ public class GuideFragment extends MobileBaseFragment implements MobileMainActiv
     }
 
     private void loadGuide() {
-        // TODO: Load from EPG data via Repository
-        // Placeholder for now
-        adapter.setProgrammes(new ArrayList<>());
-        updateEmptyState();
+        emptyView.setText(R.string.loading);
+        emptyView.setVisibility(View.VISIBLE);
+        MobileCatalog.load(requireContext(),false,catalog->{
+            if(getView()==null)return;
+            new Thread(()->{
+                List<Programme> rows=new ArrayList<>();
+                Set<String> ids=new HashSet<>();
+                for(Channel channel:catalog.channels)if(!channel.tvgId.isEmpty())ids.add(channel.tvgId);
+                Map<String,List<Epg.Programme>> guide=new HashMap<>();
+                for(String url:catalog.epgUrls)try{
+                    Map<String,List<Epg.Programme>> parsed=Epg.fetch(url,ids,System.currentTimeMillis());
+                    for(Map.Entry<String,List<Epg.Programme>> entry:parsed.entrySet())guide.putIfAbsent(entry.getKey(),entry.getValue());
+                }catch(Exception ignored){}
+                java.text.DateFormat time=java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT);
+                for(Channel channel:catalog.channels){
+                    List<Epg.Programme> programmes=guide.get(channel.tvgId);
+                    if(programmes==null)continue;
+                    for(Epg.Programme p:programmes){
+                        rows.add(new Programme(channel.name,p.title,time.format(new Date(p.start))+" – "+time.format(new Date(p.stop)),"",channel));
+                    }
+                }
+                new android.os.Handler(android.os.Looper.getMainLooper()).post(()->{
+                    if(getView()==null)return;
+                    adapter.setProgrammes(rows);emptyView.setText(R.string.guide_unavailable);
+                    emptyView.setOnClickListener(v->loadGuide());updateEmptyState();
+                });
+            },"MIMO-guide").start();
+        });
     }
 
     private void updateEmptyState() {
@@ -69,10 +96,10 @@ public class GuideFragment extends MobileBaseFragment implements MobileMainActiv
             if (query == null || query.trim().isEmpty()) {
                 filtered.addAll(programmes);
             } else {
-                String lower = query.toLowerCase();
+                String lower = query.toLowerCase(java.util.Locale.ROOT);
                 for (Programme p : programmes) {
-                    if (p.title.toLowerCase().contains(lower) ||
-                        p.channel.toLowerCase().contains(lower)) {
+                    if (p.title.toLowerCase(java.util.Locale.ROOT).contains(lower) ||
+                        p.channel.toLowerCase(java.util.Locale.ROOT).contains(lower)) {
                         filtered.add(p);
                     }
                 }
@@ -94,6 +121,7 @@ public class GuideFragment extends MobileBaseFragment implements MobileMainActiv
             holder.channel.setText(programme.channel);
             holder.title.setText(programme.title);
             holder.time.setText(programme.time);
+            holder.itemView.setOnClickListener(v->MobileNavigation.play(v.getContext(),programme.target,Collections.singletonList(programme.target)));
             if (programme.description != null && !programme.description.isEmpty()) {
                 holder.description.setText(programme.description);
                 holder.description.setVisibility(View.VISIBLE);
@@ -128,8 +156,10 @@ public class GuideFragment extends MobileBaseFragment implements MobileMainActiv
         final String title;
         final String time;
         final String description;
+        final Channel target;
 
-        Programme(String channel, String title, String time, String description) {
+        Programme(String channel, String title, String time, String description, Channel target) {
+            this.target=target;
             this.channel = channel;
             this.title = title;
             this.time = time;
@@ -137,3 +167,5 @@ public class GuideFragment extends MobileBaseFragment implements MobileMainActiv
         }
     }
 }
+
+

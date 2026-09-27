@@ -1,7 +1,7 @@
 package tv.mimo.app;
 
 import android.content.*;
-import android.util.Log;
+
 import org.json.*;
 import java.io.*;
 import java.net.*;
@@ -14,7 +14,9 @@ public final class Repository {
     public static final String EPG = "https://nkuhaupwlxadvihnnned.supabase.co/functions/v1/mimo-epg-merged";
     private final SharedPreferences prefs;
     private final File cache;
+    private final Context appContext;
     public Repository(Context context) {
+        appContext=context.getApplicationContext();
         prefs = context.getSharedPreferences("mimo", Context.MODE_PRIVATE);
         cache = new File(context.getFilesDir(), "playlists");
         if (!cache.exists()) cache.mkdirs();
@@ -99,7 +101,7 @@ public final class Repository {
         Catalog(List<Channel> channels,List<String> notices,Set<String> epgUrls) { this.channels=channels;this.notices=notices;this.epgUrls=epgUrls; }
     }
     public Catalog load(boolean network) {
-        Log.w("MIMO_DIAG","load() network="+network+" start");
+        
         List<Channel> all = new ArrayList<>();
         List<String> notices = new ArrayList<>();
         Set<String> epgs = new LinkedHashSet<>();
@@ -109,28 +111,27 @@ public final class Repository {
             if (!s.enabled) continue;
             if (M3uParser.isHttp(s.epg)) epgs.add(s.epg);
             File file=cacheFile(s);
-            Log.w("MIMO_DIAG","  source="+s.id+" cache="+file.getAbsolutePath()+" exists="+file.exists()+" size="+file.length());
+            
             String text=null;
             List<Channel> parsed=null;
             if (network) try {
-                Log.w("MIMO_DIAG","  fetching "+s.url);
+                
                 text=fetch(s.url,16*1024*1024);
-                Log.w("MIMO_DIAG","  fetch returned "+text.length()+" chars, first100="+text.substring(0,Math.min(100,text.length())).replace("\n","\\n"));
+                
                 parsed=M3uParser.parse(text,s.id,s.url);
-                Log.w("MIMO_DIAG","  network parse OK channels="+parsed.size());
+                
                 File temp = new File(file.getPath()+".tmp");
                 try(FileOutputStream out = new FileOutputStream(temp)) {out.write(text.getBytes(StandardCharsets.UTF_8));}
                 if (!temp.renameTo(file)) {
                     try(FileOutputStream out=new FileOutputStream(file)){out.write(text.getBytes(StandardCharsets.UTF_8));}
                     temp.delete();
                 }
-            } catch(Exception e) { text=null; parsed=null; Log.w("MIMO_DIAG","  fetch/validate FAILED: "+e.getClass().getSimpleName()+": "+e.getMessage()); notices.add(s.name+": refresh unavailable"+(file.exists()?"; using saved playlist.":".")); }
-            if (parsed==null && text==null && file.exists()) try(FileInputStream in = new FileInputStream(file)) {text=readBounded(in,16*1024*1024);Log.w("MIMO_DIAG","  cache read OK "+text.length()+" chars");}catch(IOException ignored){Log.w("MIMO_DIAG","  cache read FAILED");}
-            else if (parsed==null && text==null) Log.w("MIMO_DIAG","  no cache file, text still null");
+            } catch(Exception e) { text=null; parsed=null;  notices.add(s.name+": refresh unavailable"+(file.exists()?"; using saved playlist.":".")); }
+            if (parsed==null && text==null && file.exists()) try(FileInputStream in = new FileInputStream(file)) {text=readBounded(in,16*1024*1024);}catch(IOException ignored){}
             if (parsed==null && text!=null) try {
                 parsed=M3uParser.parse(text,s.id,s.url);
-                Log.w("MIMO_DIAG","  cache parse OK channels="+parsed.size());
-            } catch(IOException e) {Log.w("MIMO_DIAG","  parse FAILED: "+e.getMessage()); notices.add(s.name+": invalid playlist.");}
+                
+            } catch(IOException e) { notices.add(s.name+": invalid playlist.");}
             if (parsed!=null) all.addAll(parsed);
             if (text!=null) try {
                 String first=text.replace("\uFEFF","").trim().split("\\r?\\n",2)[0];
@@ -139,7 +140,7 @@ public final class Repository {
                 for(String epg:url.split(",")) if(M3uParser.isHttp(epg.trim())) epgs.add(epg.trim());
             } catch(Exception ignored) {}
         }
-        Log.w("MIMO_DIAG","  all.size="+all.size());
+        
         boolean mimoEnabled=ordered.stream().anyMatch(s->s.enabled&&s.url.equals(PLAYLIST));
         if(mimoEnabled) {
             if(all.stream().noneMatch(c->c.key.equals("xezertv.az"))) all.add(new Channel("XezerTV.az","Xəzər TV","AZ","Azerbaijan","","mimo"));
@@ -147,18 +148,19 @@ public final class Repository {
         }
         List<Channel> merged=M3uParser.merge(all);
         try {
-            InternalFallbackFeed fallback = new InternalFallbackFeed(cache.getParentFile().getParentFile());
-            List<Channel> fbChannels = fallback.load(network);
+            InternalFallbackFeed fallback = new InternalFallbackFeed(cache.getParentFile());
+            List<Channel> fbChannels = mimoEnabled ? fallback.load(network) : Collections.emptyList();
             if (!fbChannels.isEmpty()) {
                 List<Channel> fbMerged = M3uParser.merge(fbChannels);
                 int before = merged.size();
                 InternalFallbackFeed.mergeInto(merged, fbMerged);
-                Log.w("MIMO_DIAG","  fallback merge: "+fbMerged.size()+" fb channels, streams added to existing channels");
+                
             }
         } catch (Exception e) {
-            Log.w("MIMO_DIAG","  fallback: integration failed (non-fatal): "+e.getMessage());
+            
         }
-        Log.w("MIMO_DIAG","load() network="+network+" done merged="+merged.size()+" notices="+notices);
+        
+        LogoCatalog.fill(appContext,merged);
         return new Catalog(merged,notices,epgs);
     }
     /** Refresh only the authoritative backend when recovering a priority channel. No embedded backup URLs.
@@ -199,7 +201,7 @@ public final class Repository {
     }
     static String readBounded(InputStream in,int limit) throws IOException {
         ByteArrayOutputStream out=new ByteArrayOutputStream();byte[] buf=new byte[8192];int n;
-        while((n=in.read(buf))!=-1) {if(out.size()+n>limit) throw new IOException("Feed exceeds the phase-one size limit.");out.write(buf,0,n);}
+        while((n=in.read(buf))!=-1) {if(out.size()+n>limit) throw new IOException("Feed exceeds the supported size limit.");out.write(buf,0,n);}
         return out.toString("UTF-8");
     }
 }

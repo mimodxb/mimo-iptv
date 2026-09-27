@@ -82,9 +82,10 @@ public class HomeFragment extends MobileBaseFragment implements MobileMainActivi
 
     @Override
     public void onSearch(String query) {
-        // Navigate to Live TV with search or show search results
+        ((MobileMainActivity)requireActivity()).openLive("All",query);
     }
 
+    @Override public void onResume(){super.onResume();if(repository!=null)loadHomeData();}
     public void refreshData() {
         loadHomeData();
     }
@@ -204,7 +205,7 @@ public class HomeFragment extends MobileBaseFragment implements MobileMainActivi
                 } else {
                     recycler.setVisibility(View.VISIBLE);
                     emptyText.setVisibility(View.GONE);
-                    recycler.setLayoutManager(new LinearLayoutManager(itemView.getContext(), LinearLayout.HORIZONTAL, false));
+                    recycler.setLayoutManager(new LinearLayoutManager(itemView.getContext(), RecyclerView.HORIZONTAL, false));
                     recycler.setAdapter(new ChannelHorizontalAdapter((List<Channel>) items));
                 }
             }
@@ -241,11 +242,8 @@ public class HomeFragment extends MobileBaseFragment implements MobileMainActivi
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             Channel channel = items.get(position);
             holder.name.setText(channel.name);
-            if (channel.logo != null && !channel.logo.isEmpty()) {
-                ChannelLogoLoader.load(holder.logo, channel.logo, LOGO_SIZE_DP, LOGO_SIZE_DP, holder.itemView.getContext());
-            } else {
-                holder.logo.setImageBitmap(ChannelLogoLoader.placeholder(holder.itemView.getContext(), LOGO_SIZE_DP, LOGO_SIZE_DP));
-            }
+            holder.itemView.setOnClickListener(v->MobileNavigation.play(v.getContext(),channel,items));
+            ChannelLogoLoader.load(holder.logo, channel.logo, LOGO_SIZE_DP, LOGO_SIZE_DP, holder.itemView.getContext());
         }
 
         @Override
@@ -277,6 +275,7 @@ public class HomeFragment extends MobileBaseFragment implements MobileMainActivi
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             CategoryItem item = categories.get(position);
             holder.name.setText(item.nameRes);
+            holder.itemView.setOnClickListener(v->MobileNavigation.openLive(v.getContext(),item.categoryKey));
         }
 
         @Override
@@ -291,3 +290,4 @@ public class HomeFragment extends MobileBaseFragment implements MobileMainActivi
         }
     }
 }
+

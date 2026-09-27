@@ -64,13 +64,14 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
 
         pagerAdapter = new LiveTvPagerAdapter(getChildFragmentManager(), getLifecycle());
         viewPager.setAdapter(pagerAdapter);
-        viewPager.setOffscreenPageLimit(CATEGORIES.length);
+        viewPager.setOffscreenPageLimit(1);
 
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             tab.setText(CATEGORY_TITLES[position]);
         }).attach();
 
         refreshFab.setOnClickListener(v -> refreshCurrentCategory());
+        if(getArguments()!=null){String category=getArguments().getString("category","Azerbaijan");for(int i=0;i<CATEGORIES.length;i++)if(CATEGORIES[i].equals(category))viewPager.setCurrentItem(i,false);}
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -109,9 +110,11 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
 
     static class LiveTvPagerAdapter extends FragmentStateAdapter {
         private final Map<Integer, Fragment> fragmentMap = new HashMap<>();
+        private final FragmentManager manager;
 
         LiveTvPagerAdapter(FragmentManager fm, Lifecycle lifecycle) {
             super(fm, lifecycle);
+            manager=fm;
         }
 
         @NonNull
@@ -128,7 +131,8 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
         }
 
         Fragment getRegisteredFragment(int position) {
-            return fragmentMap.get(position);
+            Fragment restored=manager.findFragmentByTag("f"+position);
+            return restored!=null?restored:fragmentMap.get(position);
         }
     }
 
@@ -182,30 +186,14 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
 
             updateParentViews(true, null, null);
 
-            new Thread(() -> {
-                try {
-                    Repository repo = new Repository(requireContext());
-                    Repository.Catalog catalog = repo.load(forceNetwork);
-                    List<Channel> categoryChannels = new ArrayList<>();
-                    for (Channel c : catalog.channels) {
-                        if ("All".equals(category) || category.equals(c.category())) {
-                            categoryChannels.add(c);
-                        }
-                    }
-
-                    mainHandler.post(() -> {
-                        isLoading = false;
-                        channels = categoryChannels;
-                        adapter.setChannels(channels);
-                        updateParentViews(channels.isEmpty(), null, null);
-                    });
-                } catch (Exception e) {
-                    mainHandler.post(() -> {
-                        isLoading = false;
-                        updateParentViews(true, e.getMessage(), null);
-                    });
-                }
-            }).start();
+            MobileCatalog.load(requireContext(),forceNetwork,catalog->{
+                if(getView()==null)return;
+                isLoading=false;channels=new ArrayList<>();
+                for(Channel c:catalog.channels)if("All".equals(category)||category.equals(c.category()))channels.add(c);
+                adapter.setChannels(channels);
+                Fragment parent=getParentFragment();if(parent!=null&&parent.getArguments()!=null)adapter.filter(parent.getArguments().getString("query",""));
+                updateParentViews(false,catalog.notices.isEmpty()?(channels.isEmpty()?getString(R.string.live_tv_empty):null):String.join("\n",catalog.notices),channels.isEmpty());
+            });
         }
 
         private void updateParentViews(boolean loading, String errorMsg, Boolean empty) {
@@ -228,7 +216,7 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
             }
             if (refreshFab != null) {
                 boolean showFab = (empty != null && empty) || (errorMsg != null);
-                if (showFab) refreshFab.show(); else refreshFab.hide();
+                refreshFab.show();
             }
         }
 
@@ -271,9 +259,9 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
             if (query == null || query.trim().isEmpty()) {
                 filtered.addAll(channels);
             } else {
-                String lower = query.toLowerCase();
+                String lower = query.toLowerCase(java.util.Locale.ROOT);
                 for (Channel c : channels) {
-                    if (c.name.toLowerCase().contains(lower)) {
+                    if (c.name.toLowerCase(java.util.Locale.ROOT).contains(lower)) {
                         filtered.add(c);
                     }
                 }
@@ -297,13 +285,13 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             Channel channel = filtered.get(position);
             holder.name.setText(channel.name);
+            Repository favorites=new Repository(holder.itemView.getContext());
+            holder.favorite.setImageResource(favorites.favorites().contains(channel.key)?R.drawable.ic_favorite_filled:R.drawable.ic_favorite);
+            holder.favorite.setOnClickListener(v->{boolean added=favorites.toggleFavorite(channel.key);holder.favorite.setImageResource(added?R.drawable.ic_favorite_filled:R.drawable.ic_favorite);});
+            holder.itemView.setOnLongClickListener(v->{holder.favorite.performClick();return true;});
             
             // Load channel logo
-            if (channel.logo != null && !channel.logo.isEmpty()) {
-                ChannelLogoLoader.load(holder.logo, channel.logo, LOGO_SIZE_DP, LOGO_SIZE_DP, holder.itemView.getContext());
-            } else {
-                holder.logo.setImageBitmap(ChannelLogoLoader.placeholder(holder.itemView.getContext(), LOGO_SIZE_DP, LOGO_SIZE_DP));
-            }
+            ChannelLogoLoader.load(holder.logo, channel.logo, LOGO_SIZE_DP, LOGO_SIZE_DP, holder.itemView.getContext());
 
             // Programme info could be added from EPG data later
             if (channel.streams != null && !channel.streams.isEmpty()) {
@@ -330,8 +318,8 @@ public class LiveTvFragment extends MobileBaseFragment implements MobileMainActi
             Intent intent = new Intent(fragment.getActivity(), MobilePlaybackActivity.class);
             intent.putExtra("key", channel.key);
             intent.putExtra("name", channel.name);
-            intent.putStringArrayListExtra("chan_keys", channelKeys);
-            intent.putExtra("idx", channelIdx);
+            intent.putStringArrayListExtra("chan_keys", new ArrayList<>(channelKeys.subList(Math.max(0,channelIdx-100),Math.min(channelKeys.size(),channelIdx+101))));
+            intent.putExtra("idx", Math.min(channelIdx,100));
             fragment.startActivity(intent);
         }
 

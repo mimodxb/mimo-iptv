@@ -11,6 +11,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import tv.mimo.app.R;
 
 public class MobileMainActivity extends AppCompatActivity {
+    @Override protected void attachBaseContext(android.content.Context base){
+        String language=new tv.mimo.app.Repository(base).language();
+        android.content.res.Configuration configuration=new android.content.res.Configuration(base.getResources().getConfiguration());
+        configuration.setLocale(java.util.Locale.forLanguageTag(language));
+        super.attachBaseContext(base.createConfigurationContext(configuration));
+    }
 
     private BottomNavigationView bottomNavigation;
     private SearchView searchView;
@@ -82,7 +88,13 @@ public class MobileMainActivity extends AppCompatActivity {
         return false;
     }
 
+    public void openLive(String category,String query) {
+        bottomNavigation.setSelectedItemId(R.id.nav_live_tv);
+        if(currentFragment instanceof LiveTvFragment){android.os.Bundle args=new android.os.Bundle();args.putString("category",category);args.putString("query",query);currentFragment.setArguments(args);}
+    }
+
     private void handleSearch(String query) {
+        currentFragment=getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (currentFragment instanceof Searchable) {
             ((Searchable) currentFragment).onSearch(query);
         }
@@ -92,3 +104,4 @@ public class MobileMainActivity extends AppCompatActivity {
         void onSearch(String query);
     }
 }
+

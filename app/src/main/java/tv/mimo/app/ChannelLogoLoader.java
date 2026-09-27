@@ -1,5 +1,4 @@
 package tv.mimo.app;
-
 import android.content.Context;
 import android.graphics.*;
 import android.os.*;
@@ -7,159 +6,67 @@ import android.util.LruCache;
 import android.widget.ImageView;
 import java.io.*;
 import java.net.*;
+import java.lang.ref.WeakReference;
 import java.util.concurrent.*;
 
-/** Lightweight async channel-logo loader with in-memory LRU cache. No external dependencies. */
+/** Bounded, alpha-preserving FIT_CENTER loader shared by TV and phone. */
 public final class ChannelLogoLoader {
-    private static final int MAX_CACHE = 60;
-    private static final int TIMEOUT_MS = 8000;
-    private static final Bitmap.Config CFG = Bitmap.Config.RGB_565;
-    private static final LruCache<String, Bitmap> cache = new LruCache<>(MAX_CACHE);
-    private static volatile ExecutorService exec;
-    private static final Handler main = new Handler(Looper.getMainLooper());
-
-    private static ExecutorService exec() {
-        if (exec == null || exec.isShutdown()) {
-            synchronized (ChannelLogoLoader.class) {
-                if (exec == null || exec.isShutdown()) exec = Executors.newFixedThreadPool(2);
-            }
-        }
-        return exec;
+ private static final Handler MAIN=new Handler(Looper.getMainLooper());
+ private static final LruCache<String,Bitmap> CACHE=new LruCache<String,Bitmap>(12*1024*1024){
+  @Override protected int sizeOf(String k,Bitmap b){return b.getAllocationByteCount();}
+ };
+ private static final ThreadPoolExecutor IO=new ThreadPoolExecutor(3,3,30,TimeUnit.SECONDS,new ArrayBlockingQueue<>(96),new ThreadPoolExecutor.DiscardOldestPolicy());
+ public static Bitmap placeholder(int w,int h){
+  Bitmap b=Bitmap.createBitmap(Math.max(1,w),Math.max(1,h),Bitmap.Config.ARGB_8888);
+  Canvas c=new Canvas(b);c.drawColor(TvStyle.PANEL);Paint p=new Paint(3);p.setColor(TvStyle.MUTED);p.setTextSize(Math.min(w,h)*.4f);p.setTextAlign(Paint.Align.CENTER);c.drawText("▣",w/2f,h*.62f,p);return b;
+ }
+ public static int dp(Context c,float d){return Math.round(d*c.getResources().getDisplayMetrics().density);}
+ public static Bitmap placeholder(Context c,int w,int h){return placeholder(dp(c,w),dp(c,h));}
+ public static void load(ImageView v,String url,int w,int h,Context c){load(v,url,dp(c,w),dp(c,h));}
+ /** This overload takes physical pixels, matching the existing TV callers. */
+ public static void load(ImageView v,String url,int w,int h){
+  int width=Math.max(1,Math.min(768,w)),height=Math.max(1,Math.min(768,h));
+  Object token=new Object();v.setTag(token);v.setScaleType(ImageView.ScaleType.FIT_CENTER);v.setAdjustViewBounds(false);
+  int pad=Math.max(1,Math.min(width,height)/16);v.setPadding(pad,pad,pad,pad);v.setImageBitmap(placeholder(width,height));
+  if(url==null||!M3uParser.isHttp(url))return;
+  String key=url+"#"+width+"x"+height;Bitmap cached=CACHE.get(key);if(cached!=null){v.setImageBitmap(cached);return;}
+  WeakReference<ImageView> ref=new WeakReference<>(v);File dir=new File(v.getContext().getCacheDir(),"channel-logos");dir.mkdirs();
+  IO.execute(()->{
+   ImageView current=ref.get();if(current==null||current.getTag()!=token)return;
+   Bitmap bitmap=CACHE.get(key);
+   if(bitmap==null)try{
+    File disk=new File(dir,java.util.UUID.nameUUIDFromBytes(url.getBytes(java.nio.charset.StandardCharsets.UTF_8))+".img");byte[] bytes;
+    if(disk.exists()&&System.currentTimeMillis()-disk.lastModified()<7*86400000L){try(InputStream in=new FileInputStream(disk)){bytes=read(in);}}
+    else{
+     HttpURLConnection c=(HttpURLConnection)new URL(url).openConnection();c.setConnectTimeout(7000);c.setReadTimeout(10000);c.setRequestProperty("User-Agent","MIMO-TV/1.0");
+     try{if(c.getResponseCode()!=200)return;try(InputStream in=c.getInputStream()){bytes=read(in);}}finally{c.disconnect();}
+     synchronized(ChannelLogoLoader.class){
+      File[] files=dir.listFiles();long total=0;
+      if(files!=null){for(File f:files)total+=f.length();java.util.Arrays.sort(files,java.util.Comparator.comparingLong(File::lastModified));for(File f:files){if(total<64*1024*1024)break;long size=f.length();if(f.delete())total-=size;}}
+      try(FileOutputStream out=new FileOutputStream(disk)){out.write(bytes);}
+     }
     }
-
-    /** Placeholder silhouette for missing/failed logos. */
-    public static Bitmap placeholder(int w, int h) {
-        Bitmap b = Bitmap.createBitmap(Math.max(w,1), Math.max(h,1), CFG);
-        Canvas c = new Canvas(b);
-        c.drawColor(TvStyle.PANEL);
-        Paint p = new Paint(Paint.ANTI_ALIAS_FLAG); p.setColor(TvStyle.MUTED); p.setTextSize(Math.min(w,h)*0.4f); p.setTextAlign(Paint.Align.CENTER);
-        c.drawText("\u25A3", w/2f, h*0.62f, p);
-        return b;
-    }
-
-    /** Placeholder silhouette for missing/failed logos (dp overload). */
-    public static Bitmap placeholder(Context context, int widthDp, int heightDp) {
-        return placeholder(dp(context, widthDp), dp(context, heightDp));
-    }
-
-    /** Load URL into ImageView asynchronously. Falls back to placeholder.
-     *  Uses tag-based reuse protection: a delayed response is only applied if
-     *  the ImageView's tag still matches the requested URL.
-     *  Preserves aspect ratio using FIT_CENTER-style scaling.
-     *  @param view Target ImageView (will be set to FIT_CENTER scaleType)
-     *  @param url Logo URL
-     *  @param widthDp Target width in dp
-     *  @param heightDp Target height in dp
-     *  @param context Context for density conversion
-     */
-    public static void load(ImageView view, String url, int widthDp, int heightDp, Context context) {
-        if (url == null || url.isEmpty()) { 
-            view.setImageBitmap(placeholder(dp(context, widthDp), dp(context, heightDp))); 
-            view.setTag(null); 
-            return; 
-        }
-        // Ensure FIT_CENTER to preserve aspect ratio
-        view.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        view.setAdjustViewBounds(true);
-        
-        int targetW = dp(context, widthDp);
-        int targetH = dp(context, heightDp);
-        Bitmap cached = cache.get(url);
-        if (cached != null) { 
-            view.setImageBitmap(cached); 
-            view.setTag(url); 
-            return; 
-        }
-        view.setImageBitmap(placeholder(dp(context, widthDp), dp(context, heightDp)));
-        view.setTag(url);
-        final String tag = url;
-        exec().execute(() -> {
-            try {
-                HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
-                conn.setConnectTimeout(TIMEOUT_MS); conn.setReadTimeout(TIMEOUT_MS);
-                conn.setRequestProperty("User-Agent", "MIMO-TV/0.1 AndroidTV");
-                if (conn.getResponseCode() == 200) {
-                    InputStream in = conn.getInputStream();
-                    Bitmap raw = BitmapFactory.decodeStream(in);
-                    in.close();
-                    if (raw != null) {
-                        // Scale preserving aspect ratio - fit within target bounds
-                        Bitmap scaled = scalePreservingAspectRatio(raw, targetW, targetH);
-                        if (scaled != raw) raw.recycle();
-                        cache.put(url, scaled);
-                        main.post(() -> { if (tag.equals(view.getTag())) view.setImageBitmap(scaled); });
-                        return;
-                    }
-                }
-            } catch (Exception ignored) {}
-            main.post(() -> { if (tag.equals(view.getTag())) view.setImageBitmap(placeholder(dp(context, widthDp), dp(context, heightDp))); });
-        });
-    }
-
-    /** Backward-compatible overload for existing callers */
-    public static void load(ImageView view, String url, int w, int h) {
-        // Use a default context - will be overridden by the new overload in updated callers
-        if (view.getContext() != null) {
-            load(view, url, w, h, view.getContext());
-        } else {
-            // Fallback to old behavior if no context
-            loadLegacy(view, url, w, h);
-        }
-    }
-
-    /** Legacy implementation for backward compatibility */
-    private static void loadLegacy(ImageView view, String url, int w, int h) {
-        if (url == null || url.isEmpty()) { view.setImageBitmap(placeholder(w, h)); view.setTag(null); return; }
-        Bitmap cached = cache.get(url);
-        if (cached != null) { view.setImageBitmap(cached); view.setTag(url); return; }
-        view.setImageBitmap(placeholder(w, h));
-        view.setTag(url);
-        final String tag = url;
-        exec().execute(() -> {
-            try {
-                HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
-                conn.setConnectTimeout(TIMEOUT_MS); conn.setReadTimeout(TIMEOUT_MS);
-                conn.setRequestProperty("User-Agent", "MIMO-TV/0.1 AndroidTV");
-                if (conn.getResponseCode() == 200) {
-                    InputStream in = conn.getInputStream();
-                    Bitmap raw = BitmapFactory.decodeStream(in);
-                    in.close();
-                    if (raw != null) {
-                        Bitmap scaled = Bitmap.createScaledBitmap(raw, w, h, true);
-                        if (scaled != raw) raw.recycle();
-                        cache.put(url, scaled);
-                        main.post(() -> { if (tag.equals(view.getTag())) view.setImageBitmap(scaled); });
-                        return;
-                    }
-                }
-            } catch (Exception ignored) {}
-            main.post(() -> { if (tag.equals(view.getTag())) view.setImageBitmap(placeholder(w, h)); });
-        });
-    }
-
-    /** Scale bitmap preserving aspect ratio, fitting within target bounds (FIT_CENTER equivalent) */
-    private static Bitmap scalePreservingAspectRatio(Bitmap src, int targetW, int targetH) {
-        if (src == null) return null;
-        int srcW = src.getWidth();
-        int srcH = src.getHeight();
-        if (srcW <= 0 || srcH <= 0) return src;
-        
-        float scale = Math.min((float) targetW / srcW, (float) targetH / srcH);
-        int newW = Math.max(1, Math.round(srcW * scale));
-        int newH = Math.max(1, Math.round(srcH * scale));
-        
-        if (newW == srcW && newH == srcH) return src;
-        
-        Bitmap scaled = Bitmap.createScaledBitmap(src, newW, newH, true);
-        return scaled;
-    }
-
-    /** Convert dp to pixels */
-    public static int dp(Context context, float dp) {
-        return Math.round(dp * context.getResources().getDisplayMetrics().density);
-    }
-
-    /** Cancel pending loads for Activity destruction. Does NOT shut down the
-     *  shared executor — it persists across Activity recreations. */
-    public static void cancel() { /* no-op: executor is shared and persistent */ }
+    bitmap=decode(bytes,width,height);if(bitmap==null){disk.delete();return;}CACHE.put(key,bitmap);
+   }catch(Exception ignored){return;}
+   Bitmap result=bitmap;MAIN.post(()->{ImageView target=ref.get();if(target!=null&&target.getTag()==token)target.setImageBitmap(result);});
+  });
+ }
+ private static byte[] read(InputStream in)throws IOException{ByteArrayOutputStream out=new ByteArrayOutputStream();byte[] buf=new byte[8192];int n;while((n=in.read(buf))!=-1){if(out.size()+n>4*1024*1024)throw new IOException("Logo too large");out.write(buf,0,n);}return out.toByteArray();}
+ static Bitmap decode(byte[] bytes,int w,int h){
+  String prefix=new String(bytes,0,Math.min(bytes.length,2048),java.nio.charset.StandardCharsets.UTF_8);
+  if(prefix.contains("<svg"))try{
+   String xml=new String(bytes,java.nio.charset.StandardCharsets.UTF_8);
+   if(xml.contains("<!ENTITY")||xml.contains("<!DOCTYPE"))return null;
+   com.caverock.androidsvg.SVG svg=com.caverock.androidsvg.SVG.getFromString(xml);
+   svg.setDocumentPreserveAspectRatio(com.caverock.androidsvg.PreserveAspectRatio.LETTERBOX);
+   svg.setDocumentWidth(w);svg.setDocumentHeight(h);
+   Bitmap bitmap=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);svg.renderToCanvas(new Canvas(bitmap));return bitmap;
+  }catch(Exception ignored){return null;}
+  BitmapFactory.Options o=new BitmapFactory.Options();o.inJustDecodeBounds=true;BitmapFactory.decodeByteArray(bytes,0,bytes.length,o);
+  if(o.outWidth<=0||o.outHeight<=0||o.outWidth>20000||o.outHeight>20000)return null;
+  o.inSampleSize=1;while(o.outWidth/o.inSampleSize>w*2||o.outHeight/o.inSampleSize>h*2)o.inSampleSize*=2;
+  o.inJustDecodeBounds=false;o.inPreferredConfig=Bitmap.Config.ARGB_8888;Bitmap raw=BitmapFactory.decodeByteArray(bytes,0,bytes.length,o);if(raw==null)return null;
+  float scale=Math.min((float)w/raw.getWidth(),(float)h/raw.getHeight());Bitmap result=Bitmap.createScaledBitmap(raw,Math.max(1,Math.round(raw.getWidth()*scale)),Math.max(1,Math.round(raw.getHeight()*scale)),true);if(result!=raw)raw.recycle();return result;
+ }
+ public static void cancel(){}
 }

@@ -175,7 +175,7 @@ public final class MainActivity extends Activity {
             LinearLayout top=row(this);
             ImageView logo=new ImageView(this);logo.setScaleType(ImageView.ScaleType.CENTER_CROP);
             LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(d(28),d(28));lp.setMarginEnd(d(6));top.addView(logo,lp);
-            if(!c.logo.isEmpty())ChannelLogoLoader.load(logo,c.logo,d(28),d(28));else logo.setImageBitmap(ChannelLogoLoader.placeholder(d(28),d(28)));
+            ChannelLogoLoader.load(logo,c.logo,d(28),d(28));
             LinearLayout texts=column(this);
             TextView name=text(this,c.name,12,INK);name.setTypeface(null,Typeface.BOLD);name.setMaxLines(1);name.setEllipsize(android.text.TextUtils.TruncateAt.END);texts.addView(name,new LinearLayout.LayoutParams(-1,-2));
             TextView cat=text(this,c.category()+"  ·  "+c.country.toUpperCase(Locale.ROOT),9,MUTED);texts.addView(cat,new LinearLayout.LayoutParams(-1,-2));
@@ -223,7 +223,7 @@ public final class MainActivity extends Activity {
             Channel c=items.get(pos);boolean fav=repository.favorites().contains(c.key);
             h.label.setText((fav?"♥  ":"")+(c.priority()?"PRIORITY":"LIVE TV")+"  /  "+c.country.toUpperCase(Locale.ROOT));h.name.setText(c.name);
             h.description.setText(c.streams.isEmpty()?tr("source_unavail")+" · OK":page.equals("Guide")?programme(c):c.category()+"  ·  "+tr("watch_live"));
-            if(!c.logo.isEmpty()){ChannelLogoLoader.load(h.logo,c.logo,d(40),d(40));}else{h.logo.setImageBitmap(ChannelLogoLoader.placeholder(d(40),d(40)));}
+            ChannelLogoLoader.load(h.logo,c.logo,d(40),d(40));
             String desc=c.name+(c.streams.isEmpty()?", "+tr("source_unavail"):"")+(fav?", favorite":"")+". OK.";
             h.itemView.setContentDescription(desc);
             h.itemView.setOnClickListener(v->watch(c));h.itemView.setOnLongClickListener(v->{lastChannel=c.key;favorite(c);return true;});
@@ -245,7 +245,7 @@ public final class MainActivity extends Activity {
         guideLoading=true;guideState=tr("guide_loading");render();
         io.execute(()->{
             Map<String,List<Epg.Programme>> result=new HashMap<>();int failures=0;
-            for(String url:urls)try{Map<String,List<Epg.Programme>> incoming=Epg.parse(Repository.fetch(url,32*1024*1024),ids,System.currentTimeMillis());
+            for(String url:urls)try{Map<String,List<Epg.Programme>> incoming=Epg.fetch(url,ids,System.currentTimeMillis());
                 for(Map.Entry<String,List<Epg.Programme>> e:incoming.entrySet())if(!result.containsKey(e.getKey()))result.put(e.getKey(),e.getValue());
             }catch(Exception e){failures++;}
             String message=result.size()+" "+tr("guide_channels")+(failures>0?tr("guide_some_fail"):tr("guide_times"));
@@ -390,3 +390,4 @@ public final class MainActivity extends Activity {
         return super.dispatchKeyEvent(ev);
     }
 }
+

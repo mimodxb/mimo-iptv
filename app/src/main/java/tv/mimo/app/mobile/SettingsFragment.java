@@ -28,6 +28,14 @@ public class SettingsFragment extends MobileBaseFragment {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.mobile_preferences, rootKey);
+            ListPreference language=findPreference("pref_language");
+            if(language!=null){
+                language.setValue(new tv.mimo.app.Repository(requireContext()).language());
+                language.setOnPreferenceChangeListener((p,value)->{
+                    new tv.mimo.app.Repository(requireContext()).setLanguage(value.toString());
+                    requireActivity().recreate();return true;
+                });
+            }
 
             Preference aboutPref = findPreference("pref_about");
             if (aboutPref != null) {
@@ -45,9 +53,11 @@ public class SettingsFragment extends MobileBaseFragment {
             Preference sourcesPref = findPreference("pref_manage_sources");
             if (sourcesPref != null) {
                 sourcesPref.setOnPreferenceClickListener(preference -> {
+                    SourceEditor.show(requireContext());
                     return true;
                 });
             }
         }
     }
 }
+

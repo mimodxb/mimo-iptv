@@ -69,6 +69,7 @@ public class FavoritesFragment extends MobileBaseFragment implements MobileMainA
         updateEmptyState();
     }
 
+    @Override public void onResume(){super.onResume();if(repository!=null)loadFavorites();}
     public void refreshData() {
         loadFavorites();
     }
@@ -93,9 +94,9 @@ public class FavoritesFragment extends MobileBaseFragment implements MobileMainA
             if (query == null || query.trim().isEmpty()) {
                 filtered.addAll(channels);
             } else {
-                String lower = query.toLowerCase();
+                String lower = query.toLowerCase(java.util.Locale.ROOT);
                 for (Channel c : channels) {
-                    if (c.name.toLowerCase().contains(lower)) {
+                    if (c.name.toLowerCase(java.util.Locale.ROOT).contains(lower)) {
                         filtered.add(c);
                     }
                 }
@@ -115,13 +116,10 @@ public class FavoritesFragment extends MobileBaseFragment implements MobileMainA
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             Channel channel = filtered.get(position);
             holder.name.setText(channel.name);
+            holder.itemView.setOnClickListener(v->MobileNavigation.play(v.getContext(),channel,filtered));
             
             // Load channel logo
-            if (channel.logo != null && !channel.logo.isEmpty()) {
-                ChannelLogoLoader.load(holder.logo, channel.logo, 120, 120, holder.itemView.getContext());
-            } else {
-                holder.logo.setImageBitmap(ChannelLogoLoader.placeholder(holder.itemView.getContext(), 120, 120));
-            }
+            ChannelLogoLoader.load(holder.logo, channel.logo, 120, 120, holder.itemView.getContext());
 
             // Programme info
             if (channel.streams != null && !channel.streams.isEmpty()) {

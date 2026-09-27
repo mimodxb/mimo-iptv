@@ -27,6 +27,7 @@ public final class MobilePlaybackActivity extends Activity {
     private FrameLayout root;
     private Repository.Catalog catalog;
     private LinearLayout topBar, controls, infoOverlay;
+    private HorizontalScrollView controlsContainer;
     private TextView statusText, playPauseBtn, favBtn, infoName, infoCat;
     private ImageView infoLogo;
     private Channel ch;
@@ -70,6 +71,7 @@ public final class MobilePlaybackActivity extends Activity {
         buildTopBar();
         buildControls();
         setContentView(root);
+        root.setOnApplyWindowInsetsListener((v,insets)->{v.setPadding(insets.getSystemWindowInsetLeft(),insets.getSystemWindowInsetTop(),insets.getSystemWindowInsetRight(),insets.getSystemWindowInsetBottom());return insets;});
         playPauseBtn.requestFocus();
     }
 
@@ -89,7 +91,7 @@ public final class MobilePlaybackActivity extends Activity {
         }
         // Rebuild controls for orientation change
         if (controls != null) {
-            root.removeView(controls);
+            root.removeView(controlsContainer);
             buildControls();
         }
     }
@@ -111,7 +113,7 @@ public final class MobilePlaybackActivity extends Activity {
         t.addView(infoCat, new LinearLayout.LayoutParams(-1,-2));
         infoOverlay.addView(t, new LinearLayout.LayoutParams(-1,-2));
         FrameLayout.LayoutParams fp=new FrameLayout.LayoutParams(-2,-2, Gravity.TOP|Gravity.START);
-        fp.setMargins(MobileStyle.dp(this,28), MobileStyle.dp(this,28), 0, 0);
+        fp.setMargins(MobileStyle.dp(this,16), MobileStyle.dp(this,120), MobileStyle.dp(this,16), 0);
         root.addView(infoOverlay, fp);
         infoOverlay.setVisibility(View.GONE);
     }
@@ -133,8 +135,9 @@ public final class MobilePlaybackActivity extends Activity {
     private void buildControls(){
         // Use HorizontalScrollView for portrait usability
         HorizontalScrollView scrollView = new HorizontalScrollView(this);
+        controlsContainer=scrollView;
         scrollView.setHorizontalScrollBarEnabled(false);
-        scrollView.setFillViewport(false);
+        scrollView.setFillViewport(true);
         
         controls = MobileStyle.row(this);
         controls.setPadding(MobileStyle.dp(this,12), MobileStyle.dp(this,8), MobileStyle.dp(this,12), MobileStyle.dp(this,8));
@@ -164,7 +167,7 @@ public final class MobilePlaybackActivity extends Activity {
         b.setGravity(Gravity.CENTER);
         b.setTextSize(18); // Larger for icon readability
         b.setMinWidth(MobileStyle.dp(this, 56)); // Minimum touch target
-        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(0, -1, 1);
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(MobileStyle.dp(this,56), -1);
         p.setMarginEnd(MobileStyle.dp(this, 4));
         controls.addView(b, p);
         return b;
@@ -307,7 +310,7 @@ public final class MobilePlaybackActivity extends Activity {
     
     private void stopStallDetection() {
         if (stallCheckRunnable != null) h.removeCallbacks(stallCheckRunnable);
-        recovery.onPlaybackStopped();
+        if(recovery!=null) recovery.onPlaybackStopped();
     }
 
     private void recordHistoryIfNeeded(){
@@ -400,10 +403,7 @@ public final class MobilePlaybackActivity extends Activity {
         String cat=ch.category();
         String co=ch.country;
         infoCat.setText(co!=null && !co.isEmpty() ? cat+"  ·  "+co.toUpperCase(Locale.ROOT) : cat);
-        if(ch.logo!=null && !ch.logo.isEmpty())
-            ChannelLogoLoader.load(infoLogo, ch.logo, 36, 36, this);
-        else
-            infoLogo.setImageBitmap(ChannelLogoLoader.placeholder(MobileStyle.dp(this,36), MobileStyle.dp(this,36)));
+        ChannelLogoLoader.load(infoLogo, ch.logo, 36, 36, this);
         infoOverlay.setVisibility(View.VISIBLE);
         h.removeCallbacks(hideInfo);
         h.postDelayed(hideInfo, INFO_DELAY);
@@ -412,7 +412,7 @@ public final class MobilePlaybackActivity extends Activity {
     private void setChrome(boolean v){
         chrome=v;
         topBar.setVisibility(v?View.VISIBLE:View.GONE);
-        controls.setVisibility(v?View.VISIBLE:View.GONE);
+        controlsContainer.setVisibility(v?View.VISIBLE:View.GONE);
         if(!v) root.requestFocus();
     }
 
@@ -482,3 +482,4 @@ public final class MobilePlaybackActivity extends Activity {
         return super.dispatchKeyEvent(ev);
     }
 }
+
