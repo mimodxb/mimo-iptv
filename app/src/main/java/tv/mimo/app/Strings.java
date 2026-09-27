@@ -26,6 +26,11 @@ public final class Strings {
         M.put("search_headline", new String[]{"Find your channel.", "Kanalınızı tapın."});
         M.put("search_hint",     new String[]{"Channel name or country", "Kanal adı və ya ölkə"});
 
+        // Recently Watched
+        M.put("recent_headline", new String[]{"Recently Watched", "Sonuncu baxışlar"});
+        M.put("recent_empty",    new String[]{"No recently watched channels.", "Sonuncu baxılan kanal yoxdur."});
+        M.put("recent_watch",    new String[]{"Watch", "İzlə"});
+
         // Favorites
         M.put("fav_headline",  new String[]{"Your favorites.", "Sevimliləriniz."});
         M.put("fav_empty",     new String[]{"No favorites yet — hold OK on a channel to save it.", "Hələ sevimli yoxdur — kanalı saxlamaq üçün OK saxlayın."});
@@ -111,6 +116,7 @@ public final class Strings {
         M.put("enter_epg",      new String[]{"Enter an HTTP or HTTPS guide URL", "HTTP və ya HTTPS bələdçi URL daxil edin"});
         M.put("already_added",  new String[]{"This playlist is already added", "Bu pleylist artıq əlavə olunub"});
         M.put("hint_dpad",      new String[]{"D-pad  Move     OK  Watch     Hold OK  Favorite     Back  Return", "D-pad  Hərəkət     OK  İzle     OK Saxla  Sevimli     Geri  Qayıt"});
+        M.put("hint_navigate",  new String[]{"CH±  Page     Play/Pause  Top     Stop  Bottom", "CH±  Səhifə     Play/Pause  Yuxarı     Stop  Aşağı"});
         M.put("live_tv",        new String[]{"●  LIVE TV", "●  CANLI TV"});
         M.put("about_detail",   new String[]{
             "Native Android TV · Media3 playback\nFavorites and playlists are saved on this TV.\nHTTP streams are supported for legacy broadcasters.\nGuide coverage depends on your sources.",
