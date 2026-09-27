@@ -1,0 +1,63 @@
+package tv.mimo.app.mobile;
+
+import android.os.Bundle;
+import android.view.*;
+import android.widget.*;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.preference.*;
+import tv.mimo.app.R;
+
+public class SettingsFragment extends MobileBaseFragment {
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.fragment_settings;
+    }
+
+    @Override
+    public void onViewReady(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        getChildFragmentManager()
+            .beginTransaction()
+            .replace(R.id.settings_container, new SettingsPreferenceFragment())
+            .commit();
+    }
+
+    public static class SettingsPreferenceFragment extends PreferenceFragmentCompat {
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.mobile_preferences, rootKey);
+            ListPreference language=findPreference("pref_language");
+            if(language!=null){
+                language.setValue(new tv.mimo.app.Repository(requireContext()).language());
+                language.setOnPreferenceChangeListener((p,value)->{
+                    new tv.mimo.app.Repository(requireContext()).setLanguage(value.toString());
+                    requireActivity().recreate();return true;
+                });
+            }
+
+            Preference aboutPref = findPreference("pref_about");
+            if (aboutPref != null) {
+                aboutPref.setOnPreferenceClickListener(preference -> {
+                    Fragment aboutFragment = new AboutFragment();
+                    requireActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, aboutFragment)
+                        .addToBackStack(null)
+                        .commit();
+                    return true;
+                });
+            }
+
+            Preference sourcesPref = findPreference("pref_manage_sources");
+            if (sourcesPref != null) {
+                sourcesPref.setOnPreferenceClickListener(preference -> {
+                    SourceEditor.show(requireContext());
+                    return true;
+                });
+            }
+        }
+    }
+}
+

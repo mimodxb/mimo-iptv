@@ -1,0 +1,4172 @@
+[
+  {
+    "tvg-id": "XezerTV.az",
+    "tvg-name": "Xəzər TV",
+    "tvg-country": "AZ",
+    "group-title": "Azerbaijan"
+  },
+  {
+    "tvg-id": "30ATVClassicMovies.us",
+    "tvg-name": "30A TV Classic Movies",
+    "tvg-country": "US",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "3CatInfo.es",
+    "tvg-name": "3CatInfo",
+    "tvg-country": "ES",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "3sat.de",
+    "tvg-name": "3sat",
+    "tvg-country": "DE",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "4Kurd.fr",
+    "tvg-name": "4Kurd",
+    "tvg-country": "FR",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "4Music.fr",
+    "tvg-name": "4 Music",
+    "tvg-country": "FR",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "6TVGorlovka.ru",
+    "tvg-name": "6 TV Gorlovka",
+    "tvg-country": "RU",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "6WiseTv.us",
+    "tvg-name": "6 Wise Tv",
+    "tvg-country": "US",
+    "group-title": "Family"
+  },
+  {
+    "tvg-id": "7RadioVisione.it",
+    "tvg-name": "7 RadioVisione",
+    "tvg-country": "IT",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "A7TV.do",
+    "tvg-name": "A7 TV",
+    "tvg-country": "DO",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "AbadanTV.ir",
+    "tvg-name": "Abadan TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "AbanteTV.ph",
+    "tvg-name": "Abante TV",
+    "tvg-country": "PH",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ABCEntertains.au",
+    "tvg-name": "ABC Entertains",
+    "tvg-country": "AU",
+    "group-title": "Education"
+  },
+  {
+    "tvg-id": "ABCKids.au",
+    "tvg-name": "ABC Kids",
+    "tvg-country": "AU",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "ABCNewsLive.us",
+    "tvg-name": "ABC News Live",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ABCNewsLive1.us",
+    "tvg-name": "ABC News Live 1",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ABCNewsLive10.us",
+    "tvg-name": "ABC News Live 10",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ABCNewsLive2.us",
+    "tvg-name": "ABC News Live 2",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ABCNewsLive3.us",
+    "tvg-name": "ABC News Live 3",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ABCNewsLive4.us",
+    "tvg-name": "ABC News Live 4",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ABCNewsLive5.us",
+    "tvg-name": "ABC News Live 5",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ABCNewsLive6.us",
+    "tvg-name": "ABC News Live 6",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ABCNewsLive7.us",
+    "tvg-name": "ABC News Live 7",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ABCNewsLive8.us",
+    "tvg-name": "ABC News Live 8",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ABCNewsLive9.us",
+    "tvg-name": "ABC News Live 9",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ABCTVPlus.au",
+    "tvg-name": "ABC TV Plus",
+    "tvg-country": "AU",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "Acasa.ro",
+    "tvg-name": "Acasa",
+    "tvg-country": "RO",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "AcasaGold.ro",
+    "tvg-name": "Acasa Gold",
+    "tvg-country": "RO",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "Action24.gr",
+    "tvg-name": "Action 24",
+    "tvg-country": "GR",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "AdultSwimLatinAmerica.us",
+    "tvg-name": "Adult Swim Latin America",
+    "tvg-country": "US",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "AE.us",
+    "tvg-name": "A&E",
+    "tvg-country": "US",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "AELatinAmerica.us",
+    "tvg-name": "A&E Latin America",
+    "tvg-country": "US",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "AfraFilm.ir",
+    "tvg-name": "Afra Film",
+    "tvg-country": "IR",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "AghapyTV.eg",
+    "tvg-name": "Aghapy TV",
+    "tvg-country": "EG",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "AHaber.tr",
+    "tvg-name": "A Haber",
+    "tvg-country": "TR",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "AlAimmaTV.iq",
+    "tvg-name": "Al-Aimma TV",
+    "tvg-country": "IQ",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "AlborzTV.ir",
+    "tvg-name": "Alborz TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "AlfaOmegaTV.ro",
+    "tvg-name": "Alfa Omega TV",
+    "tvg-country": "RO",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "AlhaqeqaAldawlia.jo",
+    "tvg-name": "Alhaqeqa Aldawlia",
+    "tvg-country": "JO",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "AllgauTV.de",
+    "tvg-name": "Allgau TV",
+    "tvg-country": "DE",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Althania.sy",
+    "tvg-name": "Althania",
+    "tvg-country": "SY",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "AmarinTV.th",
+    "tvg-name": "Amarin TV",
+    "tvg-country": "TH",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "AMC.us",
+    "tvg-name": "AMC",
+    "tvg-country": "US",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "AMCEurope.uk",
+    "tvg-name": "AMC Europe",
+    "tvg-country": "UK",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "AMCLatinAmerica.us",
+    "tvg-name": "AMC Latin America",
+    "tvg-country": "US",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "AmericasVoice.us",
+    "tvg-name": "America's Voice",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "AmouzeshTV.ir",
+    "tvg-name": "Amouzesh TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "AndorraTV.ad",
+    "tvg-name": "Andorra TV",
+    "tvg-country": "AD",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "AnNinhTV.vn",
+    "tvg-name": "An Ninh TV",
+    "tvg-country": "VN",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "Antena3Internacional.es",
+    "tvg-name": "Antena 3 Internacional",
+    "tvg-country": "ES",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "AntenaInternational.ro",
+    "tvg-name": "Antena International",
+    "tvg-country": "RO",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "AntenaMonden.ro",
+    "tvg-name": "Antena Monden",
+    "tvg-country": "RO",
+    "group-title": "Lifestyle"
+  },
+  {
+    "tvg-id": "AntenaStars.ro",
+    "tvg-name": "Antena Stars",
+    "tvg-country": "RO",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "ANTV.id",
+    "tvg-name": "ANTV",
+    "tvg-country": "ID",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "APunt.es",
+    "tvg-name": "A Punt",
+    "tvg-country": "ES",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "AraxTV.ir",
+    "tvg-name": "Arax TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "ARDalpha.de",
+    "tvg-name": "ARD-alpha",
+    "tvg-country": "DE",
+    "group-title": "Education"
+  },
+  {
+    "tvg-id": "ArkoTV.ir",
+    "tvg-name": "Arko TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "ArmeniaPremium.am",
+    "tvg-name": "Armenia Premium",
+    "tvg-country": "AM",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "ARTNTV.us",
+    "tvg-name": "ARTN TV",
+    "tvg-country": "US",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "ArvanTV.ir",
+    "tvg-name": "Arvan TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "AtrakTV.ir",
+    "tvg-name": "Atrak TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "ATV.be",
+    "tvg-name": "ATV",
+    "tvg-country": "BE",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Audiokiss.bo",
+    "tvg-name": "Audiokiss",
+    "tvg-country": "BO",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "AVAFamily.ir",
+    "tvg-name": "AVA Family",
+    "tvg-country": "IR",
+    "group-title": "Family"
+  },
+  {
+    "tvg-id": "AXN.br",
+    "tvg-name": "AXN",
+    "tvg-country": "BR",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "AXNAdria.us",
+    "tvg-name": "AXN Adria",
+    "tvg-country": "US",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "AXNCEE.es",
+    "tvg-name": "AXN CEE",
+    "tvg-country": "ES",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "AXNCrime.us",
+    "tvg-name": "AXN Crime",
+    "tvg-country": "US",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "AXNLatinAmerica.us",
+    "tvg-name": "AXN Latin America",
+    "tvg-country": "US",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "AfarinBaxcha.iq",
+    "tvg-name": "Afarin Baxcha",
+    "tvg-country": "IQ",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "AXSTV.us",
+    "tvg-name": "AXS TV",
+    "tvg-country": "US",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "AztecaInternacional.mx",
+    "tvg-name": "Azteca Internacional",
+    "tvg-country": "MX",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "B1.ro",
+    "tvg-name": "B1",
+    "tvg-country": "RO",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "Ballcasterz.cz",
+    "tvg-name": "Ballcasterz",
+    "tvg-country": "CZ",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "BaranTV.ir",
+    "tvg-name": "Baran TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "BarrandovKrimi.cz",
+    "tvg-name": "Barrandov Krimi",
+    "tvg-country": "CZ",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "BBCFour.uk",
+    "tvg-name": "BBC Four",
+    "tvg-country": "UK",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "BBCOne.uk",
+    "tvg-name": "BBC One",
+    "tvg-country": "UK",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "BBCParliament.uk",
+    "tvg-name": "BBC Parliament",
+    "tvg-country": "UK",
+    "group-title": "Legislative"
+  },
+  {
+    "tvg-id": "BBCScotland.uk",
+    "tvg-name": "BBC Scotland",
+    "tvg-country": "UK",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "BBCThree.uk",
+    "tvg-name": "BBC Three",
+    "tvg-country": "UK",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "BBCTwo.uk",
+    "tvg-name": "BBC Two",
+    "tvg-country": "UK",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "BebetoTV.do",
+    "tvg-name": "Bebeto TV",
+    "tvg-country": "DO",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "BestClasicosTV.cr",
+    "tvg-name": "BestClasicosTV",
+    "tvg-country": "CR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "BhakthiTV.in",
+    "tvg-name": "Bhakthi TV",
+    "tvg-country": "IN",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "BigTenNetwork.us",
+    "tvg-name": "Big Ten Network",
+    "tvg-country": "US",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "BlueBloods.us",
+    "tvg-name": "Blue Bloods",
+    "tvg-country": "US",
+    "group-title": "Series"
+  },
+  {
+    "tvg-id": "BNChannel.id",
+    "tvg-name": "BN Channel",
+    "tvg-country": "ID",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "BoxKidsTV.br",
+    "tvg-name": "Box Kids TV",
+    "tvg-country": "BR",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "BravoTV.ar",
+    "tvg-name": "Bravo TV",
+    "tvg-country": "AR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "BRFernsehen.de",
+    "tvg-name": "BR Fernsehen",
+    "tvg-country": "DE",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "BRTV.id",
+    "tvg-name": "BRTV",
+    "tvg-country": "ID",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "CafeFilm.ir",
+    "tvg-name": "Cafe Film",
+    "tvg-country": "IR",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "CaMauTV.vn",
+    "tvg-name": "Ca Mau TV",
+    "tvg-country": "VN",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "CanadaOne.ca",
+    "tvg-name": "Canada One",
+    "tvg-country": "CA",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "Canal11.cr",
+    "tvg-name": "Canal 11",
+    "tvg-country": "CR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Canal13.cl",
+    "tvg-name": "Canal 13",
+    "tvg-country": "CL",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Canal2.sv",
+    "tvg-name": "Canal 2",
+    "tvg-country": "SV",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Canal26.ar",
+    "tvg-name": "Canal 26",
+    "tvg-country": "AR",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "Canal33Madrid.es",
+    "tvg-name": "Canal 33 Madrid",
+    "tvg-country": "ES",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "Canal4.sv",
+    "tvg-name": "Canal 4",
+    "tvg-country": "SV",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Canal9Link.ar",
+    "tvg-name": "Canal 9 Link",
+    "tvg-country": "AR",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "CanalIPe.pe",
+    "tvg-name": "Canal IPe",
+    "tvg-country": "PE",
+    "group-title": "Family"
+  },
+  {
+    "tvg-id": "CanalPlusActionEurope.nl",
+    "tvg-name": "Canal+ Action Europe",
+    "tvg-country": "NL",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "CanalSur2.es",
+    "tvg-name": "Canal Sur 2",
+    "tvg-country": "ES",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "CanalUOL.br",
+    "tvg-name": "Canal UOL",
+    "tvg-country": "BR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "CarubanTV.id",
+    "tvg-name": "Caruban TV",
+    "tvg-country": "ID",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "CatholicFaithNetwork.us",
+    "tvg-name": "Catholic Faith Network",
+    "tvg-country": "US",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "CBSNews247.us",
+    "tvg-name": "CBS News 24/7",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "CBSNewsBayArea.us",
+    "tvg-name": "CBS News Bay Area",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "CCTV.us",
+    "tvg-name": "CC-TV",
+    "tvg-country": "US",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "CGTV.us",
+    "tvg-name": "CGTV",
+    "tvg-country": "US",
+    "group-title": "Legislative"
+  },
+  {
+    "tvg-id": "Channel24.ua",
+    "tvg-name": "Channel 24",
+    "tvg-country": "UA",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "Channel8.gr",
+    "tvg-name": "Channel 8",
+    "tvg-country": "GR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "Channel8.iq",
+    "tvg-name": "Channel8",
+    "tvg-country": "IQ",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ChosenTVEnglish.ng",
+    "tvg-name": "Chosen TV English",
+    "tvg-country": "NG",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "CINDIETV.br",
+    "tvg-name": "CINDIE TV",
+    "tvg-country": "BR",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "Cine34.it",
+    "tvg-name": "Cine34",
+    "tvg-country": "IT",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "cinebox.bg",
+    "tvg-name": "cine.box",
+    "tvg-country": "BG",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "Cinecanal.us",
+    "tvg-name": "Cinecanal",
+    "tvg-country": "US",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "Circle.us",
+    "tvg-name": "Circle",
+    "tvg-country": "US",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "ClassicTV.ir",
+    "tvg-name": "Classic TV",
+    "tvg-country": "IR",
+    "group-title": "Classic"
+  },
+  {
+    "tvg-id": "CMMTV.es",
+    "tvg-name": "CMM TV",
+    "tvg-country": "ES",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "CNBC.us",
+    "tvg-name": "CNBC",
+    "tvg-country": "US",
+    "group-title": "Business"
+  },
+  {
+    "tvg-id": "CNBCArabiya.ae",
+    "tvg-name": "CNBC Arabiya",
+    "tvg-country": "AE",
+    "group-title": "Business"
+  },
+  {
+    "tvg-id": "CNBCAsia.sg",
+    "tvg-name": "CNBC Asia",
+    "tvg-country": "SG",
+    "group-title": "Business"
+  },
+  {
+    "tvg-id": "CNBCUK.uk",
+    "tvg-name": "CNBC UK",
+    "tvg-country": "UK",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "CNEWSPRIME.fr",
+    "tvg-name": "CNEWS PRIME",
+    "tvg-country": "FR",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ComedyCentral.de",
+    "tvg-name": "Comedy Central",
+    "tvg-country": "DE",
+    "group-title": "Comedy"
+  },
+  {
+    "tvg-id": "ComedyCentralLatinAmerica.us",
+    "tvg-name": "Comedy Central Latin America",
+    "tvg-country": "US",
+    "group-title": "Comedy"
+  },
+  {
+    "tvg-id": "CrimePlusInvestigation.us",
+    "tvg-name": "Crime + Investigation",
+    "tvg-country": "US",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "CrimePlusInvestigationAsia.sg",
+    "tvg-name": "Crime + Investigation Asia",
+    "tvg-country": "SG",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "CrimePlusInvestigationCEE.uk",
+    "tvg-name": "Crime + Investigation CEE",
+    "tvg-country": "UK",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "CRTV.cl",
+    "tvg-name": "CRTV",
+    "tvg-country": "CL",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "CT1.cz",
+    "tvg-name": "CT1",
+    "tvg-country": "CZ",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "CT2.cz",
+    "tvg-name": "CT2",
+    "tvg-country": "CZ",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "CT24.cz",
+    "tvg-name": "CT24",
+    "tvg-country": "CZ",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "CTDecko.cz",
+    "tvg-name": "CT Decko",
+    "tvg-country": "CZ",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "CTSport.cz",
+    "tvg-name": "CT Sport",
+    "tvg-country": "CZ",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "CulturaFast.br",
+    "tvg-name": "Cultura Fast",
+    "tvg-country": "BR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "CuriosityChannel.de",
+    "tvg-name": "Curiosity Channel",
+    "tvg-country": "DE",
+    "group-title": "Education"
+  },
+  {
+    "tvg-id": "DaNangTV2.vn",
+    "tvg-name": "Da Nang TV2",
+    "tvg-country": "VN",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "DanceFM.cl",
+    "tvg-name": "Dance FM",
+    "tvg-country": "CL",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "DanceTVAlgorhythm.ee",
+    "tvg-name": "DanceTV Algorhythm",
+    "tvg-country": "EE",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "DejTV.ir",
+    "tvg-name": "Dej TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "DenaTV.ir",
+    "tvg-name": "Dena TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "DePeliculaUS.us",
+    "tvg-name": "De Pelicula US",
+    "tvg-country": "US",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "DeportesporMovistarPlusPlus.es",
+    "tvg-name": "Deportes por Movistar Plus+",
+    "tvg-country": "ES",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "DhammaTV.id",
+    "tvg-name": "Dhamma TV",
+    "tvg-country": "ID",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "DisneyChannel.cz",
+    "tvg-name": "Disney Channel",
+    "tvg-country": "CZ",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "DisneyChannel.de",
+    "tvg-name": "Disney Channel",
+    "tvg-country": "DE",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "DisneyChannel.nl",
+    "tvg-name": "Disney Channel",
+    "tvg-country": "NL",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "DisneyChannel.pl",
+    "tvg-name": "Disney Channel",
+    "tvg-country": "PL",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "DisneyChannel.pt",
+    "tvg-name": "Disney Channel",
+    "tvg-country": "PT",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "DisneyChannel.ro",
+    "tvg-name": "Disney Channel",
+    "tvg-country": "RO",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "DisneyChannel.us",
+    "tvg-name": "Disney Channel",
+    "tvg-country": "US",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "DisneyChannelLatinAmerica.ar",
+    "tvg-name": "Disney Channel Latin America",
+    "tvg-country": "AR",
+    "group-title": "Animation"
+  },
+  {
+    "tvg-id": "DisneyJr.fr",
+    "tvg-name": "Disney Jr.",
+    "tvg-country": "FR",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "DisneyJrLatinAmerica.ar",
+    "tvg-name": "Disney Jr. Latin America",
+    "tvg-country": "AR",
+    "group-title": "Animation"
+  },
+  {
+    "tvg-id": "DisneyJunior.cz",
+    "tvg-name": "Disney Junior",
+    "tvg-country": "CZ",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "DisneyJunior.ro",
+    "tvg-name": "Disney Junior",
+    "tvg-country": "RO",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "DisneyJunior.us",
+    "tvg-name": "Disney Junior",
+    "tvg-country": "US",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "DisneyXD.pl",
+    "tvg-name": "Disney XD",
+    "tvg-country": "PL",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "DisneyXD.us",
+    "tvg-name": "Disney XD",
+    "tvg-country": "US",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "DistritoComedia.mx",
+    "tvg-name": "Distrito Comedia",
+    "tvg-country": "MX",
+    "group-title": "Comedy"
+  },
+  {
+    "tvg-id": "DiyanetTV.tr",
+    "tvg-name": "Diyanet TV",
+    "tvg-country": "TR",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "DoveChannel.us",
+    "tvg-name": "Dove Channel",
+    "tvg-country": "US",
+    "group-title": "Family"
+  },
+  {
+    "tvg-id": "DreamWorksChannelLatinAmerica.us",
+    "tvg-name": "DreamWorks Channel Latin America",
+    "tvg-country": "US",
+    "group-title": "Animation"
+  },
+  {
+    "tvg-id": "DrGMedicalExaminer.pl",
+    "tvg-name": "Dr G Medical Examiner",
+    "tvg-country": "PL",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "DRRamasjang.dk",
+    "tvg-name": "DR Ramasjang",
+    "tvg-country": "DK",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "DSports.us",
+    "tvg-name": "DSports",
+    "tvg-country": "US",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "dTVi.id",
+    "tvg-name": "dTVi",
+    "tvg-country": "ID",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "DumDum.br",
+    "tvg-name": "DumDum",
+    "tvg-country": "BR",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "DVTVExtra.cz",
+    "tvg-name": "DVTV Extra",
+    "tvg-country": "CZ",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "EBS1TV.kr",
+    "tvg-name": "EBS 1TV",
+    "tvg-country": "KR",
+    "group-title": "Education"
+  },
+  {
+    "tvg-id": "EBS2TV.kr",
+    "tvg-name": "EBS 2TV",
+    "tvg-country": "KR",
+    "group-title": "Education"
+  },
+  {
+    "tvg-id": "EKids.bg",
+    "tvg-name": "EKids",
+    "tvg-country": "BG",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "ELatinAmerica.us",
+    "tvg-name": "E! Latin America",
+    "tvg-country": "US",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "ElPitucoTV.do",
+    "tvg-name": "El Pituco TV",
+    "tvg-country": "DO",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "ElSeis6.do",
+    "tvg-name": "El Seis 6",
+    "tvg-country": "DO",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "ElToroTV.es",
+    "tvg-name": "El Toro TV",
+    "tvg-country": "ES",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Energy.ir",
+    "tvg-name": "Energy",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "EntertainmentTonight.us",
+    "tvg-name": "Entertainment Tonight",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ERTCosmos.gr",
+    "tvg-name": "ERT Cosmos",
+    "tvg-country": "GR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "EsperiaTV.it",
+    "tvg-name": "Esperia TV",
+    "tvg-country": "IT",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "ESPN.br",
+    "tvg-name": "ESPN",
+    "tvg-country": "BR",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "ESPN3.br",
+    "tvg-name": "ESPN 3",
+    "tvg-country": "BR",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "ESPN4.br",
+    "tvg-name": "ESPN 4",
+    "tvg-country": "BR",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "ESPNews.us",
+    "tvg-name": "ESPNews",
+    "tvg-country": "US",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "Esport3.es",
+    "tvg-name": "Esport3",
+    "tvg-country": "ES",
+    "group-title": "Public"
+  },
+  {
+    "tvg-id": "ETB1On.es",
+    "tvg-name": "ETB1 On",
+    "tvg-country": "ES",
+    "group-title": "Public"
+  },
+  {
+    "tvg-id": "ETB2.es",
+    "tvg-name": "ETB 2",
+    "tvg-country": "ES",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "ETB2On.es",
+    "tvg-name": "ETB2 On",
+    "tvg-country": "ES",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "ETV.mn",
+    "tvg-name": "ETV",
+    "tvg-country": "MN",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ETVPlus.ee",
+    "tvg-name": "ETV+",
+    "tvg-country": "EE",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "EWTNUkraine.ua",
+    "tvg-name": "EWTN Ukraine",
+    "tvg-country": "UA",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "ExtremeSportsChannel.ru",
+    "tvg-name": "Extreme Sports Channel",
+    "tvg-country": "RU",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "FarsTV.ir",
+    "tvg-name": "Fars TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "FashionTV.ru",
+    "tvg-name": "FashionTV",
+    "tvg-country": "RU",
+    "group-title": "Lifestyle"
+  },
+  {
+    "tvg-id": "FIFAPlus.uk",
+    "tvg-name": "FIFA+",
+    "tvg-country": "UK",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "Film1Action.nl",
+    "tvg-name": "Film1 Action",
+    "tvg-country": "NL",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "FishTV.br",
+    "tvg-name": "Fish TV",
+    "tvg-country": "BR",
+    "group-title": "Outdoor"
+  },
+  {
+    "tvg-id": "FlashHaberTV.tr",
+    "tvg-name": "Flash Haber TV",
+    "tvg-country": "TR",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "FlowersTVUSA.us",
+    "tvg-name": "Flowers TV USA",
+    "tvg-country": "US",
+    "group-title": "Culture"
+  },
+  {
+    "tvg-id": "FolcloreandoTV.ar",
+    "tvg-name": "Folcloreando TV",
+    "tvg-country": "AR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "FoxBusinessNetwork.us",
+    "tvg-name": "Fox Business Network",
+    "tvg-country": "US",
+    "group-title": "Business"
+  },
+  {
+    "tvg-id": "FoxDeportes.us",
+    "tvg-name": "Fox Deportes",
+    "tvg-country": "US",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "FoxNewsChannel.us",
+    "tvg-name": "Fox News Channel",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "France3.fr",
+    "tvg-name": "France 3",
+    "tvg-country": "FR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "France5.fr",
+    "tvg-name": "France 5",
+    "tvg-country": "FR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "FREEDOM.ua",
+    "tvg-name": "FREEDOM",
+    "tvg-country": "UA",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "DisneyJr.tr",
+    "tvg-name": "Disney Jr.",
+    "tvg-country": "TR",
+    "group-title": "Animation"
+  },
+  {
+    "tvg-id": "Fuse.us",
+    "tvg-name": "Fuse",
+    "tvg-country": "US",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "Futura.br",
+    "tvg-name": "Futura",
+    "tvg-country": "BR",
+    "group-title": "Education"
+  },
+  {
+    "tvg-id": "FX1.ir",
+    "tvg-name": "FX 1",
+    "tvg-country": "IR",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "FX2.ir",
+    "tvg-name": "FX 2",
+    "tvg-country": "IR",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "FXLatinAmerica.us",
+    "tvg-name": "FX Latin America",
+    "tvg-country": "US",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "Gamavision.ec",
+    "tvg-name": "Gamavision",
+    "tvg-country": "EC",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "GameShowNetwork.us",
+    "tvg-name": "Game Show Network",
+    "tvg-country": "US",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "Gametoon.nl",
+    "tvg-name": "Gametoon",
+    "tvg-country": "NL",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "GBNews.uk",
+    "tvg-name": "GB News",
+    "tvg-country": "UK",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "geFast.br",
+    "tvg-name": "ge Fast",
+    "tvg-country": "BR",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "GEMPixel.tr",
+    "tvg-name": "GEM Pixel",
+    "tvg-country": "TR",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "GiovanniPaoloTV.it",
+    "tvg-name": "Giovanni Paolo TV",
+    "tvg-country": "IT",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "Goldmines2.in",
+    "tvg-name": "Goldmines 2",
+    "tvg-country": "IN",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "GoldStar.ir",
+    "tvg-name": "Gold Star",
+    "tvg-country": "IR",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "GolfChannel.cz",
+    "tvg-name": "Golf Channel",
+    "tvg-country": "CZ",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "GolfChannelLatinAmerica.us",
+    "tvg-name": "Golf Channel Latin America",
+    "tvg-country": "US",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "GolkhaneTv.ir",
+    "tvg-name": "Golkhane Tv",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "GrandCinema.tr",
+    "tvg-name": "Grand Cinema",
+    "tvg-country": "TR",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "GZT.tr",
+    "tvg-name": "GZT",
+    "tvg-country": "TR",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "HAHATV.sk",
+    "tvg-name": "HAHA TV",
+    "tvg-country": "SK",
+    "group-title": "Comedy"
+  },
+  {
+    "tvg-id": "HalabTodayTV.sy",
+    "tvg-name": "Halab Today TV",
+    "tvg-country": "SY",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "HallmarkChannel.us",
+    "tvg-name": "Hallmark Channel",
+    "tvg-country": "US",
+    "group-title": "Family"
+  },
+  {
+    "tvg-id": "HamoonTV.ir",
+    "tvg-name": "Hamoon TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "HarvestUSA.in",
+    "tvg-name": "Harvest USA",
+    "tvg-country": "IN",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "History.br",
+    "tvg-name": "History",
+    "tvg-country": "BR",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "History.cz",
+    "tvg-name": "History",
+    "tvg-country": "CZ",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "History.us",
+    "tvg-name": "History",
+    "tvg-country": "US",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "History2.cz",
+    "tvg-name": "History2",
+    "tvg-country": "CZ",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "History2.ru",
+    "tvg-name": "History 2",
+    "tvg-country": "RU",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "History2LatinAmerica.us",
+    "tvg-name": "History 2 Latin America",
+    "tvg-country": "US",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "HistoryAsia.us",
+    "tvg-name": "History Asia",
+    "tvg-country": "US",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "HistoryLatinAmerica.us",
+    "tvg-name": "History Latin America",
+    "tvg-country": "US",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "HitradioO3.at",
+    "tvg-name": "Hitradio O3",
+    "tvg-country": "AT",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "HolyQuranRadioNablus.ps",
+    "tvg-name": "Holy Quran Radio Nablus",
+    "tvg-country": "PS",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "HomePlus.ir",
+    "tvg-name": "HomePlus",
+    "tvg-country": "IR",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "HOT8.il",
+    "tvg-name": "HOT8",
+    "tvg-country": "IL",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "HOTComedy.il",
+    "tvg-name": "HOT Comedy",
+    "tvg-country": "IL",
+    "group-title": "Comedy"
+  },
+  {
+    "tvg-id": "HOTDrama.il",
+    "tvg-name": "HOT Drama",
+    "tvg-country": "IL",
+    "group-title": "Series"
+  },
+  {
+    "tvg-id": "HOTSenior.il",
+    "tvg-name": "HOT Senior",
+    "tvg-country": "IL",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "HOTZone.il",
+    "tvg-name": "HOT Zone",
+    "tvg-country": "IL",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "hrfernsehen.de",
+    "tvg-name": "hr-fernsehen",
+    "tvg-country": "DE",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "HTV1.vn",
+    "tvg-name": "HTV1",
+    "tvg-country": "VN",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "HTV2.vn",
+    "tvg-name": "HTV2",
+    "tvg-country": "VN",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "HTV3.vn",
+    "tvg-name": "HTV3",
+    "tvg-country": "VN",
+    "group-title": "Series"
+  },
+  {
+    "tvg-id": "HTV4.vn",
+    "tvg-name": "HTV4",
+    "tvg-country": "VN",
+    "group-title": "Education"
+  },
+  {
+    "tvg-id": "HTV7.vn",
+    "tvg-name": "HTV7",
+    "tvg-country": "VN",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "HTV9.vn",
+    "tvg-name": "HTV9",
+    "tvg-country": "VN",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "HTVSports.vn",
+    "tvg-name": "HTV Sports",
+    "tvg-country": "VN",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "i24NEWSArabic.il",
+    "tvg-name": "i24NEWS Arabic",
+    "tvg-country": "IL",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "i24NEWSEnglishWorld.il",
+    "tvg-name": "i24NEWS English World",
+    "tvg-country": "IL",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "i24NEWSFrench.il",
+    "tvg-name": "i24NEWS French",
+    "tvg-country": "IL",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ICCplus.us",
+    "tvg-name": "ICC plus",
+    "tvg-country": "US",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "IciRDI.ca",
+    "tvg-name": "Ici RDI",
+    "tvg-country": "CA",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "icnet3.ca",
+    "tvg-name": "icnet 3",
+    "tvg-country": "CA",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "iFilmPersian.ir",
+    "tvg-name": "iFilm Persian",
+    "tvg-country": "IR",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "IlamTV.ir",
+    "tvg-name": "Ilam TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "InTouchPlus.us",
+    "tvg-name": "InTouch+",
+    "tvg-country": "US",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "IranNationalRevolutionTV.us",
+    "tvg-name": "Iran National Revolution TV",
+    "tvg-country": "US",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "IRIB1.ir",
+    "tvg-name": "IRIB 1",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "IRIB2.ir",
+    "tvg-name": "IRIB 2",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "IRIB3.ir",
+    "tvg-name": "IRIB 3",
+    "tvg-country": "IR",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "IRIB4.ir",
+    "tvg-name": "IRIB 4",
+    "tvg-country": "IR",
+    "group-title": "Culture"
+  },
+  {
+    "tvg-id": "IRIBMostanad.ir",
+    "tvg-name": "IRIB Mostanad",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "IRIBOmid.ir",
+    "tvg-name": "IRIB Omid",
+    "tvg-country": "IR",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "IRIBUHD.ir",
+    "tvg-name": "IRIB UHD",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "IsfahanTV.ir",
+    "tvg-name": "Isfahan TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Italia2.it",
+    "tvg-name": "Italia 2",
+    "tvg-country": "IT",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "JahanbinTV.ir",
+    "tvg-name": "Jahanbin TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "JambiTV.id",
+    "tvg-name": "Jambi TV",
+    "tvg-country": "ID",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "JawaPosTV.id",
+    "tvg-name": "Jawa Pos TV",
+    "tvg-country": "ID",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "JewelryTV2.us",
+    "tvg-name": "Jewelry TV 2",
+    "tvg-country": "US",
+    "group-title": "Shop"
+  },
+  {
+    "tvg-id": "JogjaTV.id",
+    "tvg-name": "Jogja TV",
+    "tvg-country": "ID",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "JovemPanNews.br",
+    "tvg-name": "Jovem Pan News",
+    "tvg-country": "BR",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "JoyTV.in",
+    "tvg-name": "Joy TV",
+    "tvg-country": "IN",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "JuntosTV.pe",
+    "tvg-name": "Juntos TV",
+    "tvg-country": "PE",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "kabeleinsDoku.de",
+    "tvg-name": "kabel eins Doku",
+    "tvg-country": "DE",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "Kan11.il",
+    "tvg-name": "Kan 11",
+    "tvg-country": "IL",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Kanal32.tr",
+    "tvg-name": "Kanal 32",
+    "tvg-country": "TR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "KanEducational.il",
+    "tvg-name": "Kan Educational",
+    "tvg-country": "IL",
+    "group-title": "Education"
+  },
+  {
+    "tvg-id": "KapazTV.az",
+    "tvg-name": "Kapaz TV",
+    "tvg-country": "AZ",
+    "group-title": "Azerbaijan"
+  },
+  {
+    "tvg-id": "KarbalaDocumentary.iq",
+    "tvg-name": "Karbala Documentary",
+    "tvg-country": "IQ",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "KermanTV.ir",
+    "tvg-name": "Kerman TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "KhalijeFarsTV.ir",
+    "tvg-name": "Khalij-e Fars TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "KhavaranTV.ir",
+    "tvg-name": "Khavaran TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "KhorasanRazaviTV.ir",
+    "tvg-name": "Khorasan Razavi TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "KhozestanTV.ir",
+    "tvg-name": "Khozestan TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Kino2.ua",
+    "tvg-name": "Kino 2",
+    "tvg-country": "UA",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "KinoBarrandov.cz",
+    "tvg-name": "Kino Barrandov",
+    "tvg-country": "CZ",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "KishTV.ir",
+    "tvg-name": "Kish TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "KMCTTV391.us",
+    "tvg-name": "KMCT-TV 39.1",
+    "tvg-country": "US",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "Kolyokklub.hu",
+    "tvg-name": "Kolyokklub",
+    "tvg-country": "HU",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "KongressTV.ru",
+    "tvg-name": "Kongress TV",
+    "tvg-country": "RU",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "KonkurentUkraine.ua",
+    "tvg-name": "Konkurent Ukraine",
+    "tvg-country": "UA",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "KordestanTV.ir",
+    "tvg-name": "Kordestan TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "KVIFFTV.cz",
+    "tvg-name": "KVIFF TV",
+    "tvg-country": "CZ",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "La2Canarias.es",
+    "tvg-name": "La 2 Canarias",
+    "tvg-country": "ES",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "LabbaykTV.ir",
+    "tvg-name": "LabbaykTV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "LAMIL35TV.ar",
+    "tvg-name": "LAMIL35 TV",
+    "tvg-country": "AR",
+    "group-title": "Classic"
+  },
+  {
+    "tvg-id": "LamoreRockShowWebTV.br",
+    "tvg-name": "Lamore Rock Show WebTV",
+    "tvg-country": "BR",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "LanthungTV.th",
+    "tvg-name": "Lanthung TV",
+    "tvg-country": "TH",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "LemarTV.af",
+    "tvg-name": "Lemar TV",
+    "tvg-country": "AF",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "Lifetime.us",
+    "tvg-name": "Lifetime",
+    "tvg-country": "US",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "LifetimeLatinAmerica.us",
+    "tvg-name": "Lifetime Latin America",
+    "tvg-country": "US",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "LifevisionTV.us",
+    "tvg-name": "LifevisionTV",
+    "tvg-country": "US",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "LigadeCampeonesporMovistarPlusPlus.es",
+    "tvg-name": "Liga de Campeones por Movistar Plus+",
+    "tvg-country": "ES",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "LoveNature.ca",
+    "tvg-name": "Love Nature",
+    "tvg-country": "CA",
+    "group-title": "Outdoor"
+  },
+  {
+    "tvg-id": "LovePets.ca",
+    "tvg-name": "Love Pets",
+    "tvg-country": "CA",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "LoveWorldUSA.ng",
+    "tvg-name": "LoveWorld USA",
+    "tvg-country": "NG",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "LRTLituanica.lt",
+    "tvg-name": "LRT Lituanica",
+    "tvg-country": "LT",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "LRTPlius.lt",
+    "tvg-name": "LRT Plius",
+    "tvg-country": "LT",
+    "group-title": "Culture"
+  },
+  {
+    "tvg-id": "LTV1.lv",
+    "tvg-name": "LTV1",
+    "tvg-country": "LV",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "LTV7.lv",
+    "tvg-name": "LTV7",
+    "tvg-country": "LV",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "LuxTV.ua",
+    "tvg-name": "Lux TV",
+    "tvg-country": "UA",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "m2oTV.it",
+    "tvg-name": "m2o TV",
+    "tvg-country": "IT",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "M6Music.fr",
+    "tvg-name": "M6 Music",
+    "tvg-country": "FR",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "MaincastCybersport.ua",
+    "tvg-name": "Maincast Cybersport",
+    "tvg-country": "UA",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "MaincastSport.ua",
+    "tvg-name": "Maincast Sport",
+    "tvg-country": "UA",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "Mango.pl",
+    "tvg-name": "Mango",
+    "tvg-country": "PL",
+    "group-title": "Shop"
+  },
+  {
+    "tvg-id": "MasalaTV.pk",
+    "tvg-name": "Masala TV",
+    "tvg-country": "PK",
+    "group-title": "Cooking"
+  },
+  {
+    "tvg-id": "MCTV.de",
+    "tvg-name": "MC TV",
+    "tvg-country": "DE",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "MDRFernsehen.de",
+    "tvg-name": "MDR Fernsehen",
+    "tvg-country": "DE",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "MDTV.id",
+    "tvg-name": "MDTV",
+    "tvg-country": "ID",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "MedjugorjeItaliaTV.it",
+    "tvg-name": "Medjugorje Italia TV",
+    "tvg-country": "IT",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "MegogoMusic.ua",
+    "tvg-name": "Megogo Music",
+    "tvg-country": "UA",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "MeiAlaiTV.in",
+    "tvg-name": "Mei Alai TV",
+    "tvg-country": "IN",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "MeritStreet.us",
+    "tvg-name": "Merit Street",
+    "tvg-country": "US",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "MetaFilmTV.ir",
+    "tvg-name": "Meta Film TV",
+    "tvg-country": "IR",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "mfm.lb",
+    "tvg-name": "mfm",
+    "tvg-country": "LB",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "Mh1Prime.in",
+    "tvg-name": "Mh 1 Prime",
+    "tvg-country": "IN",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "MHOneMovies.in",
+    "tvg-name": "MH One Movies",
+    "tvg-country": "IN",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "Minimax.ro",
+    "tvg-name": "Minimax",
+    "tvg-country": "RO",
+    "group-title": "Animation"
+  },
+  {
+    "tvg-id": "MojoTV.in",
+    "tvg-name": "Mojo TV",
+    "tvg-country": "IN",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "MONO29.th",
+    "tvg-name": "MONO 29",
+    "tvg-country": "TH",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "MovieSphereGold.us",
+    "tvg-name": "MovieSphere Gold",
+    "tvg-country": "US",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "Moziklub.hu",
+    "tvg-name": "Moziklub",
+    "tvg-country": "HU",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "MrBeanAnimated.uk",
+    "tvg-name": "Mr Bean Animated",
+    "tvg-country": "UK",
+    "group-title": "Animation"
+  },
+  {
+    "tvg-id": "MSNOW.us",
+    "tvg-name": "MS NOW",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "MTV.de",
+    "tvg-name": "MTV",
+    "tvg-country": "DE",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "MTV.us",
+    "tvg-name": "MTV",
+    "tvg-country": "US",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "MTV2.us",
+    "tvg-name": "MTV2",
+    "tvg-country": "US",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "MTVLatinAmerica.us",
+    "tvg-name": "MTV Latin America",
+    "tvg-country": "US",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "MTVLebanon.lb",
+    "tvg-name": "MTV Lebanon",
+    "tvg-country": "LB",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "MuslimNetworkTV.us",
+    "tvg-name": "Muslim Network TV",
+    "tvg-country": "US",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "MyUkrainaPlus.ua",
+    "tvg-name": "My Ukraina+",
+    "tvg-country": "UA",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "N24Doku.de",
+    "tvg-name": "N24 Doku",
+    "tvg-country": "DE",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "NamayeshTV.ir",
+    "tvg-name": "Namayesh TV",
+    "tvg-country": "IR",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "NasheLubimoeKinoUkraine.ua",
+    "tvg-name": "Nashe Lubimoe Kino Ukraine",
+    "tvg-country": "UA",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "Nasim.ir",
+    "tvg-name": "Nasim",
+    "tvg-country": "IR",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "NationalGeographic.cz",
+    "tvg-name": "National Geographic",
+    "tvg-country": "CZ",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "NationalGeographic.hr",
+    "tvg-name": "National Geographic",
+    "tvg-country": "HR",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "NationalGeographic.hu",
+    "tvg-name": "National Geographic",
+    "tvg-country": "HU",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "NationalGeographic.mx",
+    "tvg-name": "National Geographic",
+    "tvg-country": "MX",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "NationalGeographic.nl",
+    "tvg-name": "National Geographic",
+    "tvg-country": "NL",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "NationalGeographic.ru",
+    "tvg-name": "National Geographic",
+    "tvg-country": "RU",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "NationalGeographic.tr",
+    "tvg-name": "National Geographic",
+    "tvg-country": "TR",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "NationalGeographic.us",
+    "tvg-name": "National Geographic",
+    "tvg-country": "US",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "NationalGeographicLatinAmerica.us",
+    "tvg-name": "National Geographic Latin America",
+    "tvg-country": "US",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "NationalGeographicWild.cz",
+    "tvg-name": "National Geographic Wild",
+    "tvg-country": "CZ",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "NationalGeographicWild.hu",
+    "tvg-name": "National Geographic Wild",
+    "tvg-country": "HU",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "NationalGeographicWild.ro",
+    "tvg-name": "National Geographic Wild",
+    "tvg-country": "RO",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "NationalGeographicWild.ru",
+    "tvg-name": "National Geographic Wild",
+    "tvg-country": "RU",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "NationalGeographicWild.tr",
+    "tvg-name": "National Geographic Wild",
+    "tvg-country": "TR",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "NationalGeographicWild.ua",
+    "tvg-name": "National Geographic Wild",
+    "tvg-country": "UA",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "NationalGeographicWild.us",
+    "tvg-name": "National Geographic Wild",
+    "tvg-country": "US",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "NBATV.us",
+    "tvg-name": "NBA TV",
+    "tvg-country": "US",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "NBCLXHome.us",
+    "tvg-name": "NBC LX Home",
+    "tvg-country": "US",
+    "group-title": "Lifestyle"
+  },
+  {
+    "tvg-id": "NDRFernsehen.de",
+    "tvg-name": "NDR Fernsehen",
+    "tvg-country": "DE",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "NDRFernsehenInternational.de",
+    "tvg-name": "NDR Fernsehen International",
+    "tvg-country": "DE",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "News1.th",
+    "tvg-name": "News1",
+    "tvg-country": "TH",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "NewsmaxTV.us",
+    "tvg-name": "Newsmax TV",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "NewsStatePunjabHaryanaHimachal.in",
+    "tvg-name": "News State Punjab Haryana Himachal",
+    "tvg-country": "IN",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "Newsy.us",
+    "tvg-name": "Newsy",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "NewVisionTV.ng",
+    "tvg-name": "New Vision TV",
+    "tvg-country": "NG",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "Nickelodeon.hr",
+    "tvg-name": "Nickelodeon",
+    "tvg-country": "HR",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "NickelodeonJunior.fr",
+    "tvg-name": "Nickelodeon Junior",
+    "tvg-country": "FR",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "NickJr.hr",
+    "tvg-name": "Nick Jr.",
+    "tvg-country": "HR",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "NickJr.hu",
+    "tvg-name": "Nick Jr.",
+    "tvg-country": "HU",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "NickJr.ru",
+    "tvg-name": "Nick Jr.",
+    "tvg-country": "RU",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "Nicktoons.cz",
+    "tvg-name": "Nicktoons",
+    "tvg-country": "CZ",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "Nicktoons.hu",
+    "tvg-name": "Nicktoons",
+    "tvg-country": "HU",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "Nicktoons.ro",
+    "tvg-name": "Nicktoons",
+    "tvg-country": "RO",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "NickToonsBrasil.br",
+    "tvg-name": "NickToons Brasil",
+    "tvg-country": "BR",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "NicktoonsCIS.ru",
+    "tvg-name": "Nicktoons CIS",
+    "tvg-country": "RU",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "NicktoonsScandinavia.nl",
+    "tvg-name": "Nicktoons Scandinavia",
+    "tvg-country": "NL",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "Nigbati.ng",
+    "tvg-name": "Nigbati",
+    "tvg-country": "NG",
+    "group-title": "Culture"
+  },
+  {
+    "tvg-id": "Nitro.de",
+    "tvg-name": "Nitro",
+    "tvg-country": "DE",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "NoorTV.ir",
+    "tvg-name": "Noor TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "NOST.us",
+    "tvg-name": "NOST",
+    "tvg-country": "US",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "Noticias16.do",
+    "tvg-name": "Noticias 16",
+    "tvg-country": "DO",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "NovaTV.hr",
+    "tvg-name": "Nova TV",
+    "tvg-country": "HR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "NovoTempo.br",
+    "tvg-name": "Novo Tempo",
+    "tvg-country": "BR",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "ntv.de",
+    "tvg-name": "n-tv",
+    "tvg-country": "DE",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "NTV.tr",
+    "tvg-name": "NTV",
+    "tvg-country": "TR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Ocko.cz",
+    "tvg-name": "Ocko",
+    "tvg-country": "CZ",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "OckoExpres.cz",
+    "tvg-name": "Ocko Expres",
+    "tvg-country": "CZ",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "OckoStar.cz",
+    "tvg-name": "Ocko Star",
+    "tvg-country": "CZ",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "OfoghTV.ir",
+    "tvg-name": "Ofogh TV",
+    "tvg-country": "IR",
+    "group-title": "Culture"
+  },
+  {
+    "tvg-id": "OmroepBrabantRadio.nl",
+    "tvg-name": "Omroep Brabant Radio",
+    "tvg-country": "NL",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "OndaTV.it",
+    "tvg-name": "Onda TV",
+    "tvg-country": "IT",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "OneAmericaNewsNetwork.us",
+    "tvg-name": "One America News Network",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "OneChannel.gr",
+    "tvg-name": "One Channel",
+    "tvg-country": "GR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "ORF1.at",
+    "tvg-name": "ORF 1",
+    "tvg-country": "AT",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "ORF2.at",
+    "tvg-name": "ORF 2",
+    "tvg-country": "AT",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "ORFIII.at",
+    "tvg-name": "ORF III",
+    "tvg-country": "AT",
+    "group-title": "Culture"
+  },
+  {
+    "tvg-id": "OTV.ee",
+    "tvg-name": "OTV",
+    "tvg-country": "EE",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "PadrePioTV.it",
+    "tvg-name": "Padre Pio TV",
+    "tvg-country": "IT",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "ParamountNetwork.us",
+    "tvg-name": "Paramount Network",
+    "tvg-country": "US",
+    "group-title": "Series"
+  },
+  {
+    "tvg-id": "ParliamentofMalta.mt",
+    "tvg-name": "Parliament of Malta",
+    "tvg-country": "MT",
+    "group-title": "Legislative"
+  },
+  {
+    "tvg-id": "PersianaDocs.fr",
+    "tvg-name": "Persiana Docs",
+    "tvg-country": "FR",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "PersianaFight.fr",
+    "tvg-name": "Persiana Fight",
+    "tvg-country": "FR",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "PersianaFolk.fr",
+    "tvg-name": "Persiana Folk",
+    "tvg-country": "FR",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "PersianaMedical.fr",
+    "tvg-name": "Persiana Medical",
+    "tvg-country": "FR",
+    "group-title": "Education"
+  },
+  {
+    "tvg-id": "PersianaSeries.fr",
+    "tvg-name": "Persiana Series",
+    "tvg-country": "FR",
+    "group-title": "Series"
+  },
+  {
+    "tvg-id": "PersianaTravel.fr",
+    "tvg-name": "Persiana Travel",
+    "tvg-country": "FR",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "PersianaTurkiye.fr",
+    "tvg-name": "Persiana Turkiye",
+    "tvg-country": "FR",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "PersianaVibe.fr",
+    "tvg-name": "Persiana Vibe",
+    "tvg-country": "FR",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "Placid.us",
+    "tvg-name": "Placid",
+    "tvg-country": "US",
+    "group-title": "Animation"
+  },
+  {
+    "tvg-id": "PlenitudeTV.br",
+    "tvg-name": "Plenitude TV",
+    "tvg-country": "BR",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "PlovdivOrthodoxTV.bg",
+    "tvg-name": "Plovdiv Orthodox TV",
+    "tvg-country": "BG",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "PlutoTVEsportes.us",
+    "tvg-name": "Pluto TV Esportes",
+    "tvg-country": "US",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "PMCRoyale.ae",
+    "tvg-name": "PMC Royale",
+    "tvg-country": "AE",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "PolsatNews2.pl",
+    "tvg-name": "Polsat News 2",
+    "tvg-country": "PL",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "PolsatNewsPolityka.pl",
+    "tvg-name": "Polsat News Polityka",
+    "tvg-country": "PL",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "PolsatSport1.pl",
+    "tvg-name": "Polsat Sport 1",
+    "tvg-country": "PL",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "PooyaTV.ir",
+    "tvg-name": "Pooya TV",
+    "tvg-country": "IR",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "PooyaTVPlus.ir",
+    "tvg-name": "Pooya TV Plus",
+    "tvg-country": "IR",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "PressTV.ir",
+    "tvg-name": "Press TV",
+    "tvg-country": "IR",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "Prima.cz",
+    "tvg-name": "Prima",
+    "tvg-country": "CZ",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "PrimaCool.cz",
+    "tvg-name": "Prima Cool",
+    "tvg-country": "CZ",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "PrimaCoolSK.sk",
+    "tvg-name": "Prima Cool SK",
+    "tvg-country": "SK",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "PrimaKrimi.cz",
+    "tvg-name": "Prima Krimi",
+    "tvg-country": "CZ",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "PrimaLove.cz",
+    "tvg-name": "Prima Love",
+    "tvg-country": "CZ",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "PrimaSK.sk",
+    "tvg-name": "Prima SK",
+    "tvg-country": "SK",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "PROFI24TV.ro",
+    "tvg-name": "PROFI 24 TV",
+    "tvg-country": "RO",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "PromarTV.ve",
+    "tvg-name": "PromarTV",
+    "tvg-country": "VE",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "ProSiebenMaxx.de",
+    "tvg-name": "ProSieben Maxx",
+    "tvg-country": "DE",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "PROTVNews.ro",
+    "tvg-name": "PROTV News",
+    "tvg-country": "RO",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "PTCPunjabiCanada.ca",
+    "tvg-name": "PTC Punjabi Canada",
+    "tvg-country": "CA",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "QazvinTV.ir",
+    "tvg-name": "Qazvin TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "QBC.qa",
+    "tvg-name": "QBC",
+    "tvg-country": "QA",
+    "group-title": "Business"
+  },
+  {
+    "tvg-id": "QuranTV.ir",
+    "tvg-name": "Quran TV",
+    "tvg-country": "IR",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "RacerNetwork.us",
+    "tvg-name": "Racer Network",
+    "tvg-country": "US",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "RadarTasikmalayaTV.id",
+    "tvg-name": "Radar Tasikmalaya TV",
+    "tvg-country": "ID",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "Radio3.es",
+    "tvg-name": "Radio 3",
+    "tvg-country": "ES",
+    "group-title": "Culture"
+  },
+  {
+    "tvg-id": "RadioCapitalTiVu.it",
+    "tvg-name": "Radio Capital TiVu",
+    "tvg-country": "IT",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "RadioChisinau.md",
+    "tvg-name": "Radio Chisinau",
+    "tvg-country": "MD",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "RadioClasicaTV.bo",
+    "tvg-name": "Radio Clasica TV",
+    "tvg-country": "BO",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "RadioRomaniaAntenaSatelor.ro",
+    "tvg-name": "Radio Romania Antena Satelor",
+    "tvg-country": "RO",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "RadioRossii.ru",
+    "tvg-name": "Radio Rossii",
+    "tvg-country": "RU",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "RadioUP.ar",
+    "tvg-name": "Radio UP",
+    "tvg-country": "AR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "RadioWeserTVBremen.de",
+    "tvg-name": "Radio Weser TV Bremen",
+    "tvg-country": "DE",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "Rai1.it",
+    "tvg-name": "Rai 1",
+    "tvg-country": "IT",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "Rai2.it",
+    "tvg-name": "Rai 2",
+    "tvg-country": "IT",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "Rai3.it",
+    "tvg-name": "Rai 3",
+    "tvg-country": "IT",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "RaiScuola.it",
+    "tvg-name": "Rai Scuola",
+    "tvg-country": "IT",
+    "group-title": "Education"
+  },
+  {
+    "tvg-id": "RaiStoria.it",
+    "tvg-name": "Rai Storia",
+    "tvg-country": "IT",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "RAZ3.ua",
+    "tvg-name": "RAZ 3",
+    "tvg-country": "UA",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "RAZ3International.ua",
+    "tvg-name": "RAZ 3 International",
+    "tvg-country": "UA",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "RazaviTV.ir",
+    "tvg-name": "Razavi TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "rbbFernsehen.de",
+    "tvg-name": "rbb Fernsehen",
+    "tvg-country": "DE",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "RecordTVItapoan.br",
+    "tvg-name": "RecordTV Itapoan",
+    "tvg-country": "BR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "RecordTVSaoPaulo.br",
+    "tvg-name": "RecordTV Sao Paulo",
+    "tvg-country": "BR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "RedeSeculo21.br",
+    "tvg-name": "Rede Seculo 21",
+    "tvg-country": "BR",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "Reteveneta.it",
+    "tvg-name": "Reteveneta",
+    "tvg-country": "IT",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "RevandRoll.us",
+    "tvg-name": "Rev and Roll",
+    "tvg-country": "US",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "RevryQueer.us",
+    "tvg-name": "Revry Queer",
+    "tvg-country": "US",
+    "group-title": "Lifestyle"
+  },
+  {
+    "tvg-id": "RMCStory.fr",
+    "tvg-name": "RMC Story",
+    "tvg-country": "FR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "RoyaTV.ir",
+    "tvg-name": "Roya TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "RRINet.id",
+    "tvg-name": "RRI Net",
+    "tvg-country": "ID",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "RSILa2.ch",
+    "tvg-name": "RSI La 2",
+    "tvg-country": "CH",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "RTenEspanol.ru",
+    "tvg-name": "RT en Espanol",
+    "tvg-country": "RU",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "RTFrance.fr",
+    "tvg-name": "RT France",
+    "tvg-country": "FR",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "RTIndia.in",
+    "tvg-name": "RT India",
+    "tvg-country": "IN",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "RTLZwei.de",
+    "tvg-name": "RTL Zwei",
+    "tvg-country": "DE",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "RTP.it",
+    "tvg-name": "RTP",
+    "tvg-country": "IT",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "RTPMundo.pt",
+    "tvg-name": "RTP Mundo",
+    "tvg-country": "PT",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "RTVArnhemTV.nl",
+    "tvg-name": "RTV Arnhem TV",
+    "tvg-country": "NL",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "RugbyPassTV.uk",
+    "tvg-name": "RugbyPass TV",
+    "tvg-country": "UK",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "Russia24.ru",
+    "tvg-name": "Russia-24",
+    "tvg-country": "RU",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "RussiaK.ru",
+    "tvg-name": "Russia-K",
+    "tvg-country": "RU",
+    "group-title": "Culture"
+  },
+  {
+    "tvg-id": "RUV.is",
+    "tvg-name": "RUV",
+    "tvg-country": "IS",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "RUV2.is",
+    "tvg-name": "RUV 2",
+    "tvg-country": "IS",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "SabalanTV.ir",
+    "tvg-name": "Sabalan TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SabzTV.ir",
+    "tvg-name": "Sabz TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "SahandTV.ir",
+    "tvg-name": "Sahand TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SairamTV.in",
+    "tvg-name": "Sairam TV",
+    "tvg-country": "IN",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "SalamatTV.ir",
+    "tvg-name": "Salamat TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SaliraTV.id",
+    "tvg-name": "Salira TV",
+    "tvg-country": "ID",
+    "group-title": "Culture"
+  },
+  {
+    "tvg-id": "SangatTV.uk",
+    "tvg-name": "Sangat TV",
+    "tvg-country": "UK",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SarbedaranTV.ir",
+    "tvg-name": "Sarbedaran TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SardariTV.ca",
+    "tvg-name": "Sardari TV",
+    "tvg-country": "CA",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SAT1Gold.de",
+    "tvg-name": "SAT.1 Gold",
+    "tvg-country": "DE",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SBTNews.br",
+    "tvg-name": "SBT News",
+    "tvg-country": "BR",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "SciFi.fr",
+    "tvg-name": "SciFi",
+    "tvg-country": "FR",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "SECNetwork.us",
+    "tvg-name": "SEC Network",
+    "tvg-country": "US",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SelaparangTV.id",
+    "tvg-name": "Selaparang TV",
+    "tvg-country": "ID",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SemnanTV.ir",
+    "tvg-name": "Semnan TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SenderNeuJerusalem.de",
+    "tvg-name": "Sender Neu Jerusalem",
+    "tvg-country": "DE",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SepehrTV.ir",
+    "tvg-name": "Sepehr TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SetantaSports.uk",
+    "tvg-name": "Setanta Sports",
+    "tvg-country": "UK",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "ShenzhenSatelliteTV.cn",
+    "tvg-name": "Shenzhen Satellite TV",
+    "tvg-country": "CN",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "sixx.de",
+    "tvg-name": "sixx",
+    "tvg-country": "DE",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SmotrimChestnyyDetektiv.ru",
+    "tvg-name": "Smotrim Chestnyy Detektiv",
+    "tvg-country": "RU",
+    "group-title": "Series"
+  },
+  {
+    "tvg-id": "SNT.py",
+    "tvg-name": "SNT",
+    "tvg-country": "PY",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "SoncePlus.ua",
+    "tvg-name": "Sonce+",
+    "tvg-country": "UA",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "SonyChannel.ar",
+    "tvg-name": "Sony Channel",
+    "tvg-country": "AR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SonyChannel.br",
+    "tvg-name": "Sony Channel",
+    "tvg-country": "BR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SonyChannelAndes.us",
+    "tvg-name": "Sony Channel Andes",
+    "tvg-country": "US",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SonyMovies.br",
+    "tvg-name": "Sony Movies",
+    "tvg-country": "BR",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "SonyMoviesLatinAmerica.us",
+    "tvg-name": "Sony Movies Latin America",
+    "tvg-country": "US",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "Sorozatklub.hu",
+    "tvg-name": "Sorozatklub",
+    "tvg-country": "HU",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "SpacetoonArabic.ae",
+    "tvg-name": "Spacetoon Arabic",
+    "tvg-country": "AE",
+    "group-title": "Animation"
+  },
+  {
+    "tvg-id": "SpacetoonTurkey.tr",
+    "tvg-name": "Spacetoon Turkey",
+    "tvg-country": "TR",
+    "group-title": "Animation"
+  },
+  {
+    "tvg-id": "Sport5.ua",
+    "tvg-name": "Sport 5",
+    "tvg-country": "UA",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "SRFernsehen.de",
+    "tvg-name": "SR Fernsehen",
+    "tvg-country": "DE",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SriwijayaTV.id",
+    "tvg-name": "Sriwijaya TV",
+    "tvg-country": "ID",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "StaraTV.id",
+    "tvg-name": "Stara TV",
+    "tvg-country": "ID",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "StarChannel.cl",
+    "tvg-name": "Star Channel",
+    "tvg-country": "CL",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "STARChannel.fi",
+    "tvg-name": "STAR Channel",
+    "tvg-country": "FI",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "StarChannelLatinAmerica.us",
+    "tvg-name": "Star Channel Latin America",
+    "tvg-country": "US",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "StingrayEasyListening.ca",
+    "tvg-name": "Stingray Easy Listening",
+    "tvg-country": "CA",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "StingrayGreatestHits.ca",
+    "tvg-name": "Stingray Greatest Hits",
+    "tvg-country": "CA",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "StingrayJukeboxOldies.ca",
+    "tvg-name": "Stingray Jukebox Oldies",
+    "tvg-country": "CA",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "StingrayRomanceLatino.ca",
+    "tvg-name": "Stingray Romance Latino",
+    "tvg-country": "CA",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "StingrayTikTokRadio.ca",
+    "tvg-name": "Stingray TikTok Radio",
+    "tvg-country": "CA",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "StudioUniversalLatinAmerica.us",
+    "tvg-name": "Studio Universal Latin America",
+    "tvg-country": "US",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "STV.by",
+    "tvg-name": "STV",
+    "tvg-country": "BY",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "SuaraSurabayaVisualRadio.id",
+    "tvg-name": "Suara Surabaya Visual Radio",
+    "tvg-country": "ID",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "Super.it",
+    "tvg-name": "Super!",
+    "tvg-country": "IT",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "SuperSix.it",
+    "tvg-name": "Super Six",
+    "tvg-country": "IT",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "SuperTennis.it",
+    "tvg-name": "SuperTennis",
+    "tvg-country": "IT",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "SvitPlus.ua",
+    "tvg-name": "Svit+",
+    "tvg-country": "UA",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Svoboda.ru",
+    "tvg-name": "Svoboda",
+    "tvg-country": "RU",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SWRFernsehenHD.de",
+    "tvg-name": "SWR Fernsehen HD",
+    "tvg-country": "DE",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SWRFernsehenRheinlandPfalz.de",
+    "tvg-name": "SWR Fernsehen Rheinland-Pfalz",
+    "tvg-country": "DE",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "SX3.es",
+    "tvg-name": "SX3",
+    "tvg-country": "ES",
+    "group-title": "Animation"
+  },
+  {
+    "tvg-id": "T18.fr",
+    "tvg-name": "T18",
+    "tvg-country": "FR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "TabarestanTV.ir",
+    "tvg-name": "Tabarestan TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "talkSPORT.uk",
+    "tvg-name": "talkSPORT",
+    "tvg-country": "UK",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "Tamasha.ir",
+    "tvg-name": "Tamasha",
+    "tvg-country": "IR",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "TAMTV.ve",
+    "tvg-name": "TAM TV",
+    "tvg-country": "VE",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Taroteame.es",
+    "tvg-name": "Taroteame",
+    "tvg-country": "ES",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "TayNinhTV.vn",
+    "tvg-name": "Tay Ninh TV",
+    "tvg-country": "VN",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "TBMMTV.tr",
+    "tvg-name": "TBMM TV",
+    "tvg-country": "TR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TeenNick.il",
+    "tvg-name": "TeenNick",
+    "tvg-country": "IL",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "TehranTV.ir",
+    "tvg-name": "Tehran TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Tele1.tr",
+    "tvg-name": "Tele 1",
+    "tvg-country": "TR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "Teleamazonas.ec",
+    "tvg-name": "Teleamazonas",
+    "tvg-country": "EC",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Telecosta.gt",
+    "tvg-name": "Telecosta",
+    "tvg-country": "GT",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TeleFeBolivia.bo",
+    "tvg-name": "Tele Fe Bolivia",
+    "tvg-country": "BO",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "TelefeBuenosAires.ar",
+    "tvg-name": "Telefe Buenos Aires",
+    "tvg-country": "AR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "TelefeSalta.ar",
+    "tvg-name": "Telefe Salta",
+    "tvg-country": "AR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TelefeTucuman.ar",
+    "tvg-name": "Telefe Tucuman",
+    "tvg-country": "AR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "Telemadrid.es",
+    "tvg-name": "Telemadrid",
+    "tvg-country": "ES",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "Telemax.ar",
+    "tvg-name": "Telemax",
+    "tvg-country": "AR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TeleMia.it",
+    "tvg-name": "TeleMia",
+    "tvg-country": "IT",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TelemundoCorpusChristi.us",
+    "tvg-name": "Telemundo Corpus Christi",
+    "tvg-country": "US",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "TeleOne16.it",
+    "tvg-name": "Tele One 16",
+    "tvg-country": "IT",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "TelepaceTrento.it",
+    "tvg-name": "Telepace Trento",
+    "tvg-country": "IT",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "Thaiban83.th",
+    "tvg-name": "Thaiban 83",
+    "tvg-country": "TH",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "Thats80s.uk",
+    "tvg-name": "That's 80s",
+    "tvg-country": "UK",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "TheArchive.us",
+    "tvg-name": "The Archive",
+    "tvg-country": "US",
+    "group-title": "Classic"
+  },
+  {
+    "tvg-id": "TheCountryNetwork.us",
+    "tvg-name": "The Country Network",
+    "tvg-country": "US",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "ThemaTelevision.cl",
+    "tvg-name": "Thema Television",
+    "tvg-country": "CL",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TigoSports.py",
+    "tvg-name": "Tigo Sports",
+    "tvg-country": "PY",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "TikTokRadioBrasil.br",
+    "tvg-name": "TikTok Radio Brasil",
+    "tvg-country": "BR",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "TirolTV.at",
+    "tvg-name": "Tirol TV",
+    "tvg-country": "AT",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TLEstrella.bo",
+    "tvg-name": "TL Estrella",
+    "tvg-country": "BO",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TLNMediaChicago.us",
+    "tvg-name": "TLN Media Chicago",
+    "tvg-country": "US",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "TLNMediaSanFrancisco.us",
+    "tvg-name": "TLN Media San Francisco",
+    "tvg-country": "US",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "TMC.fr",
+    "tvg-name": "TMC",
+    "tvg-country": "FR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "TNTNovelas.us",
+    "tvg-name": "TNT Novelas",
+    "tvg-country": "US",
+    "group-title": "Series"
+  },
+  {
+    "tvg-id": "ToloTV.af",
+    "tvg-name": "Tolo TV",
+    "tvg-country": "AF",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Totalmusic2000s.uk",
+    "tvg-name": "Totalmusic 2000s",
+    "tvg-country": "UK",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "TraceUK.uk",
+    "tvg-name": "Trace UK",
+    "tvg-country": "UK",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "Trece.es",
+    "tvg-name": "Trece",
+    "tvg-country": "ES",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "TRT.ve",
+    "tvg-name": "TRT",
+    "tvg-country": "VE",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "TRT1.tr",
+    "tvg-name": "TRT 1",
+    "tvg-country": "TR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TRTAvaz.tr",
+    "tvg-name": "TRT Avaz",
+    "tvg-country": "TR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TRTBelgesel.tr",
+    "tvg-name": "TRT Belgesel",
+    "tvg-country": "TR",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "TRTCocuk.tr",
+    "tvg-name": "TRT Cocuk",
+    "tvg-country": "TR",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "TRTEBA.tr",
+    "tvg-name": "TRT EBA",
+    "tvg-country": "TR",
+    "group-title": "Education"
+  },
+  {
+    "tvg-id": "TRTHaber.tr",
+    "tvg-name": "TRT Haber",
+    "tvg-country": "TR",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "TRTKurdi.tr",
+    "tvg-name": "TRT Kurdi",
+    "tvg-country": "TR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TRTSporYildiz.tr",
+    "tvg-name": "TRT Spor Yildiz",
+    "tvg-country": "TR",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "TRTTurk.tr",
+    "tvg-name": "TRT Turk",
+    "tvg-country": "TR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TRTWorld.tr",
+    "tvg-name": "TRT World",
+    "tvg-country": "TR",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "TSC.ca",
+    "tvg-name": "TSC",
+    "tvg-country": "CA",
+    "group-title": "Shop"
+  },
+  {
+    "tvg-id": "TSTV.us",
+    "tvg-name": "TSTV",
+    "tvg-country": "US",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TV13Gujarati.in",
+    "tvg-name": "TV13 Gujarati",
+    "tvg-country": "IN",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "TV2.hu",
+    "tvg-name": "TV2",
+    "tvg-country": "HU",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TV2000.it",
+    "tvg-name": "TV2000",
+    "tvg-country": "IT",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "TV21International.ru",
+    "tvg-name": "TV 21 International",
+    "tvg-country": "RU",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "TV3.es",
+    "tvg-name": "TV3",
+    "tvg-country": "ES",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TV3CAT.es",
+    "tvg-name": "TV3CAT",
+    "tvg-country": "ES",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TV8.tr",
+    "tvg-name": "TV8",
+    "tvg-country": "TR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "TV9Nusantara.id",
+    "tvg-name": "TV 9 Nusantara",
+    "tvg-country": "ID",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TVAVicenza.it",
+    "tvg-name": "TVA Vicenza",
+    "tvg-country": "IT",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TVBarrandov.cz",
+    "tvg-name": "TV Barrandov",
+    "tvg-country": "CZ",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TVBrasil.br",
+    "tvg-name": "TV Brasil",
+    "tvg-country": "BR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TVCentr.ru",
+    "tvg-name": "TV Centr",
+    "tvg-country": "RU",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TVDifusao.br",
+    "tvg-name": "TV Difusao",
+    "tvg-country": "BR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "TVEBahia.br",
+    "tvg-name": "TVE Bahia",
+    "tvg-country": "BR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TVEncontrodasAguas.br",
+    "tvg-name": "TV Encontro das Aguas",
+    "tvg-country": "BR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Tviyserial.ua",
+    "tvg-name": "Tviy serial",
+    "tvg-country": "UA",
+    "group-title": "Series"
+  },
+  {
+    "tvg-id": "TVLHospitalet.es",
+    "tvg-name": "TV L'Hospitalet",
+    "tvg-country": "ES",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TVLitoralRN.br",
+    "tvg-name": "TV Litoral RN",
+    "tvg-country": "BR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "TVMu.id",
+    "tvg-name": "TV Mu",
+    "tvg-country": "ID",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TVNoe.cz",
+    "tvg-name": "TV Noe",
+    "tvg-country": "CZ",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TVOKids.ca",
+    "tvg-name": "TVOKids",
+    "tvg-country": "CA",
+    "group-title": "Kids"
+  },
+  {
+    "tvg-id": "TVPeruNoticias.pe",
+    "tvg-name": "TV Peru Noticias",
+    "tvg-country": "PE",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "TVPlus.cl",
+    "tvg-name": "TV+",
+    "tvg-country": "CL",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "TVPPolonia.pl",
+    "tvg-name": "TVP Polonia",
+    "tvg-country": "PL",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TVRain.nl",
+    "tvg-name": "TV Rain",
+    "tvg-country": "NL",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TVRFolclor.ro",
+    "tvg-name": "TVR Folclor",
+    "tvg-country": "RO",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "TVRI.id",
+    "tvg-name": "TVRI",
+    "tvg-country": "ID",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "TVRIWorld.id",
+    "tvg-name": "TVRI World",
+    "tvg-country": "ID",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TVRodina.bg",
+    "tvg-name": "TV Rodina",
+    "tvg-country": "BG",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "TVRSport.ro",
+    "tvg-name": "TVR Sport",
+    "tvg-country": "RO",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "TVRUSPlus.de",
+    "tvg-name": "TVRUS+",
+    "tvg-country": "DE",
+    "group-title": "Series"
+  },
+  {
+    "tvg-id": "TVS.my",
+    "tvg-name": "TVS",
+    "tvg-country": "MY",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "TVSMusicNetwork.us",
+    "tvg-name": "TVS Music Network",
+    "tvg-country": "US",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "TVSSelectNetwork.us",
+    "tvg-name": "TVS Select Network",
+    "tvg-country": "US",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "TVSSportsBureau.us",
+    "tvg-name": "TVS Sports Bureau",
+    "tvg-country": "US",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "TVSTelevisionNetwork.us",
+    "tvg-name": "TVS Television Network",
+    "tvg-country": "US",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "TyCSports.ar",
+    "tvg-name": "TyC Sports",
+    "tvg-country": "AR",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "TyCSportsUSA.ar",
+    "tvg-name": "TyC Sports USA",
+    "tvg-country": "AR",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "UAMusic.ua",
+    "tvg-name": "UA Music",
+    "tvg-country": "UA",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "UNews.lb",
+    "tvg-name": "UNews",
+    "tvg-country": "LB",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "Unifranz.bo",
+    "tvg-name": "Unifranz",
+    "tvg-country": "BO",
+    "group-title": "Education"
+  },
+  {
+    "tvg-id": "UniversalTVLatinAmerica.us",
+    "tvg-name": "Universal TV Latin America",
+    "tvg-country": "US",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "UnivisionLatinAmerica.mx",
+    "tvg-name": "Univision Latin America",
+    "tvg-country": "MX",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "USANetworkLatinAmerica.us",
+    "tvg-name": "USA Network Latin America",
+    "tvg-country": "US",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "UTravel.ua",
+    "tvg-name": "U Travel",
+    "tvg-country": "UA",
+    "group-title": "Travel"
+  },
+  {
+    "tvg-id": "Van65TV.tr",
+    "tvg-name": "Van 65 TV",
+    "tvg-country": "TR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "VarzeshTV.ir",
+    "tvg-name": "Varzesh TV",
+    "tvg-country": "IR",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "VelayatTV.ir",
+    "tvg-name": "Velayat TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "VH1.us",
+    "tvg-name": "VH1",
+    "tvg-country": "US",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "ViasatEpicDrama.uk",
+    "tvg-name": "Viasat Epic Drama",
+    "tvg-country": "UK",
+    "group-title": "Series"
+  },
+  {
+    "tvg-id": "ViasatExplore.bg",
+    "tvg-name": "Viasat Explore",
+    "tvg-country": "BG",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "ViasatHistory.bg",
+    "tvg-name": "Viasat History",
+    "tvg-country": "BG",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "ViasatNature.bg",
+    "tvg-name": "Viasat Nature",
+    "tvg-country": "BG",
+    "group-title": "Documentary"
+  },
+  {
+    "tvg-id": "ViasatSerial.ua",
+    "tvg-name": "Viasat Serial",
+    "tvg-country": "UA",
+    "group-title": "Movies"
+  },
+  {
+    "tvg-id": "ViasatTrueCrime.pl",
+    "tvg-name": "Viasat True Crime",
+    "tvg-country": "PL",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "ViaX.cl",
+    "tvg-name": "Via X",
+    "tvg-country": "CL",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "VICETV.us",
+    "tvg-name": "VICE TV",
+    "tvg-country": "US",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "VizionPlus.al",
+    "tvg-name": "Vizion Plus",
+    "tvg-country": "AL",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "VPlusTVI.pt",
+    "tvg-name": "V+ TVI",
+    "tvg-country": "PT",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "VTV10.vn",
+    "tvg-name": "VTV10",
+    "tvg-country": "VN",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "VTV6.vn",
+    "tvg-name": "VTV6",
+    "tvg-country": "VN",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "VyasChannel.in",
+    "tvg-name": "Vyas Channel",
+    "tvg-country": "IN",
+    "group-title": "Education"
+  },
+  {
+    "tvg-id": "W14DKD142.us",
+    "tvg-name": "W14DK-D 14.2",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "WBTV641.us",
+    "tvg-name": "WBTV 64.1",
+    "tvg-country": "US",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "WDRFernsehen.de",
+    "tvg-name": "WDR Fernsehen",
+    "tvg-country": "DE",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "WEST.pe",
+    "tvg-name": "WEST",
+    "tvg-country": "PE",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "WestAzerbaijanTV.ir",
+    "tvg-name": "West Azerbaijan TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "Westerns4U.us",
+    "tvg-name": "Westerns 4U",
+    "tvg-country": "US",
+    "group-title": "Classic"
+  },
+  {
+    "tvg-id": "WeTV.us",
+    "tvg-name": "We TV",
+    "tvg-country": "US",
+    "group-title": "Series"
+  },
+  {
+    "tvg-id": "WildNOut.us",
+    "tvg-name": "Wild 'N Out",
+    "tvg-country": "US",
+    "group-title": "Series"
+  },
+  {
+    "tvg-id": "WildTV.ca",
+    "tvg-name": "Wild TV",
+    "tvg-country": "CA",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "WLNGRadio.us",
+    "tvg-name": "WLNG Radio",
+    "tvg-country": "US",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "WPLG101.us",
+    "tvg-name": "WPLG 10.1",
+    "tvg-country": "US",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "WVCULP.us",
+    "tvg-name": "WVCU-LP",
+    "tvg-country": "US",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "XtraTv.do",
+    "tvg-name": "Xtra Tv",
+    "tvg-country": "DO",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "YamTichoni.il",
+    "tvg-name": "Yam Tichoni",
+    "tvg-country": "IL",
+    "group-title": "Series"
+  },
+  {
+    "tvg-id": "YazdTV.ir",
+    "tvg-name": "Yazd TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "YesNetwork.us",
+    "tvg-name": "Yes Network",
+    "tvg-country": "US",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "YleTeemaFem.fi",
+    "tvg-name": "Yle Teema & Fem",
+    "tvg-country": "FI",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "YleX.fi",
+    "tvg-name": "YleX",
+    "tvg-country": "FI",
+    "group-title": "Music"
+  },
+  {
+    "tvg-id": "ZagrosTV.ir",
+    "tvg-name": "Zagros TV",
+    "tvg-country": "IR",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "ZainabiaChannel.in",
+    "tvg-name": "Zainabia Channel",
+    "tvg-country": "IN",
+    "group-title": "Religious"
+  },
+  {
+    "tvg-id": "ZarinTV.us",
+    "tvg-name": "Zarin TV",
+    "tvg-country": "US",
+    "group-title": "General"
+  },
+  {
+    "tvg-id": "ZAZ.mx",
+    "tvg-name": "ZAZ",
+    "tvg-country": "MX",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "ZedTV.ir",
+    "tvg-name": "Zed TV",
+    "tvg-country": "IR",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "ZeeOne.uk",
+    "tvg-name": "Zee One",
+    "tvg-country": "UK",
+    "group-title": "Entertainment"
+  },
+  {
+    "tvg-id": "ZeeTamilNews.in",
+    "tvg-name": "Zee Tamil News",
+    "tvg-country": "IN",
+    "group-title": "News"
+  },
+  {
+    "tvg-id": "ZeeTVAsiaPacific.sg",
+    "tvg-name": "Zee TV Asia Pacific",
+    "tvg-country": "SG",
+    "group-title": "Undefined"
+  },
+  {
+    "tvg-id": "ZenLIFEbyStingray.ca",
+    "tvg-name": "ZenLIFE by Stingray",
+    "tvg-country": "CA",
+    "group-title": "Relax"
+  },
+  {
+    "tvg-id": "ZiggoSport.nl",
+    "tvg-name": "Ziggo Sport",
+    "tvg-country": "NL",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "ZiggoSport2.nl",
+    "tvg-name": "Ziggo Sport 2",
+    "tvg-country": "NL",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "ZiggoSport5.nl",
+    "tvg-name": "Ziggo Sport 5",
+    "tvg-country": "NL",
+    "group-title": "Sports"
+  },
+  {
+    "tvg-id": "CinemaxAction.us",
+    "tvg-name": "Cinemax Action",
+    "tvg-country": "US",
+    "group-title": "Movies"
+  }
+]

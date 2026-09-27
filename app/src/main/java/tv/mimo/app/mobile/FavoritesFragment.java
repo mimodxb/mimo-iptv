@@ -1,0 +1,173 @@
+package tv.mimo.app.mobile;
+
+import android.os.Bundle;
+import android.view.*;
+import android.widget.*;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.*;
+import tv.mimo.app.Channel;
+import tv.mimo.app.ChannelLogoLoader;
+import tv.mimo.app.R;
+import tv.mimo.app.Repository;
+import java.util.*;
+
+public class FavoritesFragment extends MobileBaseFragment implements MobileMainActivity.Searchable {
+
+    private RecyclerView recyclerView;
+    private TextView emptyView;
+    private FavoritesAdapter adapter;
+    private Repository repository;
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.fragment_favorites;
+    }
+
+    @Override
+    public void onViewReady(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        recyclerView = findView(view, R.id.favorites_recycler);
+        emptyView = findView(view, R.id.favorites_empty);
+        int spanCount = getResources().getBoolean(R.bool.is_tablet) ? 3 : 2;
+        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), spanCount));
+        repository = new Repository(requireContext());
+        adapter = new FavoritesAdapter();
+        adapter.setRepository(repository);
+        recyclerView.setAdapter(adapter);
+
+        loadFavorites();
+    }
+
+    private void loadFavorites() {
+        Set<String> favoriteKeys = repository.favorites();
+        Repository.Catalog catalog = repository.load(false);
+        List<Channel> favoriteChannels = new ArrayList<>();
+        for (Channel c : catalog.channels) {
+            if (favoriteKeys.contains(c.key)) {
+                favoriteChannels.add(c);
+            }
+        }
+        adapter.setChannels(favoriteChannels);
+        updateEmptyState();
+        // Update favorite icons
+        adapter.notifyDataSetChanged();
+    }
+
+    private void updateEmptyState() {
+        if (adapter.getItemCount() == 0) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onSearch(String query) {
+        adapter.filter(query);
+        updateEmptyState();
+    }
+
+    @Override public void onResume(){super.onResume();if(repository!=null)loadFavorites();}
+    public void refreshData() {
+        loadFavorites();
+    }
+
+    static class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
+        private List<Channel> channels = new ArrayList<>();
+        private List<Channel> filtered = new ArrayList<>();
+        private Repository repository;
+
+        void setRepository(Repository repository) {
+            this.repository = repository;
+        }
+
+        void setChannels(List<Channel> channels) {
+            this.channels = channels;
+            this.filtered = new ArrayList<>(channels);
+            notifyDataSetChanged();
+        }
+
+        void filter(String query) {
+            filtered.clear();
+            if (query == null || query.trim().isEmpty()) {
+                filtered.addAll(channels);
+            } else {
+                String lower = query.toLowerCase(java.util.Locale.ROOT);
+                for (Channel c : channels) {
+                    if (c.name.toLowerCase(java.util.Locale.ROOT).contains(lower)) {
+                        filtered.add(c);
+                    }
+                }
+            }
+            notifyDataSetChanged();
+        }
+
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_channel_card, parent, false);
+            return new ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            Channel channel = filtered.get(position);
+            holder.name.setText(channel.name);
+            holder.itemView.setOnClickListener(v->MobileNavigation.play(v.getContext(),channel,filtered));
+            
+            // Load channel logo
+            ChannelLogoLoader.load(holder.logo, channel.logo, 120, 120, holder.itemView.getContext());
+
+            // Programme info
+            if (channel.streams != null && !channel.streams.isEmpty()) {
+                holder.programme.setText(holder.itemView.getContext().getString(R.string.channel_available));
+                holder.programme.setVisibility(View.VISIBLE);
+            } else {
+                holder.programme.setVisibility(View.GONE);
+            }
+
+            // Favorite toggle
+            holder.favorite.setOnClickListener(v -> {
+                if (repository != null) {
+                    boolean added = repository.toggleFavorite(channel.key);
+                    holder.favorite.setImageResource(added ? R.drawable.ic_favorite_filled : R.drawable.ic_favorite);
+                    holder.favorite.setColorFilter(added ? 
+                        holder.itemView.getContext().getColor(R.color.mobile_gold) : 
+                        holder.itemView.getContext().getColor(R.color.mobile_muted));
+                }
+            });
+
+            // Update favorite icon state
+            if (repository != null && repository.favorites().contains(channel.key)) {
+                holder.favorite.setImageResource(R.drawable.ic_favorite_filled);
+                holder.favorite.setColorFilter(holder.itemView.getContext().getColor(R.color.mobile_gold));
+            } else {
+                holder.favorite.setImageResource(R.drawable.ic_favorite);
+                holder.favorite.setColorFilter(holder.itemView.getContext().getColor(R.color.mobile_muted));
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return filtered.size();
+        }
+
+        static class ViewHolder extends RecyclerView.ViewHolder {
+            final TextView name;
+            final TextView programme;
+            final ImageView favorite;
+            final ImageView logo;
+
+            ViewHolder(View itemView) {
+                super(itemView);
+                name = itemView.findViewById(R.id.channel_name);
+                programme = itemView.findViewById(R.id.channel_programme);
+                favorite = itemView.findViewById(R.id.channel_favorite);
+                logo = itemView.findViewById(R.id.channel_logo);
+            }
+        }
+    }
+}

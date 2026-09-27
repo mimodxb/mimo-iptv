@@ -1,0 +1,16 @@
+<resources>
+ <string name="app_name">MIMO TV</string>
+ <string name="nav_home">Ana səhifə</string><string name="nav_live_tv">Canlı TV</string>
+ <string name="nav_favorites">Sevimlilər</string><string name="nav_guide">Proqram</string><string name="nav_settings">Ayarlar</string>
+ <string name="home_recently_watched">Son izlənənlər</string><string name="home_favorites">Sevimlilər</string><string name="home_categories">Kateqoriyalar</string>
+ <string name="home_category_azerbaijan">Azərbaycan</string><string name="home_category_russia">Rusiya</string><string name="home_category_turkey">Türkiyə</string><string name="home_category_europe">Avropa</string><string name="home_category_world">Dünya</string><string name="category_all">Hamısı</string>
+ <string name="live_tv_title">Canlı TV</string><string name="live_tv_empty">Kanal yoxdur</string><string name="live_tv_loading">Kanallar yüklənir…</string><string name="live_tv_error">Kanallar yüklənmədi</string>
+ <string name="favorites_title">Sevimlilər</string><string name="favorites_empty">Hələ sevimli kanal yoxdur. Əlavə etmək üçün kanalı basılı saxlayın.</string>
+ <string name="guide_title">TV proqramı</string><string name="guide_unavailable">Proqram məlumatı yoxdur. Yenidən yoxlamaq üçün toxunun.</string><string name="guide_no_programme">Proqram məlumatı yoxdur</string>
+ <string name="settings_title">Ayarlar</string><string name="settings_language">Dil</string><string name="settings_playlists">Kanal siyahıları</string><string name="settings_about">Haqqında</string><string name="settings_diagnostics">Diaqnostika</string>
+ <string name="about_title">MIMO TV haqqında</string><string name="about_version">Versiya 1.0.0</string><string name="about_creator">Movsum Mirzazada tərəfindən</string><string name="about_description">Mimo’s Collective üçün Android TV və mobil televiziya tətbiqi.</string><string name="about_backend">Mimo IPTV ilə işləyir</string>
+ <string name="search_hint">Kanal axtar…</string><string name="search_no_results">Kanal tapılmadı</string><string name="search_empty">Axtarış üçün yazın</string>
+ <string name="error_network">Şəbəkə xətası</string><string name="error_unknown">Naməlum xəta</string><string name="retry">Yenidən cəhd et</string><string name="loading">Yüklənir…</string><string name="channel_available">Yayım mənbəyi var</string>
+ <string name="add_source">Siyahı əlavə et</string><string name="remove_source">Sil</string><string name="source_name">Siyahının adı</string><string name="playlist_url">Siyahının ünvanı</string><string name="epg_url">Proqram ünvanı (istəyə görə)</string><string name="source_enabled">Aktiv</string><string name="save">Saxla</string><string name="url_invalid">HTTP və ya HTTPS ünvanı daxil edin</string>
+ <string name="language_summary">Tətbiqin dilini seçin</string><string name="sources_summary">Siyahı əlavə edin, dəyişin və ya söndürün</string><string name="auto_refresh">Avtomatik yenilə</string><string name="auto_refresh_summary">Tətbiq açıldıqda siyahıları yenilə</string><string name="about_summary">Versiya və müəllif</string>
+</resources>
