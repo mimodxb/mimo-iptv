@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Public IPTV sources include HTTP streams; retain existing support. -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors><certificates src="system" /></trust-anchors>
+    </base-config>
+    <!-- Older TCL firmware lacks GlobalSign R46, used by this broadcaster CDN.
+         Trust only this verified public root for this domain; normal hostname,
+         validity and certificate-chain checks remain enabled. -->
+    <domain-config>
+        <domain includeSubdomains="true">yodacdn.net</domain>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="@raw/globalsign_root_r46" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>
